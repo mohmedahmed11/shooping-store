@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\COntrollers\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,6 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('user/{id}', [UserController::class, 'index']);
+
 Route::get('categories', [CategoryController::class, 'index']);
 Route::get('banners', [BannerController::class, 'index']);
 Route::get('products_list/{id}', [ProductController::class, 'productsList']);
@@ -30,3 +33,4 @@ Route::get('similar_products/{id}', [ProductController::class, 'similarProducts'
 
 
 Route::post('order', [OrderController::class, 'add']);
+Route::post('login', [UserController::class, 'login']);

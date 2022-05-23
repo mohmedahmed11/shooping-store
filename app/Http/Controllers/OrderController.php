@@ -37,7 +37,7 @@ class OrderController extends Controller
             $order->items = $items;
             return ["status" => true, "data" => $order];
         }else {
-            return ["status" => false, "data" => NULL];
+            return ["status" => false, "data" => NULL, "message" => "يوجد خطاء في بيانات الطلب"];
         }
     }
 }
