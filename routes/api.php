@@ -2,11 +2,15 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\BannerController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\OrderController;
-use App\Http\COntrollers\UserController;
+use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\BannerController;
+use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Dashboard\OrderController;
+use App\Http\Controllers\Dashboard\UserController;
+// use App\Http\Controllers\CategoryController;
+// use App\Http\Controllers\BannerController;
+// use App\Http\Controllers\ProductController;
+// use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
