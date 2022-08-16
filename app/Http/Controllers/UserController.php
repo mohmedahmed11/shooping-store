@@ -14,7 +14,7 @@ class UserController extends Controller
         if ($user) {
             return ["status" => true, "data" => $user];
         } else {
-            return ["status" => false, "data" => null];
+            return ["status" => false, "data" => null, "message" => "no user"];
         }
     }
 
