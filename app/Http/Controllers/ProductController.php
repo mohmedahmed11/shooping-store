@@ -125,6 +125,15 @@ class ProductController extends Controller
         ->where('product_id', $product->id)
         ->get()->first();
         $product->offer = $offer;
+
+
+        $newProducts = DB::table('new_products')
+        ->where('product_id', $product->id)
+        ->get()->first();
+        $product->is_new = $newProducts ? 1 : 0 ;
+
+
+
         return $product;
     }
 }

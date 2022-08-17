@@ -18,6 +18,19 @@ class UserController extends Controller
         }
     }
 
+
+    function update(Request $req) {
+        $user = User::find($req->id);
+        $user->name = $req->name;
+        $user->password = $req->password;
+        $result = $user->save();
+        if ($result) {
+            return ["status" => true, "data" => $user];
+        } else {
+            return ["status" => false, "data" => null];
+        }
+    }
+
     function login(Request $req) {
         $user = User::where('phone','=',$req->phone)->first();
 
