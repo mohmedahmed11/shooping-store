@@ -5,9 +5,75 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Product;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
+
+    function create() {
+        // $products   = Product::all(); 
+        // $categories = Category::with('products')->get();
+        // return view('products.index', compact('products','categories'));
+
+        $categories = Category::all();
+        return view('dashboard.products.create',compact('categories'));
+    }
+
+    public function save(Request $request){ 
+        $validateData=$request->validate([
+            'quantity'=>'required:products',
+            'name'=>'required',
+            'details'=>'required',
+            // 'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            
+         ]);
+        $data=new Product;
+
+
+        $imageName = ''.time().'.'.$request->image->extension();  
+        $request->image->move(public_path('storage/img/'), $imageName);
+         $imagePath = 'img/'.$imageName;
+         $data->image=$imagePath;
+         $data->name=$request->name;
+         $data->category_id=$request->category_id;
+         $data->code=$request->code;
+         $data->quantity=$request->quantity;
+         $data->status=1;
+         $data->price=$request->price;
+         $data->details=$request->details;
+         $data->save();
+
+         if($data){
+
+               return back()->with('status','Product Insert Successfully');
+
+         }else{
+
+            return back()->with('fail', ' Something Wrong ..!');
+
+         }
+
+
+         
+    }
+    // edit 
+
+    public function update($id)
+    {
+        $data = Product::find($id);
+        $categories = Category::all();
+        return view('dashboard.products.update', compact('data', 'categories'));
+    }
+
+    //add Catogires
+
+
+    function show() {
+        $blog= Product::all();
+        return view('dashboard.products.show',compact('blog'));
+    }
+
     //
     function index($product_id) {
         $product = DB::table('products')
@@ -128,4 +194,15 @@ class ProductController extends Controller
         $product->offer = $offer;
         return $product;
     }
+
+
+
+      // end of add Cato
+      public function destroy($id)
+      {
+          $blogs = Product::find($id);
+          $blogs->delete();
+          return back()->with('error','Product Deleted Successfully');
+      }
+   
 }
