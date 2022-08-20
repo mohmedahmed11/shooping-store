@@ -1,16 +1,8 @@
 @extends('layouts.master')
 @section('content')
-<div class="app-content content">
-    <div class="content-overlay"></div>
-    <div class="header-navbar-shadow"></div>
-    <div class="content-wrapper">
-        <div class="content-header row">
-        </div>
-        <div class="content-body">
-            @include('dashboard.includes.messages')
+
 <section id="multiple-column-form">
-<body  class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static"
-     data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+    <body  class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
     
     <div class="row match-height">
@@ -28,19 +20,27 @@
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-label-group">
+<<<<<<< HEAD
                                             <input type="text" id="first-name-column" class="form-control" placeholder="الاسم الاول" name="name">
                                             <label for="first-name-column">اسم المنج</label>
+=======
+                                            <label for="first-name-column">اسم المنج</label>
+                                            <input type="text" id="first-name-column" class="form-control" placeholder="الاسم الاول" name="name">
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
                                         </div>
                                     </div>
                                 
                                     <div class="col-md-6 col-12">
                                         <div class="form-label-group">
+<<<<<<< HEAD
                                             <input type="text" id="city-column" class="form-control" placeholder="code" name="code">
                                             <label for="city-column">الكود</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-label-group">
+=======
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
                                             <input type="text" id="country-floating" class="form-control" name="quantity" placeholder="الكمية">
                                             <label for="country-floating">الكمية</label>
                                         </div>
@@ -52,7 +52,17 @@
                                             <label for="number-id-column">السعر</label>
                                         </div>
                                     </div>
+<<<<<<< HEAD
 
+=======
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-label-group">
+                                            <input type="text" id="number-id-column" class="form-control" name="code" placeholder="الكود">
+                                            <label for="number-id-column">الكود</label>
+                                        </div>
+                                    </div>
+                                    
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
                                     <div class="col-md-6 col-12">
                                         القسم
                                         <div class="controls">
@@ -64,6 +74,7 @@
                                             </select>
                                             </div> 
                                     </div>
+<<<<<<< HEAD
                                        
                                 
                                     {{-- <div class="col-md-6 col-12">
@@ -77,6 +88,9 @@
                                         </fieldset>
 
                                     </div> --}}
+=======
+                                   
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
                                     <div class="col-md-6 col-12">
                                         <p class="mb-2">
                                         <div class="row">
@@ -101,9 +115,10 @@
                     </div>
                 </div>
             </div>      
-        </div>
+
+                    </div>
     
-        <div class="row match-height">
+                        <div class="row match-height">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
@@ -111,20 +126,32 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                           
+
+                            {{-- <div class="col-sm-12 data-field-col data-list-upload">
+                                <form action="#" class="dropzone dropzone-area" id="dataListUpload">
+                                    <div class="dz-message">Upload Image</div>
+                                </form>
+                            </div> --}}
                             
                             <div class="col-md-6 col-12">
                                         
                                 <fieldset class="form-group">
-                                    <label for="basicInputFile">Image</label>
-                                    <div class="custom-file">
-                                        <input type="file" multiple name="image" class="custom-file-input">
-                                         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                    </div>
+
+                                    <div class="card" style="width: 18rem;">
+                                        <img  id='output' src="{{url('/storage/img/no_image.jpg')}}" style="height:150px; width:150px;">                                        
+                                        <div class="card-body">                                                                             
+                                         <fieldset class="form-group">
+                                                <label for="basicInputFile">Image</label>
+                                        <div class="custom-file">
+                                            <input type="file" accept='image/*' name="image" onchange='openFile(event)'><br>
+                                         </div>
+                                     </fieldset>
+                                        </div>
+                                      </div>
                                 </fieldset>
 
                             </div>
-
+                            
                         </div>
                     </div>
                 </div>      
@@ -136,10 +163,12 @@
    
     
 </section>
-</body>
-</div>
-</div>
-</div>
+
+
+
+{{-- end content --}}
+
+
 @endsection
 <head>
     <title>Add New Products</title>

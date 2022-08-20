@@ -29,6 +29,7 @@ class UserController extends Controller
             return ["status" => true, "data" => $user];
         } else {
             return ["status" => false, "data" => null];
+
         }
     }
 
