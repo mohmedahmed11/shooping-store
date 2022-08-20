@@ -2,16 +2,26 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 
+=======
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\BannerController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\UserController;
+<<<<<<< HEAD
 
 use App\Http\Controllers\Dashboard\RegonController;
 use App\Http\Controllers\Dashboard\SettingController;
 
+=======
+// use App\Http\Controllers\CategoryController;
+// use App\Http\Controllers\BannerController;
+// use App\Http\Controllers\ProductController;
+// use App\Http\Controllers\OrderController;
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
 /*
 |--------------------------------------------------------------------------
 | API Routes

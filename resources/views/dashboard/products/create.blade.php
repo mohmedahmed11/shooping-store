@@ -1,8 +1,14 @@
 @extends('layouts.master')
 @section('content')
+<<<<<<< HEAD
 
 <section id="multiple-column-form">
     <body  class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+=======
+<section id="multiple-column-form">
+    <body  class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static"
+     data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
 
     
     <div class="row match-height">
@@ -21,8 +27,13 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-label-group">
 <<<<<<< HEAD
+<<<<<<< HEAD
                                             <input type="text" id="first-name-column" class="form-control" placeholder="الاسم الاول" name="name">
                                             <label for="first-name-column">اسم المنج</label>
+=======
+                                            <label for="first-name-column">اسم المنج</label>
+                                            <input type="text" id="first-name-column" class="form-control" placeholder="الاسم الاول" name="name">
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
 =======
                                             <label for="first-name-column">اسم المنج</label>
                                             <input type="text" id="first-name-column" class="form-control" placeholder="الاسم الاول" name="name">
@@ -33,12 +44,15 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-label-group">
 <<<<<<< HEAD
+<<<<<<< HEAD
                                             <input type="text" id="city-column" class="form-control" placeholder="code" name="code">
                                             <label for="city-column">الكود</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-label-group">
+=======
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
 =======
 >>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
                                             <input type="text" id="country-floating" class="form-control" name="quantity" placeholder="الكمية">
@@ -53,8 +67,11 @@
                                         </div>
                                     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
                                     <div class="col-md-6 col-12">
                                         <div class="form-label-group">
                                             <input type="text" id="number-id-column" class="form-control" name="code" placeholder="الكود">
@@ -62,6 +79,9 @@
                                         </div>
                                     </div>
                                     
+<<<<<<< HEAD
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
+=======
 >>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
                                     <div class="col-md-6 col-12">
                                         القسم
@@ -74,6 +94,7 @@
                                             </select>
                                             </div> 
                                     </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
                                        
                                 
@@ -88,6 +109,9 @@
                                         </fieldset>
 
                                     </div> --}}
+=======
+                                   
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
 =======
                                    
 >>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
@@ -115,7 +139,10 @@
                     </div>
                 </div>
             </div>      
+<<<<<<< HEAD
 
+=======
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
                     </div>
     
                         <div class="row match-height">
@@ -126,7 +153,10 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
+<<<<<<< HEAD
 
+=======
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
                             {{-- <div class="col-sm-12 data-field-col data-list-upload">
                                 <form action="#" class="dropzone dropzone-area" id="dataListUpload">
                                     <div class="dz-message">Upload Image</div>
@@ -136,7 +166,10 @@
                             <div class="col-md-6 col-12">
                                         
                                 <fieldset class="form-group">
+<<<<<<< HEAD
 
+=======
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
                                     <div class="card" style="width: 18rem;">
                                         <img  id='output' src="{{url('/storage/img/no_image.jpg')}}" style="height:150px; width:150px;">                                        
                                         <div class="card-body">                                                                             

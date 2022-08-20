@@ -6,6 +6,7 @@ use App\Http\Controllers\Properites\PropertiesController;
 
 Route::get('/', function () {
     return view('layouts.master');
+<<<<<<< HEAD
 });
 #################################product################################
 Route::prefix('product')->group(function () {
@@ -24,6 +25,27 @@ Route::prefix('product')->group(function () {
     // update-product/
     
 });
+=======
+});
+#################################product################################
+
+Route::prefix('product')->group(function () {
+   
+    Route::get('/', [ProductController::class, 'show'])->name('products');
+    Route::get('/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/save', [ProductController::class, 'save'])->name('product.save');
+    Route::get('/delete/{id}', [ProductController::class, 'destroy']);
+    Route::get('/update/{id}', [ProductController::class, 'update']);
+    Route::get('/images/{id}', [ProductController::class, 'images']);
+
+    Route::put('/save_update/{id}', [ProductController::class, 'edit']);
+    Route::get('/properites/{id}', [ProductController::class, 'properites'])->name('product.properites');
+    Route::post('/carete_proparity', [ProductController::class, 'carete_proparity'])->name('product.carete_proparity');
+   
+    // update-product/
+    
+});
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
 // 
 ##################################################
 
@@ -35,5 +57,9 @@ Route::prefix('properties')->group(function () {
     Route::post('/save', [PropertiesController::class, 'save'])->name('properties.save');
     Route::get('/delete/{id}', [PropertiesController::class, 'destroy']);
     Route::get('/images/{id}', [PropertiesController::class, 'images']);
+<<<<<<< HEAD
 });
 
+=======
+});
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca

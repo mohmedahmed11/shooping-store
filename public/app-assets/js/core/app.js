@@ -944,6 +944,10 @@
   Waves.attach(".btn", ["waves-light"]);
 })(window, document, jQuery);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
 // image Upload in Update 
 
 var openFile = function(file) {
@@ -956,4 +960,8 @@ var openFile = function(file) {
     output.src = dataURL;
   };
   reader.readAsDataURL(input.files[0]);
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca

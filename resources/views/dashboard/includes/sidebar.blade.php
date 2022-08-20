@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
@@ -30,7 +33,10 @@
                     
                 </ul>
             </li>
+<<<<<<< HEAD
 
+=======
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
             {{-- <li class=" nav-item"><a href="#"><i class="feather icon-file"></i><span class="menu-title" data-i18n="Ecommerce">الخصائص</span></a>
                 <ul class="menu-content">
                     <li><a href="{{route('properties.showProp')}}"><i class="feather icon-chevrons-left"></i><span class="menu-item" data-i18n="Shop">عرض الخصائص</span></a>

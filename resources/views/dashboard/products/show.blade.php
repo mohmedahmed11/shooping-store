@@ -1,6 +1,9 @@
 @extends('layouts.master')
 @section('content')
+<<<<<<< HEAD
 
+=======
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
 <section id="data-thumb-view" class="data-thumb-view-header">
     <div class="action-btns d-none">
         <div class="btn-dropdown mr-1 mb-1">
@@ -96,4 +99,8 @@
 
     <!-- add new sidebar ends -->
 </section>    
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
