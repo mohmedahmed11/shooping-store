@@ -29,7 +29,7 @@
                     
                 </ul>
             </li>
-            <li class=" nav-item"><a href="#"><i class="feather icon-file"></i><span class="menu-title" data-i18n="Ecommerce">الخصائص</span></a>
+            {{-- <li class=" nav-item"><a href="#"><i class="feather icon-file"></i><span class="menu-title" data-i18n="Ecommerce">الخصائص</span></a>
                 <ul class="menu-content">
                     <li><a href="{{route('properties.showProp')}}"><i class="feather icon-chevrons-left"></i><span class="menu-item" data-i18n="Shop">عرض الخصائص</span></a>
                     </li>
@@ -37,7 +37,7 @@
                     </li>
                     
                 </ul>
-            </li>
+            </li> --}}
             <li class=" nav-item"><a href="#"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">الاقسام</span></a>
                 <ul class="menu-content">
                     <li><a href="{{url('pages.category.showCato')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">عرض الاقسام</span></a>

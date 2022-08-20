@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-label-group">
-                                            <input type="number" id="number-id-column" class="form-control" name="code" placeholder="الكود">
+                                            <input type="text" id="number-id-column" class="form-control" name="code" placeholder="الكود">
                                             <label for="number-id-column">الكود</label>
                                         </div>
                                     </div>

@@ -1,6 +1,5 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Properites\PropertiesController;
@@ -11,15 +10,18 @@ Route::get('/', function () {
 #################################product################################
 
 Route::prefix('product')->group(function () {
-    Route::get('/rad/{id}', [ProductController::class, 'edit']);
-    Route::put('/pro/{id}', [ProductController::class, 'update']);
+   
     Route::get('/', [ProductController::class, 'show'])->name('products');
-    
-    Route::get('/create', [ProductController::class, 'create'])->name('product.properites');
     Route::get('/create', [ProductController::class, 'create'])->name('product.create');
     Route::post('/save', [ProductController::class, 'save'])->name('product.save');
     Route::get('/delete/{id}', [ProductController::class, 'destroy']);
+    Route::get('/update/{id}', [ProductController::class, 'update']);
     Route::get('/images/{id}', [ProductController::class, 'images']);
+
+    Route::put('/save_update/{id}', [ProductController::class, 'edit']);
+    Route::get('/properites/{id}', [ProductController::class, 'properites'])->name('product.properites');
+    Route::post('/carete_proparity', [ProductController::class, 'carete_proparity'])->name('product.carete_proparity');
+   
     // update-product/
     
 });
@@ -27,7 +29,6 @@ Route::prefix('product')->group(function () {
 ##################################################
 
 Route::prefix('properties')->group(function () {
-    // properties/rad/
     Route::get('/rad/{id}', [PropertiesController::class, 'edit']);
     Route::put('/pro/{id}', [PropertiesController::class, 'update']);
     Route::get('/showProp', [PropertiesController::class, 'show'])->name('properties.showProp');
