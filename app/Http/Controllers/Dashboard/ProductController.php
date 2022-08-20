@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,15 +11,13 @@ class ProductController extends Controller
 {
 
     function create() {
-        // $products   = Product::all(); 
-        // $categories = Category::with('products')->get();
-        // return view('products.index', compact('products','categories'));
 
         $categories = Category::all();
         return view('dashboard.products.create',compact('categories'));
     }
 
     public function save(Request $request){ 
+        
         $validateData=$request->validate([
             'quantity'=>'required:products',
             'name'=>'required',
@@ -28,9 +25,8 @@ class ProductController extends Controller
             // 'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             
          ]);
+
         $data=new Product;
-
-
         $imageName = ''.time().'.'.$request->image->extension();  
         $request->image->move(public_path('storage/img/'), $imageName);
          $imagePath = 'img/'.$imageName;
@@ -58,20 +54,64 @@ class ProductController extends Controller
          
     }
     // edit 
+// Update Product
+// 
+public function done($id)
+{
+    return "Wellcome";
+}
 
-    public function update($id)
+
+ public function edit($id)
     {
         $data = Product::find($id);
         $categories = Category::all();
-        return view('dashboard.products.update', compact('data', 'categories'));
+        return view('dashboard.products.editpro', compact('data', 'categories'));
     }
+
+// end
+public function update(Request $request,$id)
+{
+    $data = Product::find($id);
+    $data->name = $request->input('name');
+    $data->category_id = $request->input('category_id');
+    $data->code = $request->input('code');
+    $data->quantity = $request->input('quantity');
+    $data->details = $request->input('details');
+    if($request->hasFile('image')){
+
+        $imageName = ''.time().'.'.$request->image->extension();  
+        $request->image->move(public_path('storage/img/'), $imageName);
+         $imagePath = 'img/'.$imageName;
+         $data->image=$imagePath;
+
+
+        // $file=$request->file('image');
+        // $imageName= $file->getClientOriginalExtension();
+        // $imageName = ''.time().'.'.$request->image->extension();  
+        //  $request->image->move(public_path('storage/img/'), $imageName);
+        // $data->image = $imageName;
+    }
+
+    $data->update();
+
+    return redirect()->back()->with('status','Product Updated Successfully');
+    
+}
+
+
+// End Update Product
+   
 
     //add Catogires
 
+    // properties
 
+    
     function show() {
         $blog= Product::all();
-        return view('dashboard.products.show',compact('blog'));
+        $categories = Category::all();
+        return view('dashboard.products.show',compact('blog','categories'));
     }
 
     //

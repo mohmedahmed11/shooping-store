@@ -1,4 +1,3 @@
-<!-- BEGIN: SIDBAR-->
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
@@ -26,6 +25,15 @@
                     <li><a href="{{route('products')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">عرض المنتجات</span></a>
                     </li>
                     <li><a href="{{route('product.create')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافة منتج</span></a>
+                    </li>
+                    
+                </ul>
+            </li>
+            <li class=" nav-item"><a href="#"><i class="feather icon-file"></i><span class="menu-title" data-i18n="Ecommerce">الخصائص</span></a>
+                <ul class="menu-content">
+                    <li><a href="{{route('properties.showProp')}}"><i class="feather icon-chevrons-left"></i><span class="menu-item" data-i18n="Shop">عرض الخصائص</span></a>
+                    </li>
+                    <li><a href="{{route('properties.create')}}"><i class="feather icon-chevrons-left"></i><span class="menu-item" data-i18n="Details">اضافة خاصية</span></a>
                     </li>
                     
                 </ul>
