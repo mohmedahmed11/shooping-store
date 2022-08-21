@@ -9,14 +9,9 @@
     <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Dashboard analytics - Vuexy - Bootstrap HTML admin template</title>
-    <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
-    <link href="https://fonts.googleapis.com/css?family=Cairo:400,700" rel="stylesheet">
-    <style>
-        body, h1, h2, h3, h4, h5, h6 {
-            font-family: 'Cairo', sans-serif !important;
-        }
-    </style>
+    <title>Hassna Store</title>
+    {{-- <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png"> --}}
+    
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -50,6 +45,12 @@
     <link rel="stylesheet" type="text/css" href="/app-assets/css-rtl/custom-rtl.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/style-rtl.css">
     <!-- END: Custom CSS-->
+    <link href="https://fonts.googleapis.com/css?family=Cairo:400,700" rel="stylesheet">
+    <style>
+        body, h1, h2, h3, h4, h5, h6, .navigation {
+            font-family: 'Cairo', sans-serif !important;
+        }
+    </style>
 
  <!-- toast -->
  <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
@@ -91,10 +92,38 @@
 
 
 
-
+Stack(
+    children: [
+        
+    ]
+)
 
     @include('dashboard.includes.footer')
 
+     <!-- BEGIN: Vendor JS-->
+     <script src="/app-assets/vendors/js/vendors.min.js"></script>
+     <!-- BEGIN Vendor JS-->
+ 
+     <!-- BEGIN: Page Vendor JS-->
+     <script src="/app-assets/vendors/js/extensions/dropzone.min.js"></script>
+     <script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+     <script src="/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+     <script src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+     <script src="/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
+     <script src="/app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script>
+     <script src="/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
+     <!-- END: Page Vendor JS-->
+ 
+     <!-- BEGIN: Theme JS-->
+     <script src="/app-assets/js/core/app-menu.js"></script>
+     <script src="/app-assets/js/core/app.js"></script>
+     <script src="/app-assets/js/scripts/components.js"></script>
+     <!-- END: Theme JS-->
+ 
+     <!-- BEGIN: Page JS-->
+     <script src="/app-assets/js/scripts/ui/data-list-view.js"></script>
+{{--      
+    <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 
    <script src="/app-assets/vendors/js/vendors.min.js"></script>
    <script src="/app-assets/vendors/js/extensions/dropzone.min.js"></script>
@@ -102,15 +131,16 @@
    <script src="/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
    <script src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
    <script src="/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
-   {{--  <script src="/app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script>
-   <script src="/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>  --}}
+   <script src="/app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script> 
+    <script src="/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
+
    <!-- END: Page Vendor JS-->
 
    <!-- BEGIN: Theme JS-->
    <script src="/app-assets/js/core/app-menu.js"></script>
    <script src="/app-assets/js/core/app.js"></script>
    <script src="/app-assets/js/scripts/components.js"></script>
-   <!-- END: Theme JS-->
+   <!-- END: Theme JS--> --}}
 
    <!-- BEGIN: Page JS-->
    {{--  <script src="/app-assets/js/scripts/ui/data-list-view.js"></script>  --}}
@@ -131,8 +161,8 @@ if (this.files && this.files[0]) {
 }
 });
 </script>
-  <!-- toast -->
-  <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<!-- toast -->
+  {{--  <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>  --}}
   <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
   {!! Toastr::message() !!}
 

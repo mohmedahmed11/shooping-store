@@ -14,19 +14,12 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 
             <li class=" nav-item"><a href="{{url('/')}}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Main Dash</span><span class="badge badge badge-warning badge-pill float-right mr-2">2</span></a>
-
             </li>
+
             <li class=" navigation-header"><span>Apps</span>
             </li>
 
-            <li class=" nav-item"><a href="#"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">الاقسام</span></a>
-                <ul class="menu-content">
-                    <li><a href="{{route('category')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">عرض الاقسام</span></a>
-                    </li>
-                    <li><a href="{{route('category.create')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافة قسم</span></a>
-                    </li>
-
-                </ul>
+            <li class=" nav-item"><a href="{{route('category')}}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">الاقسام</span><span class="badge badge badge-warning badge-pill float-right mr-2">{{ App\Models\Category::count() }}</span></a>
             </li>
 
             <li class=" nav-item"><a href="#"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">المنتجات</span></a>
