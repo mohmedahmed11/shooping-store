@@ -52,10 +52,7 @@
     <!-- END: Custom CSS-->
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
 </head>
 <!-- END: Head-->
 
@@ -72,10 +69,7 @@
     <!-- END: Header-->
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
     @include('dashboard.includes.sidebar')
 
 

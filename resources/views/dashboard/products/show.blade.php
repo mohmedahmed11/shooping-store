@@ -1,9 +1,6 @@
 @extends('layouts.master')
 @section('content')
-<<<<<<< HEAD
 
-=======
->>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca
 <section id="data-thumb-view" class="data-thumb-view-header">
     <div class="action-btns d-none">
         <div class="btn-dropdown mr-1 mb-1">
@@ -74,7 +71,7 @@
                             </span>                                            
                             </a>
                                
-                        <a href="{{url('product/destroy/'.$product->id)}}" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="حذف">
+                        <a href="{{url('product/delete/'.$product->id)}}" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="حذف">
                             <span class="action-delete"><i class="fa fa-trash"></i>
                             </span>
                         </a>
@@ -99,8 +96,4 @@
 
     <!-- add new sidebar ends -->
 </section>    
-<<<<<<< HEAD
 @endsection
-=======
-@endsection
->>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca

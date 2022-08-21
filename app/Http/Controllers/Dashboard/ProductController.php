@@ -1,80 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\Category;
-
+use App\Models\Properties;
+use App\Models\ProductProperty;
 class ProductController extends Controller
 {
 
-    function create() {
-        // $products   = Product::all(); 
-        // $categories = Category::with('products')->get();
-        // return view('products.index', compact('products','categories'));
-
-        $categories = Category::all();
-        return view('dashboard.products.create',compact('categories'));
-    }
-
-    public function save(Request $request){ 
-        $validateData=$request->validate([
-            'quantity'=>'required:products',
-            'name'=>'required',
-            'details'=>'required',
-            // 'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            
-         ]);
-        $data=new Product;
-
-
-        $imageName = ''.time().'.'.$request->image->extension();  
-        $request->image->move(public_path('storage/img/'), $imageName);
-         $imagePath = 'img/'.$imageName;
-         $data->image=$imagePath;
-         $data->name=$request->name;
-         $data->category_id=$request->category_id;
-         $data->code=$request->code;
-         $data->quantity=$request->quantity;
-         $data->status=1;
-         $data->price=$request->price;
-         $data->details=$request->details;
-         $data->save();
-
-         if($data){
-
-               return back()->with('status','Product Insert Successfully');
-
-         }else{
-
-            return back()->with('fail', ' Something Wrong ..!');
-
-         }
-
-
-         
-    }
-    // edit 
-
-    public function update($id)
-    {
-        $data = Product::find($id);
-        $categories = Category::all();
-        return view('dashboard.products.update', compact('data', 'categories'));
-    }
-
-    //add Catogires
-
-
-    function show() {
-        $blog= Product::all();
-        return view('dashboard.products.show',compact('blog'));
-    }
-
-    //
     function index($product_id) {
         $product = DB::table('products')
         ->select('products.*')
@@ -187,31 +123,139 @@ class ProductController extends Controller
 
         $product->category = $categories;
         
-
         $offer = DB::table('product_offers')
         ->where('product_id', $product->id)
         ->get()->first();
         $product->offer = $offer;
 
 
-        $newProducts = DB::table('new_products')
+        $newProduct = DB::table('new_products')
         ->where('product_id', $product->id)
         ->get()->first();
-        $product->is_new = $newProducts ? 1 : 0 ;
-
-
+        if ($newProduct) {
+            $product-> is_new = 1;
+        }
 
         return $product;
     }
 
 
+    // new methods
+   
+    function show() {
+        $products= Product::all();
+        $categories = Category::all();
+        return view('dashboard.products.show',compact('products','categories'));
+    }
+     
+    function create() {
+        $categories = Category::all();
+        return view('dashboard.products.create',compact('categories'));
+    }
 
-      // end of add Cato
-      public function destroy($id)
-      {
-          $blogs = Product::find($id);
-          $blogs->delete();
-          return back()->with('error','Product Deleted Successfully');
-      }
+    public function save(Request $request){ 
+        
+        $validateData=$request->validate([
+            'quantity'=>'required:products',
+            'name'=>'required',
+            'details'=>'required',
+         ]);
+
+        $data=new Product;
+        $imageName = ''.time().'.'.$request->image->extension();  
+        $request->image->move(public_path('storage/img/'), $imageName);
+        $imagePath = 'img/'.$imageName;
+        $data->image=$imagePath;
+        $data->name=$request->name;
+        $data->category_id=$request->category_id;
+        $data->code=$request->code;
+        $data->quantity=$request->quantity;
+        $data->status=1;
+        $data->price=$request->price;
+        $data->details=$request->details;
+        $data->save();
+
+        if($data){
+            return back()->with('status','Product Insert Successfully');
+        }else{
+        return back()->with('fail', ' Something Wrong ..!');
+        }
+    }
+
+    public function update($id)
+    {
+        $data = Product::find($id);
+        $categories = Category::all();
+        return view('dashboard.products.update', compact('data', 'categories'));
+    }
+
+    // for save updateProduct
+    public function edit(Request $request,$id)
+    {
+        $data = Product::find($id);
+        $data->name = $request->input('name');
+        $data->category_id = $request->input('category_id');
+        $data->code = $request->input('code');
+        $data->quantity = $request->input('quantity');
+        $data->details = $request->input('details');
+        if($request->hasFile('image')){
+
+            $imageName = ''.time().'.'.$request->image->extension();  
+            $request->image->move(public_path('storage/img/'), $imageName);
+            $imagePath = 'img/'.$imageName;
+            $data->image=$imagePath;
+        }
+
+        $data->update();
+
+        return redirect()->back()->with('status','Product Updated Successfully');
+        
+    }
+
+    //  product proPariries
+    public function properites($id)
+    {
+        $product = Product::find($id);
+        $productProparities =  $this->productProparities($id);
+        $properties =  Properties::all();
+        return view('dashboard.products.properites', compact('product','properties', 'productProparities'));
+    }
+
+    function carete_proparity(Request $request) {
+        $data = new ProductProperty;
+        $data->property_id  = $request->property_id;
+        $data->product_id  = $request->product_id;
+        $data->property_value  = $request->property_value;
+        $result = $data->save();
+        if($result){
+            return back()->with('status','Product Insert Successfully');
+        }else{
+            return back()->with('fail', ' Something Wrong ..!');
+        }
+    }
+
+    function productProparities($id) {
+        return DB::table('product_properties')
+        ->join('properties', 'properties.id', '=', 'product_properties.property_id')
+        ->where('product_id', $id)
+        ->get();
+    }
+        
+    // end of add Cato
+    public function destroy($id)
+    {
+    $property = Product::find($id);
+    $property->delete();
+    return back()->with('error','Product Deleted Successfully');
+    }
+
+    // Update Product
+    // for test
+    public function done($id)
+    {
+        return "Wellcome";
+    }
+
+
    
 }
