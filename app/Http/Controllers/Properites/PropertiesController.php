@@ -88,9 +88,20 @@ public function update(Request $request,$id)
 // End Update Properties
 public function destroy($id)
 {
+    
     $blogs = Properties::find($id);
     $blogs->delete();
     return redirect()->back()->with('error','Properties Deleted Successfully');
 }
+
+public function destrooy($id)
+{
+    
+    $property = Properties::find($id);
+    $property->delete();
+    return redirect()->back()->with('error','Properties Deleted Successfully');
+    
+}
+
 
 }

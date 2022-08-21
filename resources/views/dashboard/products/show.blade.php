@@ -35,50 +35,51 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($blog as $key => $blogs)
+                @foreach($products as $product)
                 <tr>
 
 
                     <td>
 
                     </td>
-                    <td class="product-name">{{$blogs->id}}</td>
+                    <td class="product-name">{{$product->id}}</td>
                     <td class="product-img">
-                        <img src="{{url('storage/'.$blogs->image)}}" class="rounded float-md-left" style="height:100px; width:100px;">
+                        <img src="{{url('storage/'.$product->image)}}" class="rounded float-md-left" style="height:100px; width:100px;">
                     </td>
-                    <td class="product-name">{{$blogs->name}}</td>
-                    <td class="product-name">{{$blogs->category_id}}</td>
-                    <td class="product-name">{{$blogs->status}}</td>
+                    <td class="product-name">{{$product->name}}</td>
+                    <td class="product-name">{{$product->category_id}}</td>
+                    <td class="product-name">{{$product->status}}</td>
                     <td class="product-name">
                         <div class="chip chip-primary">
                             <div class="chip-body">
-                                <div class="chip-text">{{$blogs->code}}</div>
+                                <div class="chip-text">{{$product->code}}</div>
                             </div>
                         </div>
                     </td>
-                    <td class="product-name">{{$blogs->quantity}}</td>
+
+                    <td class="product-name">{{$product->quantity}}</td>
 
                     <td class="product-name"><div class="chip chip-text">
                         <div class="chip-body">
-                            <div class="chip-text">{{$blogs->price}}</div>
+                            <div class="chip-text">{{$product->price}}</div>
                         </div>
                     </div>
                     </td>
                     <td class="product-action">
-                        <a href="{{url('product/rad/'.$blogs->id)}}" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="تعديل">
+                        <a href="{{url('product/update/'.$product->id)}}" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="تعديل">
                             <span class="action-edit"><i class="feather icon-edit"></i>
                             </span>
                             </a>
 
-                        <a href="{{url('product/delete/'.$blogs->id)}}" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="حذف">
+                        <a href="{{url('product/destroy/'.$product->id)}}" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="حذف">
                             <span class="action-delete"><i class="fa fa-trash"></i>
                             </span>
                         </a>
-                        <a href="{{route('product.images',$blogs->id)}}" data-toggle="tooltip" data-placement="top" title="الخصائص"  class="btn btn-outline-success">
+                        <a href="{{url('product/properites/'.$product->id)}}" data-toggle="tooltip" data-placement="top" title="الخصائص"  class="btn btn-outline-success">
                             <span class="action-edit"><i class="fa fa-check-square"></i>
                             </span>
                             </a>
-                        <a href="{{url('product/images/'.$blogs->id)}}" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="صور العرض">
+                        <a href="{{url('product/images/'.$product->id)}}" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="صور العرض">
                             <span class="action-edit"><i class="fa fa-image"></i>
                             </span>
                             </a>

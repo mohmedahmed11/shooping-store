@@ -102,8 +102,8 @@
    <script src="/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
    <script src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
    <script src="/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
-   <script src="/app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script>
-   <script src="/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
+   {{--  <script src="/app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script>
+   <script src="/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>  --}}
    <!-- END: Page Vendor JS-->
 
    <!-- BEGIN: Theme JS-->
@@ -113,7 +113,7 @@
    <!-- END: Theme JS-->
 
    <!-- BEGIN: Page JS-->
-   <script src="/app-assets/js/scripts/ui/data-list-view.js"></script>
+   {{--  <script src="/app-assets/js/scripts/ui/data-list-view.js"></script>  --}}
 
   <!-- image preview -->
   <script>

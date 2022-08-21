@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Properties;
+use App\Models\ProductProperty;
 use App\Models\ProductImage;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -14,111 +16,6 @@ use Brian2694\Toastr\Facades\Toastr;
 class ProductController extends Controller
 {
 
-    function create() {
-
-        $categories = Category::all();
-        return view('dashboard.products.create',compact('categories'));
-    }
-
-    public function save(Request $request){
-
-        $validateData=$request->validate([
-            'quantity'=>'required:products',
-            'name'=>'required',
-            'details'=>'required',
-            // 'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-
-         ]);
-
-        $data=new Product;
-        $imageName = ''.time().'.'.$request->image->extension();
-        $request->image->move(public_path('storage/img/'), $imageName);
-         $imagePath = 'img/'.$imageName;
-         $data->image=$imagePath;
-         $data->name=$request->name;
-         $data->category_id=$request->category_id;
-         $data->code=$request->code;
-         $data->quantity=$request->quantity;
-         $data->status=1;
-         $data->price=$request->price;
-         $data->details=$request->details;
-         $data->save();
-
-         if($data){
-
-               return redirect()->route('products')->with('status','Product Insert Successfully');
-
-         }else{
-
-            return back()->with('fail', ' Something Wrong ..!');
-
-         }
-
-
-
-    }
-    // edit
-// Update Product
-//
-public function done($id)
-{
-    return "Wellcome";
-}
-
-
- public function edit($id)
-    {
-        $data = Product::find($id);
-        $categories = Category::all();
-        return view('dashboard.products.update', compact('data', 'categories'));
-    }
-
-// end
-public function update(Request $request,$id)
-{
-    $data = Product::find($id);
-    $data->name = $request->input('name');
-    $data->category_id = $request->input('category_id');
-    $data->code = $request->input('code');
-    $data->quantity = $request->input('quantity');
-    $data->details = $request->input('details');
-    if($request->hasFile('image')){
-
-        $imageName = ''.time().'.'.$request->image->extension();
-        $request->image->move(public_path('img/'), $imageName);
-         $imagePath = 'img/'.$imageName;
-         $data->image=$imagePath;
-
-
-        // $file=$request->file('image');
-        // $imageName= $file->getClientOriginalExtension();
-        // $imageName = ''.time().'.'.$request->image->extension();
-        //  $request->image->move(public_path('storage/img/'), $imageName);
-        // $data->image = $imageName;
-    }
-
-    $data->update();
-
-    return redirect()->back()->with('status','Product Updated Successfully');
-
-}
-
-
-// End Update Product
-
-
-    //add Catogires
-
-    // properties
-
-
-    function show() {
-        $blog= Product::all();
-        $categories = Category::all();
-        return view('dashboard.products.show',compact('blog','categories'));
-    }
-
-    //
     function index($product_id) {
         $product = DB::table('products')
         ->select('products.*')
@@ -231,7 +128,6 @@ public function update(Request $request,$id)
 
         $product->category = $categories;
 
-
         $offer = DB::table('product_offers')
         ->where('product_id', $product->id)
         ->get()->first();
@@ -239,77 +135,168 @@ public function update(Request $request,$id)
         return $product;
     }
 
-      // end of add Cato
-      public function destroy($id)
-      {
-          $blogs = Product::find($id);
-          $blogs->delete();
-          return back()->with('error','Product Deleted Successfully');
-      }
+    // new methods
 
-      public function images(Request $request, $id)
-      {
-          $product = Product::with(['images'])->find($id);
-          $images = $product->images;
+    function show() {
+        $products= Product::all();
+        $categories = Category::all();
+        return view('dashboard.products.show',compact('products','categories'));
+    }
 
-          return view('dashboard.products.images', compact('product','images'));
-      }
+    function create() {
+        $categories = Category::all();
+        return view('dashboard.products.create',compact('categories'));
+    }
 
-      public function imagestore(Request $request, $id)
-      {
-        // return $request;
-        $request->validate([
-            'image' => 'image|required',
-        ]);
-        $request_data = $request->except(['_token']);
-        if ($request->image) {
+    public function save(Request $request){
 
-            Image::make($request->image)
-                ->resize(300, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->save(public_path('img/' . $request->image->hashName()));
+        $validateData=$request->validate([
+            'quantity'=>'required:products',
+            'name'=>'required',
+            'details'=>'required',
+         ]);
 
-            $request_data['image'] = $request->image->hashName();
+        $data=new Product;
+        $imageName = ''.time().'.'.$request->image->extension();
+        $request->image->move(public_path('storage/img/'), $imageName);
+        $imagePath = 'img/'.$imageName;
+        $data->image=$imagePath;
+        $data->name=$request->name;
+        $data->category_id=$request->category_id;
+        $data->code=$request->code;
+        $data->quantity=$request->quantity;
+        $data->status=1;
+        $data->price=$request->price;
+        $data->details=$request->details;
+        $data->save();
 
-        }//end of if
-        $request_data['product_id'] = $id;
-        $request_data['image'] = 'img/'.$request_data['image'];
-        $image = ProductImage::create($request_data);
-        if ($image) {
-            Toastr::success('تم الاضافه بنجاح', 'success');
-        } else {
-            Toastr::success('لم يتم اضافه الصوره', 'error');
+        if($data){
+            return back()->with('status','Product Insert Successfully');
+        }else{
+        return back()->with('fail', ' Something Wrong ..!');
         }
-        return redirect()->back();
+    }
 
+    public function update($id)
+    {
+        $data = Product::find($id);
+        $categories = Category::all();
+        return view('dashboard.products.update', compact('data', 'categories'));
+    }
 
+    // for save updateProduct
+    public function edit(Request $request,$id)
+    {
+        $data = Product::find($id);
+        $data->name = $request->input('name');
+        $data->category_id = $request->input('category_id');
+        $data->code = $request->input('code');
+        $data->quantity = $request->input('quantity');
+        $data->details = $request->input('details');
+        if($request->hasFile('image')){
+
+            $imageName = ''.time().'.'.$request->image->extension();
+            $request->image->move(public_path('storage/img/'), $imageName);
+            $imagePath = 'img/'.$imageName;
+            $data->image=$imagePath;
+        }
+
+        $data->update();
+
+        return redirect()->back()->with('status','Product Updated Successfully');
+
+    }
+
+    //  product proPariries
+    public function properites($id)
+    {
+        $product = Product::find($id);
+        $productProparities =  $this->productProparities($id);
+        $properties =  Properties::all();
+        return view('dashboard.products.properites', compact('product','properties', 'productProparities'));
+    }
+
+    function carete_proparity(Request $request) {
+        $data = new ProductProperty;
+        $data->property_id  = $request->property_id;
+        $data->product_id  = $request->product_id;
+        $data->property_value  = $request->property_value;
+        $result = $data->save();
+        if($result){
+            return back()->with('status','Product Insert Successfully');
+        }else{
+            return back()->with('fail', ' Something Wrong ..!');
+        }
+    }
+
+    function productProparities($id) {
+        return DB::table('product_properties')
+        ->join('properties', 'properties.id', '=', 'product_properties.property_id')
+        ->where('product_id', $id)
+        ->get();
+    }
+
+    // end of add Cato
+    public function destroy($id)
+    {
+    $property = Product::find($id);
+    $property->delete();
+    return back()->with('error','Product Deleted Successfully');
+    }
+
+    // Update Product
+    // for test
+    public function done($id)
+    {
+        return "Wellcome";
+    }
+
+    public function images(Request $request, $id)
+    {
+        $product = Product::with(['images'])->find($id);
+        $images = $product->images;
+
+        return view('dashboard.products.images', compact('product','images'));
+    }
+
+    public function imagestore(Request $request, $id)
+    {
+      // return $request;
+      $request->validate([
+          'image' => 'image|required',
+      ]);
+      $request_data = $request->except(['_token']);
+      if ($request->image) {
+
+          Image::make($request->image)
+              ->resize(300, null, function ($constraint) {
+                  $constraint->aspectRatio();
+              })
+              ->save(public_path('img/' . $request->image->hashName()));
+
+          $request_data['image'] = $request->image->hashName();
+
+      }//end of if
+      $request_data['product_id'] = $id;
+      $request_data['image'] = 'img/'.$request_data['image'];
+      $image = ProductImage::create($request_data);
+      if ($image) {
+          Toastr::success('تم الاضافه بنجاح', 'success');
+      } else {
+          Toastr::success('لم يتم اضافه الصوره', 'error');
       }
-
-      public function imagedelete(Request $request, $id)
-      {
-        $images = ProductImage::find($id);
-        $images->delete();
-
-        Toastr::success('تم حذف الصوره', 'success');
-        return redirect()->back();
-      }
+      return redirect()->back();
 
 
+    }
 
+    public function imagedelete(Request $request, $id)
+    {
+      $images = ProductImage::find($id);
+      $images->delete();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+      Toastr::success('تم حذف الصوره', 'success');
+      return redirect()->back();
+    }
 
 }

@@ -11,7 +11,7 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form" action="{{url('/product/pro/'.$data->id) }}" method="post" enctype="multipart/form-data">
+                                        <form class="form" action="{{url('/product/save_update/'.$data->id) }}" method="post" enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
                                             <div class="form-body">

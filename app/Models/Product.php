@@ -10,7 +10,6 @@ class Product extends Model
 {
     use HasFactory;
 
-
     protected $table = 'products';
     protected $fillable = ['id','name','category_id','image','code','quantity','status','price','details'];
 
@@ -39,8 +38,6 @@ class Product extends Model
     {
         return asset('img/'.$this->image) ;
     }
-
-
 
 
 }
