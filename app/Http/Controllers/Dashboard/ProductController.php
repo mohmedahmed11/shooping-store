@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ProductImage;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Brian2694\Toastr\Facades\Toastr;
 
 class ProductController extends Controller
 {
@@ -16,18 +20,18 @@ class ProductController extends Controller
         return view('dashboard.products.create',compact('categories'));
     }
 
-    public function save(Request $request){ 
-        
+    public function save(Request $request){
+
         $validateData=$request->validate([
             'quantity'=>'required:products',
             'name'=>'required',
             'details'=>'required',
             // 'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            
+
          ]);
 
         $data=new Product;
-        $imageName = ''.time().'.'.$request->image->extension();  
+        $imageName = ''.time().'.'.$request->image->extension();
         $request->image->move(public_path('storage/img/'), $imageName);
          $imagePath = 'img/'.$imageName;
          $data->image=$imagePath;
@@ -42,7 +46,7 @@ class ProductController extends Controller
 
          if($data){
 
-               return back()->with('status','Product Insert Successfully');
+               return redirect()->route('products')->with('status','Product Insert Successfully');
 
          }else{
 
@@ -51,11 +55,11 @@ class ProductController extends Controller
          }
 
 
-         
+
     }
-    // edit 
+    // edit
 // Update Product
-// 
+//
 public function done($id)
 {
     return "Wellcome";
@@ -66,7 +70,7 @@ public function done($id)
     {
         $data = Product::find($id);
         $categories = Category::all();
-        return view('dashboard.products.editpro', compact('data', 'categories'));
+        return view('dashboard.products.update', compact('data', 'categories'));
     }
 
 // end
@@ -80,15 +84,15 @@ public function update(Request $request,$id)
     $data->details = $request->input('details');
     if($request->hasFile('image')){
 
-        $imageName = ''.time().'.'.$request->image->extension();  
-        $request->image->move(public_path('storage/img/'), $imageName);
+        $imageName = ''.time().'.'.$request->image->extension();
+        $request->image->move(public_path('img/'), $imageName);
          $imagePath = 'img/'.$imageName;
          $data->image=$imagePath;
 
 
         // $file=$request->file('image');
         // $imageName= $file->getClientOriginalExtension();
-        // $imageName = ''.time().'.'.$request->image->extension();  
+        // $imageName = ''.time().'.'.$request->image->extension();
         //  $request->image->move(public_path('storage/img/'), $imageName);
         // $data->image = $imageName;
     }
@@ -96,18 +100,18 @@ public function update(Request $request,$id)
     $data->update();
 
     return redirect()->back()->with('status','Product Updated Successfully');
-    
+
 }
 
 
 // End Update Product
-   
+
 
     //add Catogires
 
     // properties
 
-    
+
     function show() {
         $blog= Product::all();
         $categories = Category::all();
@@ -123,7 +127,7 @@ public function update(Request $request,$id)
 
         if ($product){
             $product = $this->prepareProductData($product);
-            
+
             return ["status" => true, "data" => $product];
         }else {
             return ["status" => false, "data" => NULL];
@@ -153,7 +157,7 @@ public function update(Request $request,$id)
         ->where('best_seller_products.status', 1)
         ->get();
 
-        
+
 
         if ($products){
             foreach ($products as $key => $product) {
@@ -200,7 +204,7 @@ public function update(Request $request,$id)
     }
 
     function prepareProductData($product) {
-        $images = DB::table('images')
+        $images = DB::table('product_images')
         ->where('product_id', $product->id)
         ->get();
 
@@ -226,7 +230,7 @@ public function update(Request $request,$id)
         ->get()->first();
 
         $product->category = $categories;
-        
+
 
         $offer = DB::table('product_offers')
         ->where('product_id', $product->id)
@@ -235,8 +239,6 @@ public function update(Request $request,$id)
         return $product;
     }
 
-
-
       // end of add Cato
       public function destroy($id)
       {
@@ -244,5 +246,70 @@ public function update(Request $request,$id)
           $blogs->delete();
           return back()->with('error','Product Deleted Successfully');
       }
-   
+
+      public function images(Request $request, $id)
+      {
+          $product = Product::with(['images'])->find($id);
+          $images = $product->images;
+
+          return view('dashboard.products.images', compact('product','images'));
+      }
+
+      public function imagestore(Request $request, $id)
+      {
+        // return $request;
+        $request->validate([
+            'image' => 'image|required',
+        ]);
+        $request_data = $request->except(['_token']);
+        if ($request->image) {
+
+            Image::make($request->image)
+                ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save(public_path('img/' . $request->image->hashName()));
+
+            $request_data['image'] = $request->image->hashName();
+
+        }//end of if
+        $request_data['product_id'] = $id;
+        $request_data['image'] = 'img/'.$request_data['image'];
+        $image = ProductImage::create($request_data);
+        if ($image) {
+            Toastr::success('تم الاضافه بنجاح', 'success');
+        } else {
+            Toastr::success('لم يتم اضافه الصوره', 'error');
+        }
+        return redirect()->back();
+
+
+      }
+
+      public function imagedelete(Request $request, $id)
+      {
+        $images = ProductImage::find($id);
+        $images->delete();
+
+        Toastr::success('تم حذف الصوره', 'success');
+        return redirect()->back();
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -21,7 +21,7 @@
         <table class="table data-thumb-view">
             <thead>
                 <tr>
-                                    
+
                     <th></th>
                     <th>id</th>
                     <th>Image</th>
@@ -38,7 +38,7 @@
                 @foreach($blog as $key => $blogs)
                 <tr>
 
-                     
+
                     <td>
 
                     </td>
@@ -47,7 +47,7 @@
                         <img src="{{url('storage/'.$blogs->image)}}" class="rounded float-md-left" style="height:100px; width:100px;">
                     </td>
                     <td class="product-name">{{$blogs->name}}</td>
-                    <td class="product-name">{{$blogs->category_id}}</td>                                  
+                    <td class="product-name">{{$blogs->category_id}}</td>
                     <td class="product-name">{{$blogs->status}}</td>
                     <td class="product-name">
                         <div class="chip chip-primary">
@@ -57,7 +57,7 @@
                         </div>
                     </td>
                     <td class="product-name">{{$blogs->quantity}}</td>
-                    
+
                     <td class="product-name"><div class="chip chip-text">
                         <div class="chip-body">
                             <div class="chip-text">{{$blogs->price}}</div>
@@ -67,21 +67,21 @@
                     <td class="product-action">
                         <a href="{{url('product/rad/'.$blogs->id)}}" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="تعديل">
                             <span class="action-edit"><i class="feather icon-edit"></i>
-                            </span>                                            
+                            </span>
                             </a>
-                               
+
                         <a href="{{url('product/delete/'.$blogs->id)}}" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="حذف">
                             <span class="action-delete"><i class="fa fa-trash"></i>
                             </span>
                         </a>
-                        <a href="{{url('product/images/'.$blogs->id)}}" data-toggle="tooltip" data-placement="top" title="الخصائص"  class="btn btn-outline-success">
+                        <a href="{{route('product.images',$blogs->id)}}" data-toggle="tooltip" data-placement="top" title="الخصائص"  class="btn btn-outline-success">
                             <span class="action-edit"><i class="fa fa-check-square"></i>
                             </span>
                             </a>
                         <a href="{{url('product/images/'.$blogs->id)}}" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="صور العرض">
                             <span class="action-edit"><i class="fa fa-image"></i>
                             </span>
-                            </a>                                        
+                            </a>
                     </td>
 
                 </tr>
@@ -94,5 +94,5 @@
     <!-- add new sidebar starts -->
 
     <!-- add new sidebar ends -->
-</section>    
+</section>
 @endsection

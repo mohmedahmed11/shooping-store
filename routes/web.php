@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Properites\PropertiesController;
+use App\Http\Controllers\Dashboard\CategoryController;
 
 Route::get('/', function () {
     return view('layouts.master');
@@ -11,19 +12,21 @@ Route::get('/', function () {
 #################################product################################
 
 Route::prefix('product')->group(function () {
-    Route::get('/rad/{id}', [ProductController::class, 'edit']);
-    Route::put('/pro/{id}', [ProductController::class, 'update']);
     Route::get('/', [ProductController::class, 'show'])->name('products');
-    
+
     Route::get('/create', [ProductController::class, 'create'])->name('product.properites');
     Route::get('/create', [ProductController::class, 'create'])->name('product.create');
     Route::post('/save', [ProductController::class, 'save'])->name('product.save');
+    Route::get('/rad/{id}', [ProductController::class, 'edit']);
+    Route::put('/pro/{id}', [ProductController::class, 'update']);
     Route::get('/delete/{id}', [ProductController::class, 'destroy']);
-    Route::get('/images/{id}', [ProductController::class, 'images']);
+    Route::get('/images/{id}', [ProductController::class, 'images'])->name('product.images');
+    Route::post('/image/store/{id}', [ProductController::class, 'imagestore'])->name('products.image.store');
+    Route::get('/image/delete/{id}', [ProductController::class, 'imagedelete'])->name('products.image.delete');
     // update-product/
-    
+
 });
-// 
+//
 ##################################################
 
 Route::prefix('properties')->group(function () {
@@ -36,3 +39,16 @@ Route::prefix('properties')->group(function () {
     Route::get('/delete/{id}', [PropertiesController::class, 'destroy']);
     Route::get('/images/{id}', [PropertiesController::class, 'images']);
 });
+
+//
+#########################   category  #########################
+
+Route::group(['prefix' => 'category'], function(){
+    Route::get('/', [CategoryController::class , 'show'])->name('category');
+    Route::get('create', [CategoryController::class , 'create'])->name('category.create');
+    Route::post('store', [CategoryController::class , 'store'])->name('category.store');
+    Route::get('edit/{id}', [CategoryController::class , 'edit'])->name('category.edit');
+    Route::post('update/{id}', [CategoryController::class , 'update'])->name('category.update');
+    Route::get('delete/{id}', [CategoryController::class , 'destroy'])->name('category.delete');
+});
+
