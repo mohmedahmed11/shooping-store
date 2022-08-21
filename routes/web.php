@@ -21,9 +21,9 @@ Route::prefix('product')->group(function () {
     Route::put('/save_update/{id}', [ProductController::class, 'edit']);
     Route::get('/properites/{id}', [ProductController::class, 'properites'])->name('product.properites');
     Route::post('/carete_proparity', [ProductController::class, 'carete_proparity'])->name('product.carete_proparity');
-   
-    // update-product/
     
+    Route::get('/details/{id}', [ProductController::class, 'details'])->name('product.details');
+ 
 });
 // 
 ##################################################

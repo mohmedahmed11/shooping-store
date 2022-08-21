@@ -10,7 +10,7 @@
         <div class="col-8">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Add new Product</h4>
+                    <h4 class="card-title"> خصائص المنتج</h4>
                 </div>
                 <div class="card-content">
                     <div class="card-body">
@@ -37,9 +37,9 @@
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>product_id</th>
-                                    <th>property_id</th>
-                                    <th>property_value</th>
+                                    <th>No:</th>
+                                    <th>اسم الخاصية</th>
+                                    <th>الوصف</th>
                                     {{-- <th>ORDER STATUS</th>
                                     <th>DATE</th> --}}
                                     <th>ACTION</th>
@@ -108,7 +108,7 @@
                             <button class="btn btn-primary">Add Data</button>
                         </div>
                         <div class="cancel-data-btn">
-                            <button type="reset" class="btn btn-outline-danger">Cancel</button>
+                            <button value="reset" class="btn btn-outline-danger">Cancel</button>
                         </div>
                     </div>
                 </form>
@@ -127,7 +127,7 @@
                         <div class="add-new-data">
                             <div class="div mt-2 px-2 d-flex new-data-title justify-content-between">
                                 <div>
-                                    <h4 class="text-uppercase">Add New Proparaties</h4>
+                                    <h4 class="text-uppercase">خصائص المنتج:</h4>
                                 </div>
                                 <div class="hide-data-sidebar">
                                     <i class="feather icon-x"></i>
@@ -177,3 +177,15 @@
 
 @endsection
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Properites</title>
+</head>
+<body>
+    
+</body>
+</html>

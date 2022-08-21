@@ -9,7 +9,7 @@
     <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Dashboard analytics - Vuexy - Bootstrap HTML admin template</title>
+    <title>Hassna Store</title>
     <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
       <style>
@@ -101,8 +101,8 @@
    <script src="/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
    <script src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
    <script src="/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
-   <script src="/app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script>
-   <script src="/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
+   {{-- <script src="/app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script> --}} --}}
+   {{-- <script src="/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
    <!-- END: Page Vendor JS-->
 
    <!-- BEGIN: Theme JS-->

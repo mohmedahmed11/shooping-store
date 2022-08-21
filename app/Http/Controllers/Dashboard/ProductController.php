@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Properties;
 use App\Models\ProductProperty;
+use Brian2694\Toastr\Facades\Toastr;
 class ProductController extends Controller
 {
 
@@ -135,7 +136,15 @@ class ProductController extends Controller
    
     function show() {
         $products= Product::all();
+        foreach ($products as $key => $product) {
+            $category = Category::find($product->category_id);
+            $product->category = $category->name;
+            $products[$key] = $product;
+        }
+
+        
         $categories = Category::all();
+
         return view('dashboard.products.show',compact('products','categories'));
     }
      
@@ -143,7 +152,6 @@ class ProductController extends Controller
         $categories = Category::all();
         return view('dashboard.products.create',compact('categories'));
     }
-
     public function save(Request $request){ 
         
         $validateData=$request->validate([
@@ -167,9 +175,10 @@ class ProductController extends Controller
         $data->save();
 
         if($data){
-            return back()->with('status','Product Insert Successfully');
+            Toastr::success('تم حذف الصوره', 'success');
+             return redirect('/products')->with('success', 'Product is successfully saved');
         }else{
-        return back()->with('fail', ' Something Wrong ..!');
+        return back()->with('fail',' Something Wrong ..!');
         }
     }
 
@@ -198,8 +207,7 @@ class ProductController extends Controller
         }
 
         $data->update();
-
-        return redirect()->back()->with('status','Product Updated Successfully');
+        return redirect('/product')->with('status','Product Updated Successfully');
         
     }
 
@@ -211,6 +219,7 @@ class ProductController extends Controller
         $properties =  Properties::all();
         return view('dashboard.products.properites', compact('product','properties', 'productProparities'));
     }
+    
 
     function carete_proparity(Request $request) {
         $data = new ProductProperty;
@@ -230,6 +239,27 @@ class ProductController extends Controller
         ->join('properties', 'properties.id', '=', 'product_properties.property_id')
         ->where('product_id', $id)
         ->get();
+    }
+    // DEt
+    public function details($id)
+    {
+
+        $products= Product::all();
+        foreach ($products as $key => $product) {
+            $category = Category::find($product->category_id);
+            $product->category = $category->name;
+            $products[$key] = $product;
+        }
+
+        
+        $categories = Category::all();
+
+
+
+        // $product = Product::find($id);
+        // $productProparities =  $this->productProparities($id);
+        // $properties =  Properties::all();
+        return view('dashboard.products.details',compact('products','categories'));
     }
         
     // end of add Cato
