@@ -16,7 +16,7 @@ class UserController extends Controller
             return ["status" => true, "data" => $user];
         } else {
            return ["status" => false, "data" => null, "message" => "no user fund"];
-<<<<<<< HEAD:app/Http/Controllers/Dashboard/UserController.php
+
         }
     }
 
@@ -30,9 +30,6 @@ class UserController extends Controller
             return ["status" => true, "data" => $user];
         } else {
             return ["status" => false, "data" => null];
-
-=======
->>>>>>> c00423c9393d6f88643c21f3af616728cbe315ca:app/Http/Controllers/UserController.php
         }
     }
 

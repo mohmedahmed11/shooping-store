@@ -1,10 +1,8 @@
 @extends('layouts.master')
 @section('content')
-
 <section id="multiple-column-form">
     <body  class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static"
      data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
-
 
     
     <div class="row match-height">
@@ -22,10 +20,8 @@
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-label-group">
-
                                             <label for="first-name-column">اسم المنج</label>
                                             <input type="text" id="first-name-column" class="form-control" placeholder="الاسم الاول" name="name">
-
                                         </div>
                                     </div>
                                 
@@ -49,7 +45,6 @@
                                         </div>
                                     </div>
                                     
-
                                     <div class="col-md-6 col-12">
                                         القسم
                                         <div class="controls">
@@ -61,7 +56,6 @@
                                             </select>
                                             </div> 
                                     </div>
-
                                     <div class="col-md-6 col-12">
                                         <p class="mb-2">
                                         <div class="row">
@@ -86,7 +80,6 @@
                     </div>
                 </div>
             </div>      
-
                     </div>
     
                         <div class="row match-height">
@@ -97,7 +90,6 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-
                             {{-- <div class="col-sm-12 data-field-col data-list-upload">
                                 <form action="#" class="dropzone dropzone-area" id="dataListUpload">
                                     <div class="dz-message">Upload Image</div>
@@ -107,7 +99,6 @@
                             <div class="col-md-6 col-12">
                                         
                                 <fieldset class="form-group">
-
                                     <div class="card" style="width: 18rem;">
                                         <img  id='output' src="{{url('/storage/img/no_image.jpg')}}" style="height:150px; width:150px;">                                        
                                         <div class="card-body">                                                                             
