@@ -211,8 +211,9 @@ class ProductController extends Controller
         }
 
         $data->update();
-        
+
         return redirect('/product')->with('status','Product Updated Successfully');
+
 
     }
 
@@ -245,7 +246,7 @@ class ProductController extends Controller
         ->where('product_id', $id)
         ->get();
     }
-    
+
     // end of add Cato
     public function destroy($id)
     {
@@ -308,7 +309,7 @@ class ProductController extends Controller
       Toastr::success('تم حذف الصوره', 'success');
       return redirect()->back();
     }
-
+    
     public function details($id)
     {
         $product= Product::find($id);

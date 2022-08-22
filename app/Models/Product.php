@@ -40,4 +40,5 @@ class Product extends Model
         return asset('img/'.$this->image) ;
     }
 
+
 }

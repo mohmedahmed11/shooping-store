@@ -11,12 +11,7 @@
     <meta name="author" content="PIXINVENT">
     <title>Hassna Store</title>
     {{-- <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png"> --}}
-    <link href="https://fonts.googleapis.com/css?family=Cairo:400,700" rel="stylesheet">
-    <style>
-        body, h1, h2, h3, h4, h5, h6 {
-            font-family: 'Cairo', sans-serif !important;
-        }
-    </style>
+
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -50,6 +45,12 @@
     <link rel="stylesheet" type="text/css" href="/app-assets/css-rtl/custom-rtl.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/style-rtl.css">
     <!-- END: Custom CSS-->
+    <link href="https://fonts.googleapis.com/css?family=Cairo:400,700" rel="stylesheet">
+    <style>
+        body, h1, h2, h3, h4, h5, h6, .navigation {
+            font-family: 'Cairo', sans-serif !important;
+        }
+    </style>
 
  <!-- toast -->
  <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
@@ -160,7 +161,6 @@ if (this.files && this.files[0]) {
 }
 });
 </script>
-  <!-- toast -->
 
   <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
   {!! Toastr::message() !!}

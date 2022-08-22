@@ -23,6 +23,7 @@
             <thead>
                 <tr  class="filters">
                     {{-- product_images            --}}
+
                     <th></th>
                     <th>id</th>
                     <th>الصورة</th>
@@ -52,6 +53,7 @@
                     </td>
                     <td class="product-name">{{$product->name}}</td>
                     <td class="product-name">{{$product->category}}</td>                                  
+
                     <td class="product-name">{{$product->status}}</td>
                     <td class="product-name">
                         <div class="chip chip-primary">
@@ -75,6 +77,7 @@
                             </span>
                             </a>
                         <a href="{{url('product/delete/'.$product->id)}}" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="حذف">
+
                             <span class="action-delete"><i class="fa fa-trash"></i>
                             </span>
                         </a>

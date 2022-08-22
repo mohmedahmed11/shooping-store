@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Properites\PropertiesController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Settings\RegonsController;
+use App\Http\Controllers\Settings\SettingsController;
 
 Route::get('/', function () {
     return view('layouts.master');
@@ -24,7 +26,7 @@ Route::prefix('product')->group(function () {
 
     Route::post('/image/store/{id}', [ProductController::class, 'imagestore'])->name('products.image.store');
     Route::get('/image/delete/{id}', [ProductController::class, 'imagedelete'])->name('products.image.delete');
-    
+
     Route::get('/details/{id}', [ProductController::class, 'details'])->name('product.details');
 
 });
@@ -46,10 +48,28 @@ Route::prefix('properties')->group(function () {
 
 Route::group(['prefix' => 'category'], function(){
     Route::get('/', [CategoryController::class , 'show'])->name('category');
-    Route::get('create', [CategoryController::class , 'create'])->name('category.create');
     Route::post('store', [CategoryController::class , 'store'])->name('category.store');
     Route::get('edit/{id}', [CategoryController::class , 'edit'])->name('category.edit');
     Route::post('update/{id}', [CategoryController::class , 'update'])->name('category.update');
     Route::get('delete/{id}', [CategoryController::class , 'destroy'])->name('category.delete');
+});
+
+
+#########################   regons  #########################
+
+Route::group(['prefix' => 'regon'], function(){
+    Route::get('/', [RegonsController::class , 'show'])->name('regon');
+    Route::post('store', [RegonsController::class , 'store'])->name('regon.store');
+    Route::get('edit/{id}', [RegonsController::class , 'edit'])->name('regon.edit');
+    Route::post('update/{id}', [RegonsController::class , 'update'])->name('regon.update');
+    Route::get('delete/{id}', [RegonsController::class , 'destroy'])->name('regon.delete');
+    Route::get('status/{id}', [RegonsController::class , 'status'])->name('regon.status');
+});
+
+#########################   regons  #########################
+
+Route::group(['prefix' => 'settings'], function(){
+    Route::get('/', [SettingsController::class , 'show'])->name('settings');
+    Route::post('update', [SettingsController::class , 'update'])->name('settings.update');
 });
 
