@@ -10,23 +10,32 @@
     </div>
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
-        
+
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            
+
             <li class=" nav-item"><a href="{{url('/')}}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Main Dash</span><span class="badge badge badge-warning badge-pill float-right mr-2">2</span></a>
-                
+
             </li>
             <li class=" navigation-header"><span>Apps</span>
             </li>
-            
-            
+
+            <li class=" nav-item"><a href="#"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">الاقسام</span></a>
+                <ul class="menu-content">
+                    <li><a href="{{route('category')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">عرض الاقسام</span></a>
+                    </li>
+                    <li><a href="{{route('category.create')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافة قسم</span></a>
+                    </li>
+
+                </ul>
+            </li>
+
             <li class=" nav-item"><a href="#"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">المنتجات</span></a>
                 <ul class="menu-content">
                     <li><a href="{{route('products')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">عرض المنتجات</span></a>
                     </li>
                     <li><a href="{{route('product.create')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافة منتج</span></a>
                     </li>
-                    
+
                 </ul>
             </li>
             {{-- <li class=" nav-item"><a href="#"><i class="feather icon-file"></i><span class="menu-title" data-i18n="Ecommerce">الخصائص</span></a>
@@ -35,18 +44,14 @@
                     </li>
                     <li><a href="{{route('properties.create')}}"><i class="feather icon-chevrons-left"></i><span class="menu-item" data-i18n="Details">اضافة خاصية</span></a>
                     </li>
-                    
+
+
                 </ul>
             </li> --}}
-            <li class=" nav-item"><a href="#"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">الاقسام</span></a>
-                <ul class="menu-content">
-                    <li><a href="{{url('pages.category.showCato')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">عرض الاقسام</span></a>
-                    </li>
-                    <li><a href="{{url('pages.category.newcato')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافة قسم</span></a>
-                    </li>
-                   
+
                 </ul>
             </li>
+
         </ul>
     </div>
 </div>

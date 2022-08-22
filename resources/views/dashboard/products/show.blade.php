@@ -22,7 +22,7 @@
         <table class="table data-thumb-view">
             <thead>
                 <tr  class="filters">
-                                    
+                    {{-- product_images            --}}
                     <th></th>
                     <th>id</th>
                     <th>الصورة</th>
@@ -37,8 +37,7 @@
             </thead>
             <tbody>
                 @foreach($products as $product)
-                <a href="index.html" >
-                <tr  role="row" href="index.html" >
+                <tr role="row" >
 
                     <td>
 
@@ -61,8 +60,9 @@
                             </div>
                         </div>
                     </td>
+
                     <td class="product-name">{{$product->quantity}}</td>
-                    
+
                     <td class="product-name"><div class="chip chip-text">
                         <div class="chip-body">
                             <div class="chip-text">{{$product->price}}</div>
@@ -72,9 +72,8 @@
                     <td class="product-action">
                         <a href="{{url('product/update/'.$product->id)}}" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="تعديل">
                             <span class="action-edit"><i class="feather icon-edit"></i>
-                            </span>                                            
+                            </span>
                             </a>
-                               
                         <a href="{{url('product/delete/'.$product->id)}}" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="حذف">
                             <span class="action-delete"><i class="fa fa-trash"></i>
                             </span>
@@ -86,28 +85,28 @@
                         <a href="{{url('product/images/'.$product->id)}}" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="صور العرض">
                             <span class="action-edit"><i class="fa fa-image"></i>
                             </span>
-                            </a>                                        
+                            </a>
                     </td>
                
                 </tr>
-            </a>
+          
                 @endforeach
             </tbody>
         </table>
     </div>
     <!-- dataTable ends -->
-    
+
     <!-- add new sidebar starts -->
 
     <!-- add new sidebar ends -->
-</section>    
+</section>
 @endsection
-<head>
+{{-- <head>
 
     <title>Display Products</title>
 </head>
-<a target="_blank" rel="nofollow noreferrer" href="vvvv/" title="" class="add-friend">Add Friend</a>
-
+<a target="_blank" rel="nofollow noreferrer" href="vvvv/" title="" class="add-friend">Add Friend</a> --}}
+{{-- 
 <script>
     var counter = 1;
     jQuery('a.add-friend').click(function(event){
@@ -125,4 +124,4 @@
             counter + '"/></td></tr>');
         jQuery('table.friends-list').append(newRow);
     });
-</script>
+</script> --}}
