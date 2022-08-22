@@ -47,7 +47,7 @@ class ProductController extends Controller
         }
     }
 
-    function bestSeller() {
+    public function bestSeller() {
         $products = DB::table('best_seller_products')
         ->join('products', 'products.id', '=', 'best_seller_products.product_id')
         ->select('products.*')
@@ -64,7 +64,7 @@ class ProductController extends Controller
         }
     }
 
-    function latest() {
+    public function latest() {
         $products = DB::table('latest_products')
         ->join('products', 'products.id', '=', 'latest_products.product_id')
         ->select('products.*')

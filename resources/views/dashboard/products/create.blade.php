@@ -95,24 +95,49 @@
                                     <div class="dz-message">Upload Image</div>
                                 </form>
                             </div> --}}
+
+                        <!-- <div class="col-md-6 col-12">
+                            <div class="form-label-group">
+                                <fieldset class="form-group">
+                                    <label for="first-name-icon">صورة</label>
+                                    <div class="position-relative has-icon-left">
+                                        <input type="file" name="image" class="form-control image">
+                                        <div class="form-control-position">
+                                            <i class="feather icon-image"></i>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <img src="{{ asset('icons/defalut.jpeg') }}" style="width: 100px" class="img-thumbnail image-preview" alt="">
+                            </div>
+                        </div> -->
+
+
                             
-                            <div class="col-md-6 col-12">
+                            <div class="col-md-12 col-12">
                                         
                                 <fieldset class="form-group">
                                     <div class="card" style="width: 18rem;">
-                                        <img  id='output' src="{{url('/storage/img/no_image.jpg')}}" style="height:150px; width:150px;">                                        
+                                                                           
                                         <div class="card-body">                                                                             
-                                         <fieldset class="form-group">
-                                                <label for="basicInputFile">Image</label>
-                                        <div class="custom-file">
-                                            <input type="file" accept='image/*' name="image" onchange='openFile(event)'><br>
-                                         </div>
-                                     </fieldset>
+                                            <fieldset class="form-group">
+                                            <label for="first-name-icon">صورة</label>
+                                                <div class="position-relative">
+                                                <input type="file" name="image" class="form-control image">
+                                            </div>
+                                            </fieldset>
+                                            <div class="form-group">
+                                                <img src="{{ asset('icons/defalut.jpeg') }}" style="width: 100px" id='output' class="img-thumbnail image-preview" alt="">
+                                            </div>
                                         </div>
                                       </div>
                                 </fieldset>
 
-                            </div>
+                            </div> 
                             
                         </div>
                     </div>

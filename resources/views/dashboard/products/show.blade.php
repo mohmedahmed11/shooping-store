@@ -68,7 +68,7 @@
                             </span>
                             </a>
 
-                        <a href="{{url('product/destroy/'.$product->id)}}" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="حذف">
+                        <a href="{{url('product/delete/'.$product->id)}}" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="حذف">
 
                             <span class="action-delete"><i class="fa fa-trash"></i>
                             </span>
