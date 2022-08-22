@@ -29,7 +29,7 @@ class CategoryController extends Controller
 
 public function show()
 {
-    $categories = Category::selection()->latest()->paginate(4);
+    $categories = Category::selection()->get();
     // return  $categories;
     return view('dashboard.category.index', compact('categories'));
 }
