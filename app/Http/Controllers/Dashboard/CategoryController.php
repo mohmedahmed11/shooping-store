@@ -33,9 +33,7 @@ class CategoryController extends Controller
             }
 
             return $categories;
-
         }
-
     }
     ////////////////////////////////////////////////
 
