@@ -50,20 +50,30 @@
                             </h4>
                         </div>  
                     </div>
-                    <hr>                               
+                    <hr>    
+                    <div
+                     class="row match-height">
+                        @isset($images)
+                        @foreach($images as $index=>$image)
+                             <div class="col-xl-4">
+                                    <div class="card-body">
+                                        <img class="card-img img-fluid mb-1" src="{{ $image->image_path }}" alt="Card image cap">
+                                    </div>
+                        </div>
+                        @endforeach
+                        @endisset
+                    </div>                   
+                    <hr>
                     <div class="col-12">
                         <div class="form-group">
                             <div class="col-12" >
-                                <h3>
-                                    
+                                <h3>                                    
                                 التفاصيل : 
                                 <p class="">
                                     <br>
                                     {{ $product->details}}
-                                </p>
-                                    
-                                </h3>
-                                
+                                </p>                                    
+                                </h3>                               
                             </div>
                         </div>
                     </div>
@@ -74,8 +84,7 @@
                                 <thead>
                                     <tr>
                                         <th>اسم الخاصية</th>
-                                        <th>الوصف</th>
-                                        
+                                        <th>الوصف</th>                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,12 +94,9 @@
                                         <td class="product-category">{{$property->property_value}}</td>
                                     </tr>
                                     @endforeach
-                                </tbody>
-                            
-                            </table>
-                       
-                        </div>
-                        
+                                </tbody>                           
+                            </table>                      
+                        </div>                      
                     </div>        
                     <hr>               
                 </div>

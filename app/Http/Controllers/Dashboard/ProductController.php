@@ -264,6 +264,7 @@ class ProductController extends Controller
 
     public function images(Request $request, $id)
     {
+
         $product = Product::with(['images'])->find($id);
         $images = $product->images;
 
@@ -319,7 +320,9 @@ class ProductController extends Controller
         }
         $product->proparities =  $this->productProparities($id);
 
-        return view('dashboard.products.details',compact('product'));
+        $products = Product::with(['images'])->find($id);
+        $images = $product->images;
+        return view('dashboard.products.details',compact('product','products','images'));
     }
 
 }
