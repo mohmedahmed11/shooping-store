@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductImage;
+use App\Models\Banner;
 
 class Product extends Model
 {
@@ -18,6 +19,14 @@ class Product extends Model
         return $query -> select('id','name','category_id','image','code','quantity','status','price','details');
     }
 
+    protected $appends = [
+        'image_path',
+    ];
+
+    public function getImagePathAttribute()
+    {
+        return asset('img/'.$this->image) ;
+    }
 
     // relations of products
     public function category()
@@ -30,14 +39,10 @@ class Product extends Model
         return $this -> hasMany(ProductImage::class,'product_id','id');
     }
 
-    protected $appends = [
-        'image_path',
-    ];
 
-    public function getImagePathAttribute()
-    {
-        return asset('img/'.$this->image) ;
-    }
+
+
+
 
 
 }

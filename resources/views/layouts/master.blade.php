@@ -11,7 +11,7 @@
     <meta name="author" content="PIXINVENT">
     <title>Hassna Store</title>
     {{-- <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png"> --}}
-    
+
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -94,7 +94,7 @@
 
 Stack(
     children: [
-        
+
     ]
 )
 
@@ -103,7 +103,7 @@ Stack(
      <!-- BEGIN: Vendor JS-->
      <script src="/app-assets/vendors/js/vendors.min.js"></script>
      <!-- BEGIN Vendor JS-->
- 
+
      <!-- BEGIN: Page Vendor JS-->
      <script src="/app-assets/vendors/js/extensions/dropzone.min.js"></script>
      <script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
@@ -113,16 +113,16 @@ Stack(
      <script src="/app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script>
      <script src="/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
      <!-- END: Page Vendor JS-->
- 
+
      <!-- BEGIN: Theme JS-->
      <script src="/app-assets/js/core/app-menu.js"></script>
      <script src="/app-assets/js/core/app.js"></script>
      <script src="/app-assets/js/scripts/components.js"></script>
      <!-- END: Theme JS-->
- 
+
      <!-- BEGIN: Page JS-->
      <script src="/app-assets/js/scripts/ui/data-list-view.js"></script>
-{{--      
+{{--
     <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 
    <script src="/app-assets/vendors/js/vendors.min.js"></script>
@@ -131,7 +131,7 @@ Stack(
    <script src="/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
    <script src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
    <script src="/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
-   <script src="/app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script> 
+   <script src="/app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script>
     <script src="/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
 
    <!-- END: Page Vendor JS-->
@@ -166,6 +166,42 @@ if (this.files && this.files[0]) {
   <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
   {!! Toastr::message() !!}
 
+   {{--  chekbox show  --}}
+   <script>
+    function Enableddl(checked)
+     {
+        var ddl=document.getElementById('selectProduct');
+        ddl.disabled=check.checked ? false : true;
+        if (!ddl.disabled)
+        {
+            ddl.focus();
+        }
+    }
+
+    $("#selectProduct").change(function () {
+        
+        var val = $('#selectProduct').val();
+        {{--  var base_url = '{!! url().'/' !!}';  --}}
+        var APP_URL = {!! json_encode(url('/').'/') !!}
+        console.log(APP_URL);
+        $.ajax({
+        url: APP_URL+"banner/find_product/"+val,
+        method: 'GET',
+        success: function(data){
+             console.log(data.id);
+             $("#productToView tbody").text("");
+             $("#productToView").append('<tr role="row" class="odd">'
+                                        +'<td>'+data.id+'</td>'
+                                        +'<td>'+data.name+'</td>'
+                                        +'<td><img src="'+APP_URL+data.image+'" style="width: 80px;" class="img-thumbnail" alt=""></td>' 
+                                        +'</tr>');
+            {{--  $("#productToView").load();  --}}
+        }});
+
+    });
+
+
+</script>
 
 </body>
 <!-- END: Body-->

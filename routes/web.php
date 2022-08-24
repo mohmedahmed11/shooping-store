@@ -6,6 +6,7 @@ use App\Http\Controllers\Properites\PropertiesController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Settings\RegonsController;
 use App\Http\Controllers\Settings\SettingsController;
+use App\Http\Controllers\Settings\BannerController;
 
 Route::get('/', function () {
     return view('layouts.master');
@@ -67,6 +68,20 @@ Route::group(['prefix' => 'regon'], function(){
 Route::group(['prefix' => 'settings'], function(){
     Route::get('/', [SettingsController::class , 'show'])->name('settings');
     Route::post('update', [SettingsController::class , 'update'])->name('settings.update');
+});
+
+#########################   banner  #########################
+
+Route::group(['prefix' => 'banner'], function(){
+    Route::get('/', [BannerController::class , 'show'])->name('banner');
+    Route::get('/create', [BannerController::class , 'create'])->name('banner.create');
+    Route::post('store', [BannerController::class , 'store'])->name('banner.store');
+    Route::get('edit/{id}', [BannerController::class , 'edit'])->name('banner.edit');
+    Route::post('update/{id}', [BannerController::class , 'update'])->name('banner.update');
+    Route::get('delete/{id}', [BannerController::class , 'destroy'])->name('banner.delete');
+    Route::get('status/{id}', [BannerController::class , 'status'])->name('banner.status');
+    Route::get('find_product/{id}', [BannerController::class , 'find_product'])->name('banner.find_product');
+    
 });
 
 
