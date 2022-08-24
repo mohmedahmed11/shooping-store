@@ -9,6 +9,7 @@ use App\Models\Banner;
 
 class Product extends Model
 {
+   
     use HasFactory;
 
     protected $table = 'products';

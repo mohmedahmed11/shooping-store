@@ -139,7 +139,15 @@ class ProductController extends Controller
 
     function show() {
         $products= Product::all();
+        foreach ($products as $key => $product) {
+            $category = Category::find($product->category_id);
+            $product->category = $category->name;
+            $products[$key] = $product;
+        }
+
+        
         $categories = Category::all();
+
         return view('dashboard.products.show',compact('products','categories'));
     }
 
@@ -171,9 +179,10 @@ class ProductController extends Controller
         $data->save();
 
         if($data){
-            return back()->with('status','Product Insert Successfully');
+            Toastr::success('تم اضافة المنتج', 'success');
+             return redirect('/product')->with('success', 'successfully saved');
         }else{
-        return back()->with('fail', ' Something Wrong ..!');
+        return back()->with('fail',' Something Wrong ..!');
         }
     }
 
@@ -203,7 +212,8 @@ class ProductController extends Controller
 
         $data->update();
 
-        return redirect()->back()->with('status','Product Updated Successfully');
+        return redirect('/product')->with('status','Product Updated Successfully');
+
 
     }
 
@@ -215,6 +225,7 @@ class ProductController extends Controller
         $properties =  Properties::all();
         return view('dashboard.products.properites', compact('product','properties', 'productProparities'));
     }
+    
 
     function carete_proparity(Request $request) {
         $data = new ProductProperty;
@@ -253,6 +264,7 @@ class ProductController extends Controller
 
     public function images(Request $request, $id)
     {
+
         $product = Product::with(['images'])->find($id);
         $images = $product->images;
 
@@ -297,6 +309,20 @@ class ProductController extends Controller
 
       Toastr::success('تم حذف الصوره', 'success');
       return redirect()->back();
+    }
+    
+    public function details($id)
+    {
+        $product= Product::find($id);
+        if ( $product) {
+            $category = Category::find($product->category_id);
+            $product->category = $category->name;
+        }
+        $product->proparities =  $this->productProparities($id);
+
+        $products = Product::with(['images'])->find($id);
+        $images = $product->images;
+        return view('dashboard.products.details',compact('product','products','images'));
     }
 
 }

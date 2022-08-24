@@ -20,7 +20,8 @@ class Category extends Model
 
     public function getImageAttribute($val)
     {
-        return ($val !== null) ? asset('icons/' . $val) : "";
+        return ($val !== null) ? asset('' . $val) : "";
+
     }
 
 // relations of categories
