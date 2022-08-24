@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Properties;
 use App\Models\ProductProperty;
 use App\Models\ProductImage;
+use App\Models\SimilerProduct;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Brian2694\Toastr\Facades\Toastr;
@@ -145,10 +146,16 @@ class ProductController extends Controller
             $products[$key] = $product;
         }
 
+        foreach ($products as $key => $pro) {
+            $category = Category::find($pro->category_id);
+            $pro->category = $category->name;
+            $pro[$key] = $pro;
+        }
+
         
         $categories = Category::all();
 
-        return view('dashboard.products.show',compact('products','categories'));
+        return view('dashboard.products.show',compact('products','categories','pro'));
     }
 
     function create() {
@@ -318,11 +325,27 @@ class ProductController extends Controller
             $category = Category::find($product->category_id);
             $product->category = $category->name;
         }
+
+
+        $similerProducts=Product::with(['simlier'=>function($q){
+
+           
+        }])->find($id);
+
+        foreach ($similerProducts->simlier as $key => $similer) {
+            # code...
+            $similerProducts->simlier[$key]->product = Product::find($similer->similar_product_id);
+        }
+
         $product->proparities =  $this->productProparities($id);
 
         $products = Product::with(['images'])->find($id);
         $images = $product->images;
-        return view('dashboard.products.details',compact('product','products','images'));
+
+        // return $similerProducts;
+
+        return view('dashboard.products.details',compact('product','products','images','similerProducts'));
     }
+
 
 }

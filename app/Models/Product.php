@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductImage;
+use App\Models\SimilerProduct;
 
 class Product extends Model
 {
@@ -31,6 +32,12 @@ class Product extends Model
         return $this -> hasMany(ProductImage::class,'product_id','id');
     }
 
+    // public function simlier(){
+    //     return $this->hasOne(ProductImage::class,'id', 'similar_product_id');
+
+    // }
+
+
     protected $appends = [
         'image_path',
     ];
@@ -38,6 +45,9 @@ class Product extends Model
     public function getImagePathAttribute()
     {
         return asset('img/'.$this->image) ;
+    }
+    public function simlier(){
+        return $this->hasMany('App\Models\SimilerProduct','product_id','id');
     }
 
 

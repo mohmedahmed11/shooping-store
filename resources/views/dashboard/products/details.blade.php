@@ -51,8 +51,7 @@
                         </div>  
                     </div>
                     <hr>    
-                    <div
-                     class="row match-height">
+                    <div class="row match-height">
                         @isset($images)
                         @foreach($images as $index=>$image)
                              <div class="col-xl-4">
@@ -98,11 +97,41 @@
                             </table>                      
                         </div>                      
                     </div>        
-                    <hr>               
+                    <hr> 
+                    <h3> المنتجات المشابهة </h3>
+                    <hr>   
+                    <div class="table-responsive">
+                        <table class="table data-thumb-view">
+                            <thead>
+                                <tr class="filters">
+                                    <th></th>
+                                        <th> # </th>
+                                        <th>اسم المنتج</th>
+                                        <th>صوره</th>
+                                        <th>إجراء</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @isset($similerProducts->simlier)
+                                {{-- $index = 0; --}}
+                                    @foreach($similerProducts->simlier as $similer)
+                                        <tr role="row" class="odd">
+                                            <td></td>
+                                            <td>{{ $similer->product->id }}</td>
+                                            <td>{{ $similer->product->name }}</td>
+                                            <td><img src="{{ url('storage/'.$similer->product->image) }}" style="width: 80px;" class="img-thumbnail" alt=""></td>
+                                            <td><a href="{{ url('similer/delete', $similer->product->id) }}" id="delete" class="btn btn-outline-danger"><i class="fa fa-trash"></i>حذف</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endisset
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
 @endsection
 <head>
