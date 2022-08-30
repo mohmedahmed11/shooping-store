@@ -22,15 +22,46 @@
                                             <form class="form" action="{{ route('product.productoption') }}" method="post" enctype="multipart/form-data">
                                                 @csrf
                                             <div class="form-label-group mt-1">
-                                                <input type="text" id="emailTo" class="form-control" placeholder="name" name="name">
-                                                <label for="emailTo">name</label>
+                                                <span for="data-name">وصف</span>
+                                                <input type="text" id="emailTo" class="form-control" placeholder="وصف الخيار " name="name">
+
                                             </div>
-                                            <div class="form-group mt-2">
+
+
+                                            <div class="col-6">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                       <h4>صورة  </h4>  {{-- <h4 class="card-title">Image <i class="fa fa-image" aria-hidden="true"></i>add Image</h4> --}}
+                                                    </div>
+                                                    <div class="col-md-6 col-6">
+
+                                                        <fieldset class="form-group">
+                                                            <div class="card" style="width: 18rem;">
+                                                                <img  id='output' class="img-thumbnail" src="{{url('/storage/img/no_image.jpg')}}" style="height:150px; width:150px;">
+                                                                <div class="card-body">
+                                                                 <fieldset class="form-group">
+                                                                        <span for="basicInputFile">Image</span>
+                                                                <div class="custom-file">
+                                                                    <input type="file" accept='image/*' name="image" onchange='openFile(event)'><br>
+                                                                 </div>
+                                                             </fieldset>
+                                                                </div>
+                                                              </div>
+                                                        </fieldset>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+                                            {{-- <div class="form-group mt-2">
                                                 <div class="custom-file">
                                                     <input type="file" name="image" class="custom-file-input" id="emailAttach">
                                                     <span class="custom-file-label" for="emailAttach">Attach file</span>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <div class="modal-footer">
                                             <input type="hidden" name="product_id" value="{{$product->id}}">

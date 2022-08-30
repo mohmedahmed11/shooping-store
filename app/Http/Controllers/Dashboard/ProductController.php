@@ -202,7 +202,14 @@ class ProductController extends Controller
             $data->image=$imagePath;
         }
         $data->update();
-        return redirect('/product')->with('status','Product Updated Successfully');
+        if($data)
+        {
+
+
+        Toastr::success('تمت  تعديل المنتج ', 'success');
+        return redirect('/product');
+    }
+        ;
 
     }
     //  product proPariries
