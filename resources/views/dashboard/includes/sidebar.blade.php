@@ -20,7 +20,7 @@
             <li class=" navigation-header"><span>Apps</span>
             </li>
 
-            <li class=" nav-item"><a href="{{route('category')}}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">الاقسام</span><span class="badge badge badge-warning badge-pill float-right mr-2">{{ App\Models\Category::count() }}</span></a>
+            <li class=" nav-item"><a href="{{route('category')}}"><i class="feather icon-menu"></i><span class="menu-title" data-i18n="Dashboard">الاقسام</span><span class="badge badge badge-warning badge-pill float-right mr-2">{{ App\Models\Category::count() }}</span></a>
 
             </li>
 
@@ -38,7 +38,9 @@
                 <ul class="menu-content">
                     <li><a href="{{route('regon')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">مناطق التوصيل</span></a>
                     </li>
-                    <li><a href="{{ route('settings') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اعدادات التطبيق</span></a>
+                    <li><a href="{{ route('banner') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">إعلانات</span></a>
+                    <li><a href="{{ route('banner.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافه إعلان</span></a>
+                    <li><a href="{{ route('settings') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">إعدادات التطبيق</span></a>
                     </li>
                 </ul>
             </li>

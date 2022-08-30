@@ -58,7 +58,7 @@ public function store(Request $request)
                 })
                 ->save(public_path('icons/' . $request->image->hashName()));
 
-            $request_data['image'] = $request->image->hashName();
+            $request_data['image'] = 'icons/' .$request->image->hashName();
 
         }//end of if
 
@@ -91,7 +91,7 @@ public function update(Request $request, $id)
     {
         if ($request->image != '')
         {
-            Storage::disk('public_uploads')->delete('icons/'. $request->image);
+            Storage::disk('public_uploads')->delete( $request->image);
         }//end of inner if
         Image::make($request->image)
             ->resize(300, null, function ($constraint) {
@@ -99,7 +99,7 @@ public function update(Request $request, $id)
             })
             ->save(public_path('icons/'.$request->image->hashName()));
 
-        $request_data['image'] = $request->image->hashName();
+        $request_data['image'] = 'icons/' .$request->image->hashName();
     }//end of external if
 
     Category::where('id',$id)->update($request_data);
