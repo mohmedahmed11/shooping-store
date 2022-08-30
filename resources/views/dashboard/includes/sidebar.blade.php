@@ -34,6 +34,15 @@
                 </ul>
             </li>
 
+
+            <li class=" nav-item"><a href="#"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">الطلبات</span></a>
+                <ul class="menu-content">
+                    <li><a href="{{route('order')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">عرض الطلبات </span></a>
+                    </li>
+                    <li><a href="{{ route('order.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافه طلب</span></a>
+                </ul>
+            </li>
+
             <li class=" nav-item"><a href="#"><i class="feather icon-settings"></i><span class="menu-title" data-i18n="Ecommerce">الاعدادات</span></a>
                 <ul class="menu-content">
                     <li><a href="{{route('regon')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">مناطق التوصيل</span></a>

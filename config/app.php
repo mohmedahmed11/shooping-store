@@ -176,6 +176,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         //toster
         Brian2694\Toastr\ToastrServiceProvider::class,
+        // PDF
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
 
     ],
 
@@ -233,6 +235,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         //toster
         'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
+        //PDF
+        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
+
 
     ],
 

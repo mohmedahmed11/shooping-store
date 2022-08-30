@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Properites\PropertiesController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Settings\RegonsController;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Settings\BannerController;
@@ -85,5 +86,17 @@ Route::group(['prefix' => 'banner'], function(){
     Route::get('delete/{id}', [BannerController::class , 'destroy'])->name('banner.delete');
     Route::get('status/{id}', [BannerController::class , 'status'])->name('banner.status');
     Route::get('find_product/{id}', [BannerController::class , 'find_product'])->name('banner.find_product');
+
+});
+#########################   order  #########################
+
+Route::group(['prefix' => 'order'], function(){
+    Route::get('/', [OrderController::class , 'show'])->name('order');
+    Route::get('/create', [OrderController::class , 'create'])->name('order.create');
+    Route::post('store', [OrderController::class , 'store'])->name('order.store');
+    Route::post('status', [OrderController::class , 'status'])->name('order.status');
+    Route::get('find_order/{id}', [OrderController::class , 'find_order'])->name('order.find_order');
+
+
 
 });

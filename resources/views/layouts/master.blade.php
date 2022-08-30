@@ -44,6 +44,7 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="/app-assets/css-rtl/custom-rtl.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/style-rtl.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
     <!-- END: Custom CSS-->
     <link href="https://fonts.googleapis.com/css?family=Cairo:400,700" rel="stylesheet">
     <style>
@@ -59,7 +60,7 @@
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+<body class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" dir="rtl">
 
     <!-- BEGIN: Header-->
     @include('dashboard.includes.header')
@@ -110,8 +111,8 @@ Stack(
      <script src="/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
      <script src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
      <script src="/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
-     <script src="/app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script>
-     <script src="/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
+     {{--  <script src="/app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script>
+     <script src="/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>  --}}
      <!-- END: Page Vendor JS-->
 
      <!-- BEGIN: Theme JS-->
@@ -122,6 +123,10 @@ Stack(
 
      <!-- BEGIN: Page JS-->
      <script src="/app-assets/js/scripts/ui/data-list-view.js"></script>
+
+     <!-- PRINT: THIS JS-->
+     <script src="{{ asset('assets/js/printThis.js') }}"></script>
+
 {{--
     <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 
@@ -144,6 +149,24 @@ Stack(
 
    <!-- BEGIN: Page JS-->
    {{--  <script src="/app-assets/js/scripts/ui/data-list-view.js"></script>  --}}
+
+   <!-- print this -->
+   <script>
+        //print order
+    $(document).on('click', '.print-btn', function() {
+        $('#print-area .modal-body').printThis({
+            debug: false,               // show the iframe for debugging
+            importCSS: true,            // import parent page css
+            importStyle: false,          // import style tags
+            printContainer: true,       // print outer container/$.selector
+            loadCSS: "{{ asset('assets/css/printStyle.css') }}",
+            header: '<span class="modal-title" id="exampleModalCenterTitle">طلب رقم : 22</span>',
+            footer: '<hr> <div class="row"> <div class="col-md-12"> <label><p>تكلفه التوصيل ثابته لكل المناطق داخل الخرطوم</p></label>  </div> </div>'
+            //base: "http://127.0.0.1:8000/",            // function called before iframe is removed
+        });
+    });//end of click function
+   </script>
+
 
   <!-- image preview -->
   <script>
@@ -178,7 +201,7 @@ if (this.files && this.files[0]) {
     }
 
     $("#selectProduct").change(function () {
-        
+
         var val = $('#selectProduct').val();
         {{--  var base_url = '{!! url().'/' !!}';  --}}
         var APP_URL = {!! json_encode(url('/').'/') !!}
@@ -192,13 +215,85 @@ if (this.files && this.files[0]) {
              $("#productToView").append('<tr role="row" class="odd">'
                                         +'<td>'+data.id+'</td>'
                                         +'<td>'+data.name+'</td>'
-                                        +'<td><img src="'+APP_URL+data.image+'" style="width: 80px;" class="img-thumbnail" alt=""></td>' 
+                                        +'<td><img src="'+APP_URL+data.image+'" style="width: 80px;" class="img-thumbnail" alt=""></td>'
                                         +'</tr>');
             {{--  $("#productToView").load();  --}}
         }});
 
     });
 
+
+
+    $(".selectedOrder").click(function () {
+
+        var val = $(this).attr("val");//this.attr('val');
+        var APP_URL = {!! json_encode(url('/').'/') !!}
+        console.log(val);
+        $.ajax({
+        url: APP_URL+"order/find_order/"+val,
+        method: 'GET',
+        success: function(data){
+            console.log(data.id);
+            $('#OrderModalCenter').modal('show');
+            $("#OrderModalCenter #print-area").text("");
+            $("#OrderModalCenter #print-area").html('<div class="modal-header">'
+            +'<h5 class="modal-title" id="exampleModalCenterTitle">طلب رقم : '+data.id+'</h5>'
+            +'<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+            +'<span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body">'
+
+            +'</div>'
+            +'<br><div class="modal-footer"><button  class="btn btn-primary print-btn"><i class="fa fa-print"></i>طباعه فاتوره</button></div>'
+            );
+
+            $("#OrderModalCenter .modal-body").html(' <div class="row"><div class="col-md-6 col-12">'
+                +'<strong>التاريخ : </strong> <br> <span>'+data.created_at+'</span> </div>'
+                +'<div class="col-md-6 col-12"> <strong>المستخدم : </strong>  <span>'+data.user.name+'</span></span> <br>'
+                +'<strong>الهاتف : </strong> <span>'+data.user.phone+'</span> </div>  </div> <hr>'
+                +'<div class="row">  <div class="col-md-12"> <label><strong>المنطقه</strong> : <span>'+data.regon.name+'</span></label> </div> </div>'
+                +'<div class="row"> <div class="col-md-12"> <label><strong>العنوان</strong> : <span>'+data.address+'</span></label> </div> </div>'
+                +'<div class="row"> <div class="col-md-12">  <label><strong>مواعيد التوصيل</strong> : <span>'+data.delivery_period+'</span></label> </div> </div> <hr>'
+                +'<div class="row">  <div class="col-md-12"> <label><strong>الاصناف : </strong></label> </div> <div class="col-md-12"> '
+                +'<table class="table">  <thead>  <th>#</th>  <th>اسم المنتج</th> <th>الكميه</th> </thead>'
+                +'<tbody></tbody></table> </div></div>'
+                +'<hr> <div class="row"> <div class="col-md-12"> <label><strong>ملاحظه</strong> : <span>'+data.note+'</span></label> </div> </div>'
+                +'<hr> <div class="row"> <div class="col-md-12"> <label><strong>تكلفه الطلب</strong> : <span>'+data.total+'</span></label></div>'
+                +'<div class="col-md-12"> <label><strong>رسوم التوصيل</strong> : <span>'+data.delivery_cost+'</span></label> </div>'
+                +'<div class="col-md-12"><label><strong>الاجمالي</strong> : <span></span>'+data.total+'</label></div>'
+                +'</div>'
+
+
+            );
+
+
+            $.each( data.items, function( key, item ) {
+                $("#OrderModalCenter .modal-body .table tbody").append('<tr><td>'+item.id+'</td> <td>'+item.name+'</td><td>'+item.count+'</td></tr> ');
+            });
+
+            }});
+        return false;
+    });
+
+
+
+    $('.orderStatus').change(function() {
+        var status = $(this).val();
+        var id = $(this).attr("val");
+        var APP_URL = {!! json_encode(url('/').'/') !!};
+        $.ajax({
+            url: APP_URL+"order/status",
+            method: 'post',
+            dataType: 'application/json',
+            data: {
+                status,
+                id
+            }, 
+            success: function(data){
+                console.log(data);
+            }
+        });
+        console.log(status);
+        console.log(order_id);
+    });
 
 </script>
 
