@@ -20,7 +20,7 @@
             <li class=" navigation-header"><span>Apps</span>
             </li>
 
-            <li class=" nav-item"><a href="{{route('category')}}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">الاقسام</span><span class="badge badge badge-warning badge-pill float-right mr-2">{{ App\Models\Category::count() }}</span></a>
+            <li class=" nav-item"><a href="{{route('category')}}"><i class="feather icon-menu"></i><span class="menu-title" data-i18n="Dashboard">الاقسام</span><span class="badge badge badge-warning badge-pill float-right mr-2">{{ App\Models\Category::count() }}</span></a>
 
             </li>
 

@@ -31,6 +31,14 @@ Route::prefix('product')->group(function () {
 
     Route::get('/details/{id}', [ProductController::class, 'details'])->name('product.details');
 
+    Route::get('/similer/delete/{id}', [ProductController::class, 'deleteSimilerProduct']);
+    Route::post('/crate_silmiler', [ProductController::class, 'crate_silmiler'])->name('products.crate_silmiler');
+
+    Route::post('/productoption', [ProductController::class, 'productoption'])->name('product.productoption');
+    Route::get('/option/delete/{id}', [ProductController::class, 'deleteOptionProduct']);
+    
+    //
+
 });
 //
 ##################################################

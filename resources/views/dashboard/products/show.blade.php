@@ -3,29 +3,14 @@
 <section id="data-thumb-view" class="data-thumb-view-header">
     <div class="action-btns d-none">
         <div class="btn-dropdown mr-1 mb-1">
-            {{-- <div class="btn-group dropdown actions-dropodown"> --}}
-                {{-- <button type="button" class="btn btn-white px-1 py-1 dropdown-toggle waves-effect waves-light" aria-haspopup="true" aria-expanded="false">
-                    Actions
-                </button>
-             --}}
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#"><i class="feather icon-trash"></i>Delete</a>
-                    <a class="dropdown-item" href="#"><i class="feather icon-archive"></i>Archive</a>
-                    <a class="dropdown-item" href="#"><i class="feather icon-file"></i>Print</a>
-                    <a class="dropdown-item" href="#"><i class="feather icon-save"></i>Another Action</a>
-                </div>
-            {{-- </div> --}}
         </div>
     </div>
-    <!-- dataTable starts -->
     <div class="table-responsive">
         <table class="table data-thumb-view">
             <thead>
                 <tr  class="filters">
-                    {{-- product_images            --}}
-
                     <th></th>
-                    <th>id</th>
+                    <th>الرقم</th>
                     <th>الصورة</th>
                     <th>الاسم</th>
                     <th>القسم</th>
@@ -37,23 +22,18 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($products as $product)
+                @foreach($products as $index=>$product)
                 <tr role="row" >
-
                     <td>
-
                     </td>
-                    <td class="product-name">{{$product->id}}</td>
+                    <td class="product-name">{{ $index + 1 }}</td>
                     <td class="product-img">
                         <a href="{{url('product/details/'.$product->id)}}" data-toggle="tooltip" data-placement="top" title="تفاصيل..">
-                                                                     
-                           
                         <img src="{{url('storage/'.$product->image)}}" class="img-thumbnail" style="height:100px; width:100px;">
                     </a>
                     </td>
                     <td class="product-name">{{$product->name}}</td>
                     <td class="product-name">{{$product->category}}</td>                                  
-
                     <td class="product-name">{{$product->status}}</td>
                     <td class="product-name">
                         <div class="chip chip-primary">
@@ -62,9 +42,7 @@
                             </div>
                         </div>
                     </td>
-
                     <td class="product-name">{{$product->quantity}}</td>
-
                     <td class="product-name"><div class="chip chip-text">
                         <div class="chip-body">
                             <div class="chip-text">{{$product->price}}</div>
@@ -90,41 +68,13 @@
                             </span>
                             </a>
                     </td>
-               
                 </tr>
-          
                 @endforeach
             </tbody>
         </table>
     </div>
-    <!-- dataTable ends -->
-
-    <!-- add new sidebar starts -->
-
-    <!-- add new sidebar ends -->
 </section>
 @endsection
-{{-- <head>
-
+<head>
     <title>Display Products</title>
 </head>
-<a target="_blank" rel="nofollow noreferrer" href="vvvv/" title="" class="add-friend">Add Friend</a> --}}
-{{-- 
-<script>
-    var counter = 1;
-    jQuery('a.add-friend').click(function(event){
-        event.preventDefault();
-        counter++;
-        var newRow = jQuery('<tr><td><input type="text" name="name' +
-            counter + '"/></td><td><input type="text" name="mobile' +
-            counter + '"/></td><td><div class="form-group"><div class="checkbox"><input type="checkbox" name="about_singing' +
-            counter + '"/>Singing</div><input type="text" name="about_singing'+
-            counter + '"/></div><div class="form-group"><div class="checkbox"><input type="checkbox" name="about_dancing' +
-            counter + '"/>Dancing</div><input type="text" name="about_dancing'+
-            counter + '"/></div><div class="form-group"><div class="checkbox"><input type="checkbox" name="other_hobby' +
-            counter + '"/>Other</div><input type="text" name="other_hobby'+
-            counter + '"/></div></td><td><input type="text" name="about_friend' +
-            counter + '"/></td></tr>');
-        jQuery('table.friends-list').append(newRow);
-    });
-</script> --}}

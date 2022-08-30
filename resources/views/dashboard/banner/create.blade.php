@@ -41,6 +41,9 @@
                                         </div>
                                     </div>
 
+
+                                    {{-- copiy from haer --}}
+
                                     <div class="col-md-8 col-12">
                                         <div class="controls">
                                             <select class="form-control"  name="product_id" id="selectProduct" disabled='disabled'>
@@ -88,6 +91,8 @@
                                             <button type="submit" class="btn gradient-light-info white">اضافه</button>
                                         </div>
                                     </div>
+
+                                    {{-- copt to hire --}}
 
                                 </div>
                             </div>

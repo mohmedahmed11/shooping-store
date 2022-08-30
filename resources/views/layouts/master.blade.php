@@ -216,6 +216,7 @@ if (this.files && this.files[0]) {
                                         +'<td>'+data.id+'</td>'
                                         +'<td>'+data.name+'</td>'
                                         +'<td><img src="'+APP_URL+data.image+'" style="width: 80px;" class="img-thumbnail" alt=""></td>'
+
                                         +'</tr>');
             {{--  $("#productToView").load();  --}}
         }});

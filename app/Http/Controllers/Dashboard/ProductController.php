@@ -9,9 +9,12 @@ use App\Models\Category;
 use App\Models\Properties;
 use App\Models\ProductProperty;
 use App\Models\ProductImage;
+use App\Models\ProductOption;
+use App\Models\SimilerProduct;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Brian2694\Toastr\Facades\Toastr;
+use Facade\FlareClient\Stacktrace\File;
 
 class ProductController extends Controller
 {
@@ -36,7 +39,6 @@ class ProductController extends Controller
         ->select('products.*')
         ->where('products.category_id', $category_id)
         ->get();
-
         if ($products){
             foreach ($products as $key => $product) {
                 $products[$key] = $this->prepareProductData($product);
@@ -53,8 +55,6 @@ class ProductController extends Controller
         ->select('products.*')
         ->where('best_seller_products.status', 1)
         ->get();
-
-
 
         if ($products){
             foreach ($products as $key => $product) {
@@ -121,22 +121,17 @@ class ProductController extends Controller
         }else {
             $product->properties = [];
         }
-
         $categories = DB::table('categories')
         ->where('id', $product->category_id)
         ->get()->first();
-
         $product->category = $categories;
-
         $offer = DB::table('product_offers')
         ->where('product_id', $product->id)
         ->get()->first();
         $product->offer = $offer;
         return $product;
     }
-
     // new methods
-
     function show() {
         $products= Product::all();
         foreach ($products as $key => $product) {
@@ -144,20 +139,19 @@ class ProductController extends Controller
             $product->category = $category->name;
             $products[$key] = $product;
         }
-
-        
+        foreach ($products as $key => $pro) {
+            $category = Category::find($pro->category_id);
+            $pro->category = $category->name;
+            $pro[$key] = $pro;
+        }
         $categories = Category::all();
-
-        return view('dashboard.products.show',compact('products','categories'));
+        return view('dashboard.products.show',compact('products','categories','pro'));
     }
-
     function create() {
         $categories = Category::all();
         return view('dashboard.products.create',compact('categories'));
     }
-
     public function save(Request $request){
-
         $validateData=$request->validate([
             'quantity'=>'required:products',
             'name'=>'required',
@@ -185,14 +179,12 @@ class ProductController extends Controller
         return back()->with('fail',' Something Wrong ..!');
         }
     }
-
     public function update($id)
     {
         $data = Product::find($id);
         $categories = Category::all();
         return view('dashboard.products.update', compact('data', 'categories'));
     }
-
     // for save updateProduct
     public function edit(Request $request,$id)
     {
@@ -209,14 +201,17 @@ class ProductController extends Controller
             $imagePath = 'img/'.$imageName;
             $data->image=$imagePath;
         }
-
         $data->update();
+        if($data)
+        {
 
-        return redirect('/product')->with('status','Product Updated Successfully');
 
+        Toastr::success('تمت  تعديل المنتج ', 'success');
+        return redirect('/product');
+    }
+        ;
 
     }
-
     //  product proPariries
     public function properites($id)
     {
@@ -225,8 +220,6 @@ class ProductController extends Controller
         $properties =  Properties::all();
         return view('dashboard.products.properites', compact('product','properties', 'productProparities'));
     }
-    
-
     function carete_proparity(Request $request) {
         $data = new ProductProperty;
         $data->property_id  = $request->property_id;
@@ -254,10 +247,9 @@ class ProductController extends Controller
     $property->delete();
     return back()->with('error','Product Deleted Successfully');
     }
-
     // Update Product
     // for test
-    public function done($id)
+    public function done(Request $request)
     {
         return "Wellcome";
     }
@@ -279,7 +271,6 @@ class ProductController extends Controller
       ]);
       $request_data = $request->except(['_token']);
       if ($request->image) {
-
           Image::make($request->image)
               ->resize(300, null, function ($constraint) {
                   $constraint->aspectRatio();
@@ -287,7 +278,6 @@ class ProductController extends Controller
               ->save(public_path('img/' . $request->image->hashName()));
 
           $request_data['image'] = $request->image->hashName();
-
       }//end of if
       $request_data['product_id'] = $id;
       $request_data['image'] = 'img/'.$request_data['image'];
@@ -298,31 +288,101 @@ class ProductController extends Controller
           Toastr::success('لم يتم اضافه الصوره', 'error');
       }
       return redirect()->back();
-
-
     }
 
     public function imagedelete(Request $request, $id)
-    {
-      $images = ProductImage::find($id);
-      $images->delete();
+        {
+        $images = ProductImage::find($id);
+        $images->delete();
+        Toastr::success('تم حذف الصوره', 'success');
+        return redirect()->back();
+     }
 
-      Toastr::success('تم حذف الصوره', 'success');
-      return redirect()->back();
-    }
-    
     public function details($id)
     {
-        $product= Product::find($id);
-        if ( $product) {
-            $category = Category::find($product->category_id);
-            $product->category = $category->name;
-        }
-        $product->proparities =  $this->productProparities($id);
+            $product= Product::find($id);
+            if ( $product) {
+                $category = Category::find($product->category_id);
+                $product->category = $category->name;
+            }
 
-        $products = Product::with(['images'])->find($id);
-        $images = $product->images;
-        return view('dashboard.products.details',compact('product','products','images'));
+             $similerProducts=Product::with(['simlier'=>function($q){
+            }])->find($id);
+
+            foreach ($similerProducts->simlier as $key => $similer) {
+                # code...
+                $similerProducts->simlier[$key]->product = Product::find($similer->similar_product_id);
+            }
+            $product->proparities =  $this->productProparities($id);
+            $products = Product::with(['images'])->find($id);
+            $images = $product->images;
+            $sim= Product::all();
+            $alloption= Product::all();
+            $options=Product::with(['option'=>function($q){
+            }])->find($id);
+            foreach ($options->option as $key => $optiion) {
+                # code...
+                $options->option[$key]->product = Product::find($optiion->product_id);
+            }
+            return view('dashboard.products.details',compact('sim','product','products','images','similerProducts','alloption','options'));
     }
+    function productSimiler($id) {
+            return DB::table('similar_products')
+            ->join('products', 'products.id', '=', 'similar_products.similar_product_id')
+            ->where('product_id', $id)
+            ->get();
+    }
+
+    public function deleteSimilerProduct($id)
+    {
+        $data = SimilerProduct::find($id);
+        $data->delete();
+        Toastr::success('تم حذف المنتج..!', 'fail');
+                return redirect()->back();
+    }
+    public function Crate_Silmiler(Request $request){
+
+        $data = new SimilerProduct();
+        $data->status = $request->status;
+        $data->similar_product_id = $request->similar_product_id;
+        $data->product_id = $request->product_id;
+         $data->save();
+        if($data){
+            Toastr::success('تمت اضافة المنتج المشابه ', 'success');
+            return redirect()->back();
+        }
+        else{
+            Toastr::success('خطأ..!', 'fail');
+            return redirect()->back();
+        }
+    }
+    public function productoption(Request $request){
+        $data = new ProductOption();
+        $imageName = ''.time().'.'.$request->image->extension();
+        $request->image->move(public_path('storage/option/'), $imageName);
+        $imagePath = 'option/'.$imageName;
+        $data->image=$imagePath;
+        $data->name = $request->name;
+        $data->product_id = $request->product_id;
+         $data->save();
+        if($data){
+            Toastr::success('تمت اضافة خيارات المنتج ', 'success');
+            return redirect()->back();
+        }
+        else{
+            Toastr::success('خطأ..!', 'fail');
+            return redirect()->back();
+        }
+
+    }
+    public function deleteOptionProduct($id)
+        {
+
+        $data = ProductOption::find($id);
+        $data->delete();
+        Storage::delete(public_path('storage/option/'));
+        Toastr::success('تم حذف المنتج..!', 'fail');
+                return redirect()->back();
+        }
 
 }

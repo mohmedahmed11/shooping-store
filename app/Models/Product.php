@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductImage;
 use App\Models\Banner;
+use App\Models\SimilerProduct;
+use App\Models\ProductOption;
 
 class Product extends Model
 {
-   
+
     use HasFactory;
 
     protected $table = 'products';
@@ -26,7 +28,7 @@ class Product extends Model
 
     public function getImagePathAttribute()
     {
-        return asset('img/'.$this->image) ;
+        return asset(''.$this->image) ;
     }
 
     // relations of products
@@ -39,11 +41,12 @@ class Product extends Model
     {
         return $this -> hasMany(ProductImage::class,'product_id','id');
     }
+    public function simlier(){
+        return $this->hasMany(SimilerProduct::class,'product_id','id');
+    }
 
-
-
-
-
-
-
+    public function option()
+    {
+        return $this -> hasMany(ProductOption::class,'product_id','id');
+    }
 }
