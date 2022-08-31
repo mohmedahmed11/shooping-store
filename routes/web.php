@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Properites\PropertiesController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Settings\RegonsController;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Settings\BannerController;
@@ -96,7 +97,18 @@ Route::group(['prefix' => 'banner'], function(){
 
 });
 
+#########################   order  #########################
 
+Route::group(['prefix' => 'order'], function(){
+    Route::get('/', [OrderController::class , 'show'])->name('order');
+    Route::get('/create', [OrderController::class , 'create'])->name('order.create');
+    Route::post('store', [OrderController::class , 'store'])->name('order.store');
+    Route::post('status', [OrderController::class , 'status'])->name('order.status');
+    Route::get('find_order/{id}', [OrderController::class , 'find_order'])->name('order.find_order');
+
+
+
+});
 // Route::get('/home', [ProductController::class, 'show'])->name('products');
 Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
