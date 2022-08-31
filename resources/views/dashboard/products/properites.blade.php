@@ -1,9 +1,9 @@
 
 @extends('layouts.master')
-@section('content') 
-  
+@section('content')
+
                 <section id="data-list-view multiple-column-form" class="data-list-view-header">
-                    
+
                     <body  class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static"
                     data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
     <div class="row match-height">
@@ -21,7 +21,7 @@
                                 <button type="button" class="btn btn-white px-1 py-1 dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Actions
                                 </button>
-                                <div class="dropdown-menu">                               
+                                <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#"><i class="feather icon-trash"></i>Delete</a>
                                     <a class="dropdown-item" href="#"><i class="feather icon-archive"></i>Archive</a>
                                     <a class="dropdown-item" href="#"><i class="feather icon-file"></i>Print</a>
@@ -48,7 +48,7 @@
                             <tbody>
                                 @foreach($productProparities as $property)
                                 <tr>
-                                    
+
                                         {{-- 	id	name	type --}}
                                     {{-- property_id  product_id	property_value 	 --}}
                                     {{-- 	id 	property_id 	product_id 	property_value 	 --}}
@@ -56,14 +56,14 @@
                                     <td class="product-name">{{$property->id}}</td>
                                     <td class="product-category">{{$property->name}}</td>
                                     <td class="product-category">{{$property->property_value}}</td>
-                                                                       
+
                                     <td class="product-action">
                                         {{-- /delete/properites/ --}}
                                         <a href="{{url('properties/delete/'.$property->id)}}" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="حذف">
                                             <span class="action-delete"><i class="fa fa-trash"></i>
                                             </span>
                                         </a>
-                                    </td> 
+                                    </td>
                                                                     </tr>
                                @endforeach
                             </tbody>
@@ -71,7 +71,7 @@
                     </div>
                     <!-- DataTable ends -->
 
-                </div>      
+                </div>
             </div>
         </div>
     </div>
@@ -93,31 +93,31 @@
                                     <input type="text" name="name" class="form-control" id="data-name">
                                 </div>
                                 {{-- value="{{$data->name}}"  --}}
-                            
+
                                 <div class="col-sm-12 data-field-col">
                                     <label for="data-price">Type</label>
                                     <input type="textname=" name="type" class="form-control" id="data-price">
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
                         <div class="add-data-btn">
                             <button class="btn btn-primary">Add Data</button>
                         </div>
                         <div class="cancel-data-btn">
-                            <button value="reset" class="btn btn-outline-danger">Cancel</button>
+                            <button value="reset" type="reset" class="btn btn-outline-danger">Cancel</button>
                         </div>
                     </div>
                 </form>
-                    
+
                 </div>
             </div>
-        </div>      
+        </div>
     {{-- </div> --}}
- 
+
 </div>
 </body>
 
@@ -148,17 +148,17 @@
                                             </select>
                                         </div>
                                         {{-- value="{{$data->name}}"  --}}
-                                
-                                    
+
+
                                         <div class="col-sm-12 data-field-col">
                                             <label for="data-price">value</label>
                                             <input type="text" name="property_value" class="form-control" id="value">
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
                                 <div class="add-data-btn">
                                     <input type="hidden" name="product_id" value="{{ $product->id}}">
@@ -186,6 +186,6 @@
     <title>Properites</title>
 </head>
 <body>
-    
+
 </body>
 </html>

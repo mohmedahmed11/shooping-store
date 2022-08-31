@@ -1,16 +1,16 @@
  <!-- BEGIN: Header-->
 
-<nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
+<nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow" style="width: calc( 100vw - (100vw - 100%) - calc(2.2rem * 2));">
     <div class="navbar-wrapper">
         <div class="navbar-container content">
-            <div class="navbar-collapse" id="navbar-mobile">
-                <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+            <div class="navbar-collapse">
+                <div class="mr-auto float-left bookmark-wrapper d-flex align-items-stretch">
                 </div>
                 <ul class="nav navbar-nav float-right">
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link"  href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                         @endif
                         {{-- @if (Route::has('register'))

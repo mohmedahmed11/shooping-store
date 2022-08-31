@@ -9,7 +9,7 @@ use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Settings\BannerController;
 
 Route::get('/', function () {
-    return view('layouts.master');
+    return view('/auth.login');
 });
 #################################product################################
 
@@ -35,7 +35,7 @@ Route::prefix('product')->group(function () {
 
     Route::post('/productoption', [ProductController::class, 'productoption'])->name('product.productoption');
     Route::get('/option/delete/{id}', [ProductController::class, 'deleteOptionProduct']);
-    
+
     //
 
 });
@@ -95,3 +95,20 @@ Route::group(['prefix' => 'banner'], function(){
     Route::get('find_product/{id}', [BannerController::class , 'find_product'])->name('banner.find_product');
 
 });
+
+
+// Route::get('/home', [ProductController::class, 'show'])->name('products');
+Auth::routes();
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [ProductController::class, 'show'])->name('home');
+
+Auth::routes();
+
+Route::get('/logout', [App\Http\Controllers\HomeController::class, 'index'])->name('logout');
