@@ -49,7 +49,7 @@ class OrderController extends Controller
 
     function history($id) {
         if (Order::where('user_id', $id)->get()){
-            $orders = Order::where('user_id', $id)->get();
+            $orders = Order::where('user_id', $id)->orderBy('created_at', 'desc')->get();
             foreach ($orders as $key => $value) {
                 $orders[$key] = $this->order_data($value->id);
             }
@@ -136,5 +136,17 @@ class OrderController extends Controller
         }
 
         return $product;
+    }
+
+    function cancel_order(Request $req) {
+        $order = Order::find($req->id);
+        $order->status = 4;
+        $order->save();
+
+        if ($order) {
+            return ["status" => true, "data" => $order, "message" => NULL];
+        }else {
+            return ["status" => false, "data" => NULL, "message" => "فشل في إلغاء الطلب"];
+        }
     }
 }

@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <section id="data-list-view" class="data-list-view-header">
 <body  class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static"
        data-menu="vertical-menu-modern" data-col="2-columns">

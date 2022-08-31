@@ -27,6 +27,9 @@ Route::prefix('product')->group(function () {
 
     Route::post('/image/store/{id}', [ProductController::class, 'imagestore'])->name('products.image.store');
     Route::get('/image/delete/{id}', [ProductController::class, 'imagedelete'])->name('products.image.delete');
+
+    Route::get('/details/{id}', [ProductController::class, 'details'])->name('product.details');
+
 });
 //
 ##################################################
@@ -52,6 +55,7 @@ Route::group(['prefix' => 'category'], function(){
     Route::post('update/{id}', [CategoryController::class , 'update'])->name('category.update');
     Route::get('delete/{id}', [CategoryController::class , 'destroy'])->name('category.delete');
 });
+
 
 #########################   regons  #########################
 

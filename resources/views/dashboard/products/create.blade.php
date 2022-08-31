@@ -11,6 +11,7 @@
                 <div class="card-header">
                     <h4 class="card-title">Add new Product</h4>
                 </div>
+                {!! Toastr::message() !!}
                 <div class="card-content">
                     <div class="card-body">
                         <form class="form" action="{{ route('product.save') }}" method="post" enctype="multipart/form-data">

@@ -8,6 +8,7 @@ use App\Models\ProductImage;
 
 class Product extends Model
 {
+   
     use HasFactory;
 
     protected $table = 'products';
@@ -36,7 +37,7 @@ class Product extends Model
 
     public function getImagePathAttribute()
     {
-        return asset('img/'.$this->image) ;
+        return asset('storage/'.$this->image) ;
     }
 
 }

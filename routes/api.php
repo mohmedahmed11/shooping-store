@@ -41,3 +41,5 @@ Route::get('order/{order_id}', [OrderController::class, 'order_info']);
 Route::post('order', [OrderController::class, 'add']);
 Route::post('login', [UserController::class, 'login']);
 Route::post('update_user', [UserController::class, 'update']);
+
+Route::post('cancel_order', [OrderController::class, 'cancel_order']);
