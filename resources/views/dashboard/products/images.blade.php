@@ -25,7 +25,7 @@
                                         <div class="card-content">
                                             <div class="card-body">
 
-                                                <img class="card-img img-fluid mb-1" src="{{ $image->image_path }}" alt="Card image cap">
+                                                <img class="card-img img-fluid mb-1" src="{{ ''.$image->image_path }}" alt="Card image cap">
 
                                                 <div class="card-btns d-flex justify-content-between">
                                                     <a href="{{  route('products.image.delete',$image->id) }}" class="btn gradient-light-danger white">حذف</a>
@@ -62,7 +62,7 @@
                                     <div class="col-md-6 col-12">
                                         <fieldset class="form-group">
                                             <div class="card" style="width: 18rem;">
-                                                <img  id='output' src="{{ asset('icons/defalut.jpeg') }}" style="height:150px; width:150px;">
+                                                <img  id='output' class="img-thumbnail" src="{{ asset('/img/no_image.jpg') }}" style="height:150px; width:150px;">
                                                 <div class="card-body">
                                                     <fieldset class="form-group">
                                                         <label for="basicInputFile">Image</label>

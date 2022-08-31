@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @section('content')
-<section id="multiple-column-form">
+<section id="multiple-column-form" id="place-order" class="list-view product-checkout">
     <body  class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static"
      data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
-    
+
     <div class="row match-height">
         <div class="col-8">
-            <div class="card">
+            <div class="card" style="height: 420.283px;">
                 <div class="card-header">
-                    <h4 class="card-title">Add new Product</h4>
+                    <h4 class="card-title">إضافة منتج جديد</h4>
                 </div>
                 {!! Toastr::message() !!}
                 <div class="card-content">
@@ -19,137 +19,144 @@
                             @csrf
                             <div class="form-body">
                                 <div class="row">
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-label-group">
-                                            <label for="first-name-column">اسم المنج</label>
-                                            <input type="text" id="first-name-column" class="form-control" placeholder="الاسم الاول" name="name">
-                                        </div>
-                                    </div>
-                                
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-label-group">
-                                            <input type="text" id="country-floating" class="form-control" name="quantity" placeholder="الكمية">
-                                            <label for="country-floating">الكمية</label>
-                                        </div>
-                                    </div>
-                                   
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-label-group">
-                                            <input type="number" id="number-id-column" class="form-control" name="price" placeholder="السعر">
-                                            <label for="number-id-column">السعر</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-label-group">
-                                            <input type="text" id="number-id-column" class="form-control" name="code" placeholder="الكود">
-                                            <label for="number-id-column">الكود</label>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-6 col-12">
-                                        القسم
-                                        <div class="controls">
-                                            <select class="form-control"  name="category_id" id="select" required="">
-                                                @foreach($categories as $category)
-                                                <option value="{{$category->id}}" >
-                                                    {{$category->name}}</option>
-                                                @endforeach
-                                            </select>
-                                            </div> 
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <p class="mb-2">
-                                        <div class="row">
-                                            
-                                            <div class="col-12">
-                                                Details
-                                                <fieldset class="form-label-group">
-                                                    <textarea class="form-control" id="label-textarea" rows="3" name="details" placeholder="Label in Textarea"></textarea>
-                                                    <label for="label-textarea">Label in Textarea</label>
-                                                </fieldset>
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-4">
+                                                <span>اسم المنتج </span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" required id="first-name" class="form-control" name="name" placeholder="اسم المنتج">
+
                                             </div>
                                         </div>
                                     </div>
-                                    
                                     <div class="col-12">
-                                        <input type="submit" class="btn btn-primary mr-1 mb-1" value="Save" name="Save">
-                                        <button type="reset" class="btn btn-outline-warning mr-1 mb-1">Reset</button>
+                                        <div class="form-group row">
+                                            <div class="col-md-4">
+                                                <span>الكمية </span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="number" required id="number-id-column" class="form-control" name="quantity" placeholder="الكمية">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-4">
+                                                <span>السعر </span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="number" required id="contact-info-vertical" class="form-control" name="price" placeholder="السعر">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-4">
+                                                <label id="checkout-number-error">الكود </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" required id="first-name" class="form-control" name="code" placeholder="الكود">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-4">
+
+                                                <span for="location1">القسم</span>
+                                            </div>
+                                            <div class="col-md-8">
+
+                                                <select class="form-control"  name="category_id" id="select" required="">
+                                                    @foreach($categories as $category)
+                                                    <option value="{{$category->id}}" >
+                                                        {{$category->name}}</option>
+                                                    @endforeach
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title">التفاصيل</h4>
+                                            </div>
+                                            <div class="card-content">
+                                                <div class="card-body">
+                                                    <p class="mb-2">
+                                                     <div class="row">
+                                                        <div class="col-12">
+                                                            <fieldset class="form-label-group mb-0">
+                                                                <textarea data-length="200" required name="details" class="form-control char-textarea active" id="textarea-counter" rows="3" placeholder="Counter" style="color: rgb(78, 81, 84);"></textarea>
+                                                                <label for="textarea-counter">التفاصيل</label>
+                                                            </fieldset>
+                                                            <small class="counter-value float-right" style="background-color: rgb(115, 103, 240);"><span class="char-count">0</span> / 100 </small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                        <div class="add-data-btn">
+                                            <input type="hidden" name="Save" value="Save">
+                                            <button class="btn mr-4 btn-primary">save</button>
+                                        </div>
+                                        <div class="cancel-data-btn">
+                                            <button type="reset" name="reset" class="btn btn-outline-danger">Cancel</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div> 
-                           
+                            </div>
                     </div>
                 </div>
-            </div>      
+            </div>
                     </div>
-    
+
                         <div class="row match-height">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Image <i class="fa fa-image" aria-hidden="true"></i>add Image</h4>
+                        <h3 class="card-title"><i class="fa fa-image" aria-hidden="true"></i>اضافة صورة</h3>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            {{-- <div class="col-sm-12 data-field-col data-list-upload">
-                                <form action="#" class="dropzone dropzone-area" id="dataListUpload">
-                                    <div class="dz-message">Upload Image</div>
-                                </form>
-                            </div> --}}
-
-                        <!-- <div class="col-md-6 col-12">
-                            <div class="form-label-group">
-                                <fieldset class="form-group">
-                                    <label for="first-name-icon">صورة</label>
-                                    <div class="position-relative has-icon-left">
-                                        <input type="file" name="image" class="form-control image">
-                                        <div class="form-control-position">
-                                            <i class="feather icon-image"></i>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group">
-                                <img src="{{ asset('icons/defalut.jpeg') }}" style="width: 100px" class="img-thumbnail image-preview" alt="">
-                            </div>
-                        </div> -->
 
 
-                            
-                            <div class="col-md-12 col-12">
-                                        
+                            <div class="col-md-6 col-12">
+
                                 <fieldset class="form-group">
                                     <div class="card" style="width: 18rem;">
-                                                                           
-                                        <div class="card-body">                                                                             
-                                            <fieldset class="form-group">
-                                            <label for="first-name-icon">صورة</label>
-                                                <div class="position-relative">
-                                                <input type="file" name="image" class="form-control image">
-                                            </div>
-                                            </fieldset>
-                                            <div class="form-group">
-                                                <img src="{{ asset('icons/defalut.jpeg') }}" style="width: 100px" id='output' class="img-thumbnail image-preview" alt="">
-                                            </div>
+                                        <img  id='output' class="img-thumbnail" src="{{url('/img/no_image.jpg')}}" style="height:150px; width:150px;">
+                                        <div class="card-body">
+                                         <fieldset class="form-group">
+                                                <span for="basicInputFile">Image</span>
+                                        <div class="custom-file">
+                                            <input type="file" accept='image/*' name="image" onchange='openFile(event)'><br>
+                                         </div>
+                                     </fieldset>
+                                     
                                         </div>
                                       </div>
                                 </fieldset>
 
-                            </div> 
-                            
+                            </div>
+
                         </div>
                     </div>
-                </div>      
+                </div>
             </div>
-         
+
         </div>
-    </form> 
+    </form>
     </div>
-   
-    
+
+
 </section>
 
 

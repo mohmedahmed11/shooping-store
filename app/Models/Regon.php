@@ -29,5 +29,11 @@ class Regon extends Model
         return $query->where('status', 1);
     }
 
+    #####################  relations of regons ###################
+    public function orders()
+    {
+        return $this->hasMany(Order::class,'regon_id','id');
+    }
+
 
 }

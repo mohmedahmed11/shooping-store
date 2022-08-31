@@ -121,8 +121,10 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
+        
         $category = Category::find($id);
         $category->delete();
+
 
         // Toastr::success('تم الحذف بنجاح', 'success');
 

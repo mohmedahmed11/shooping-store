@@ -1,6 +1,6 @@
 @extends('layouts.master')
-@section('content') 
-  
+@section('content')
+
                 <section id="data-list-view" class="data-list-view-header">
                     <div class="action-btns d-none">
                         <div class="btn-dropdown mr-1 mb-1">
@@ -8,7 +8,7 @@
                                 <button type="button" class="btn btn-white px-1 py-1 dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Actions
                                 </button>
-                                <div class="dropdown-menu">                               
+                                <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#"><i class="feather icon-trash"></i>Delete</a>
                                     <a class="dropdown-item" href="#"><i class="feather icon-archive"></i>Archive</a>
                                     <a class="dropdown-item" href="#"><i class="feather icon-file"></i>Print</a>
@@ -54,17 +54,17 @@
                                     <td class="product-action">
                                         <a href="{{url('properties/rad/'.$blogs->id)}}" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="تعديل">
                                             <span class="action-edit"><i class="feather icon-edit"></i>
-                                            </span>                                            
+                                            </span>
                                             </a>
-                                               
+
                                         <a href="{{url('properties/delete/'.$blogs->id)}}" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="حذف">
                                             <span class="action-delete"><i class="fa fa-trash"></i>
                                             </span>
                                         </a>
                                     </td>
                                 </tr>
-                              
-                        
+
+
                                @endforeach
                             </tbody>
                         </table>
@@ -94,16 +94,16 @@
                                             <input type="text" name="name" class="form-control" id="data-name">
                                         </div>
                                         {{-- value="{{$data->name}}"  --}}
-                                    
+
                                         <div class="col-sm-12 data-field-col">
                                             <label for="data-price">Type</label>
-                                            <input type="textname="type" class="form-control" id="data-price">
+                                            <input type="text"name="type" class="form-control" id="data-price">
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
                                 <div class="add-data-btn">
                                     <button class="btn btn-primary">Add Data</button>

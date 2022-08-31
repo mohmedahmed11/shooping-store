@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Properites\PropertiesController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Settings\RegonsController;
 use App\Http\Controllers\Settings\SettingsController;
+use App\Http\Controllers\Settings\BannerController;
 
 Route::get('/', function () {
     return view('layouts.master');
@@ -29,6 +31,14 @@ Route::prefix('product')->group(function () {
     Route::get('/image/delete/{id}', [ProductController::class, 'imagedelete'])->name('products.image.delete');
 
     Route::get('/details/{id}', [ProductController::class, 'details'])->name('product.details');
+
+    Route::get('/similer/delete/{id}', [ProductController::class, 'deleteSimilerProduct']);
+    Route::post('/crate_silmiler', [ProductController::class, 'crate_silmiler'])->name('products.crate_silmiler');
+
+    Route::post('/productoption', [ProductController::class, 'productoption'])->name('product.productoption');
+    Route::get('/option/delete/{id}', [ProductController::class, 'deleteOptionProduct']);
+    
+    //
 
 });
 //
@@ -73,4 +83,30 @@ Route::group(['prefix' => 'regon'], function(){
 Route::group(['prefix' => 'settings'], function(){
     Route::get('/', [SettingsController::class , 'show'])->name('settings');
     Route::post('update', [SettingsController::class , 'update'])->name('settings.update');
+});
+
+#########################   banner  #########################
+
+Route::group(['prefix' => 'banner'], function(){
+    Route::get('/', [BannerController::class , 'show'])->name('banner');
+    Route::get('/create', [BannerController::class , 'create'])->name('banner.create');
+    Route::post('store', [BannerController::class , 'store'])->name('banner.store');
+    Route::get('edit/{id}', [BannerController::class , 'edit'])->name('banner.edit');
+    Route::post('update/{id}', [BannerController::class , 'update'])->name('banner.update');
+    Route::get('delete/{id}', [BannerController::class , 'destroy'])->name('banner.delete');
+    Route::get('status/{id}', [BannerController::class , 'status'])->name('banner.status');
+    Route::get('find_product/{id}', [BannerController::class , 'find_product'])->name('banner.find_product');
+
+});
+#########################   order  #########################
+
+Route::group(['prefix' => 'order'], function(){
+    Route::get('/', [OrderController::class , 'show'])->name('order');
+    Route::get('/create', [OrderController::class , 'create'])->name('order.create');
+    Route::post('store', [OrderController::class , 'store'])->name('order.store');
+    Route::get('status/{id}/{status}', [OrderController::class , 'status'])->name('order.status');
+    Route::get('find_order/{id}', [OrderController::class , 'find_order'])->name('order.find_order');
+
+
+
 });

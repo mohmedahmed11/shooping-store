@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductImage;
+use App\Models\Banner;
+use App\Models\SimilerProduct;
+use App\Models\ProductOption;
 
 class Product extends Model
 {
-   
+
     use HasFactory;
 
     protected $table = 'products';
@@ -19,6 +22,14 @@ class Product extends Model
         return $query -> select('id','name','category_id','image','code','quantity','status','price','details');
     }
 
+    protected $appends = [
+        'image_path',
+    ];
+
+    public function getImagePathAttribute()
+    {
+        return asset(''.$this->image) ;
+    }
 
     // relations of products
     public function category()
@@ -30,14 +41,13 @@ class Product extends Model
     {
         return $this -> hasMany(ProductImage::class,'product_id','id');
     }
+    public function simlier(){
+        return $this->hasMany(SimilerProduct::class,'product_id','id');
+    }
 
-    protected $appends = [
-        'image_path',
-    ];
-
-    public function getImagePathAttribute()
+    public function option()
     {
-        return asset('storage/'.$this->image) ;
+        return $this -> hasMany(ProductOption::class,'product_id','id');
     }
 
 }

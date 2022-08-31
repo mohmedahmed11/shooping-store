@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\Product;
+use App\Models\OrderItem;use App\Models\User;
 use App\Models\Regon;
+use App\Models\Product;
+use Brian2694\Toastr\Facades\Toastr;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -38,7 +40,7 @@ class OrderController extends Controller
 
                 $orderItem->save();
                 array_push($items, $orderItem);
-                 
+
             }
             $order->items = $items;
             return ["status" => true, "data" => $order, "message" => NULL];
@@ -149,4 +151,73 @@ class OrderController extends Controller
             return ["status" => false, "data" => NULL, "message" => "فشل في إلغاء الطلب"];
         }
     }
+    ###########################################################################
+
+    public function show()
+    {
+        $orders = Order::with(['user','regon'])->selection()->get();
+        // return $orders;
+        return view('dashboard.order.index',compact('orders'));
+    }
+
+    public function create()
+    {
+        $users = User::all();
+        $regons = Regon::selection()->get();
+        return view('dashboard.order.create',compact('users','regons'));
+    }
+
+    public function store(Request $request)
+    {
+        // return $request;
+        $request->validate([
+            'user_id'=>'required',
+            'regon_id'=>'required',
+            'address'=>'required',
+            'total'=>'required',
+            'delivery_cost'=>'required',
+            'delivery_period'=>'required',
+            'items_count'=>'required',
+            'status'=>'required',
+            'order_from'=>'required',
+            'note'=>'required',
+        ]);
+
+        $request_data = $request->except(['_token']);
+        $order = Order::create($request_data);
+        Toastr::success('تم الاضافه بنجاح', 'success');
+
+        return redirect()->route('order');
+    }
+
+    function find_order($id) {
+        $order = Order::with(['user','regon','items'])->selection()->find($id);
+        foreach ($order->items as $key => $item) {
+            # code...
+            $product = Product::find($item->product_id);
+            $order->items[$key]->name = $product->name;
+        }
+        return $order;
+    }
+
+    public function status($id, $status)
+    {
+        $order = Order::find($id);
+        $status =  $status ;
+        $order -> update(['status'=>$status ]);
+        // Toastr::success(' تم تغيير الحالة بنجاح ', 'success');
+        return  redirect()->route('order');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
