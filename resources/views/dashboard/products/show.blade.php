@@ -33,7 +33,7 @@
                     <td class="product-name">{{ $index + 1 }}</td>
                     <td class="product-img">
                         <a href="{{url('product/details/'.$product->id)}}" data-toggle="tooltip" data-placement="top" title="تفاصيل..">
-                        <img src="{{url('storage/'.$product->image)}}" class="img-thumbnail" style="height:100px; width:100px;">
+                        <img src="{{url('storage/'.$product->image)}}" class="img-thumbnail" style="height:100px; width:150px;">
                     </a>
                     </td>
                     <td class="product-name">{{$product->name}}</td>

@@ -52,15 +52,6 @@
                     </li>
                 </ul>
             </li>
-            {{-- <li class=" nav-item"><a href="#"><i class="feather icon-file"></i><span class="menu-title" data-i18n="Ecommerce">الخصائص</span></a>
-                <ul class="menu-content">
-                    <li><a href="{{route('properties.showProp')}}"><i class="feather icon-chevrons-left"></i><span class="menu-item" data-i18n="Shop">عرض الخصائص</span></a>
-                    </li>
-                    <li><a href="{{route('properties.create')}}"><i class="feather icon-chevrons-left"></i><span class="menu-item" data-i18n="Details">اضافة خاصية</span></a>
-                    </li>
-
-                </ul>
-            </li> --}}
 
                 </ul>
             </li>

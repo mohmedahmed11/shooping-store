@@ -288,7 +288,7 @@ class ProductController extends Controller
               ->resize(300, null, function ($constraint) {
                   $constraint->aspectRatio();
               })
-              ->save(public_path('img/' . $request->image->hashName()));
+              ->save(public_path('storage/img/' . $request->image->hashName()));
 
           $request_data['image'] = $request->image->hashName();
       }//end of if

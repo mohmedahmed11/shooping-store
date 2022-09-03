@@ -109,7 +109,7 @@
                                     <button class="btn btn-primary">Add Data</button>
                                 </div>
                                 <div class="cancel-data-btn">
-                                    <button class="btn btn-outline-danger">Cancel</button>
+                                    <button type="reset" class="btn btn-outline-danger">Cancel</button>
                                 </div>
                             </div>
                         </form>
