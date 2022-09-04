@@ -1,6 +1,21 @@
 @extends('layouts.master')
 @section('content')
+
 <section id="data-thumb-view" class="data-thumb-view-header">
+
+    <div class="content-header row">
+        <div class="content-header-left col-md-9 col-12 mb-2">
+            <div class="row breadcrumbs-top">
+                <div class="col-12">
+                    <h2 class="content-header-title float-left mb-0">  <strong>المنتجات :</strong></h2>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
     <div class="action-btns d-none">
         <div class="btn-dropdown mr-1 mb-1">
         </div>
@@ -33,7 +48,7 @@
                     </a>
                     </td>
                     <td class="product-name">{{$product->name}}</td>
-                    <td class="product-name">{{$product->category}}</td>                                  
+                    <td class="product-name">{{$product->category}}</td>
                     <td class="product-name">{{$product->status}}</td>
                     <td class="product-name">
                         <div class="chip chip-primary">

@@ -59,10 +59,9 @@
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+<body class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" style="background-image: url({{url('/assets/img/bg.jpg')}})">
 
-    <!-- BEGIN: Header-->
-@include('dashboard.includes.headerAuth')
+ <!-- BEGIN: Header-->
 
 
 
@@ -73,19 +72,50 @@
 
     <div class="app-content content" style="margin-right: 0px">
         <div class="content-overlay"></div>
-        <div class="header-navbar-shadow"></div>
+        <div class="header-navbar"></div>
         <div class="content-wrapper">
             <div class="content-header row">
             </div>
             <div class="content-body">
-                @include('dashboard.includes.messages')
-                @yield('content')
+                <center>
+                    <img src="{{url('/assets/img/hasnaa.png')}}" alt="" width="60%" height="50%">
+                    <br>
+                    <h1>متجر حسناء ستور</h1>
+                    <strong> جميع متطلبات المرأة للتجميل </strong>
 
-    </div>
-    </div>
+                    <div class="login-footer mb-2">
+                        <div class="divider">
+                            <div class="divider-text">Follow US</div>
+                        </div>
+                        <div class="footer-btn d-inline">
+                            <a href="#" class="btn btn-facebook"><span class="fa fa-facebook"></span></a>
+                            <a href="#" class="btn btn-twitter white"><span class="fa fa-twitter"></span></a>
+                            <a href="#" class="btn btn-google"><span class="fa fa-instagram"></span></a>
+                        </div>
+                        <div class="divider">
+                            <div class="divider-text">Download From</div>
+                        </div>
+                        <div class="footer-btn d-inline">
+                            <a href="#" > <img src="{{url('/assets/img/appleStore.png')}}" alt="" width="150" height="50"></a>
+                            <a href="#" > <img src="{{url('/assets/img/googleStore.png')}}" alt="" width="150" height="50"></a>
+                        </div>
+
+                    </div>
+
+                </center>
+            </div>
+        </div>
     </div>
 
 
+
+    <!-- BEGIN: Footer-->
+
+    <footer class="footer footer-static footer-light">
+        <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2020<a class="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent,</a>All rights Reserved</span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i class="feather icon-heart pink"></i></span>
+            <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
+        </p>
+    </footer>
 
      <!-- BEGIN: Vendor JS-->
      <script src="/app-assets/vendors/js/vendors.min.js"></script>
@@ -132,62 +162,6 @@
    <!-- BEGIN: Page JS-->
    {{--  <script src="/app-assets/js/scripts/ui/data-list-view.js"></script>  --}}
 
-  <!-- image preview -->
-  <script>
-    // image preview
-$(".image").change(function () {
-
-if (this.files && this.files[0]) {
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-        $('.image-preview').attr('src', e.target.result);
-    }
-
-    reader.readAsDataURL(this.files[0]);
-}
-});
-</script>
-
-  <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-  {!! Toastr::message() !!}
-
-   {{--  chekbox show  --}}
-   <script>
-    function Enableddl(checked)
-     {
-        var ddl=document.getElementById('selectProduct');
-        ddl.disabled=check.checked ? false : true;
-        if (!ddl.disabled)
-        {
-            ddl.focus();
-        }
-    }
-
-    $("#selectProduct").change(function () {
-
-        var val = $('#selectProduct').val();
-        {{--  var base_url = '{!! url().'/' !!}';  --}}
-        var APP_URL = {!! json_encode(url('/').'/') !!}
-        console.log(APP_URL);
-        $.ajax({
-        url: APP_URL+"banner/find_product/"+val,
-        method: 'GET',
-        success: function(data){
-             console.log(data.id);
-             $("#productToView tbody").text("");
-             $("#productToView").append('<tr role="row" class="odd">'
-                                        +'<td>'+data.id+'</td>'
-                                        +'<td>'+data.name+'</td>'
-                                        +'<td><img src="'+APP_URL+'storage/'+data.image+'" style="width: 80px;" class="img-thumbnail" alt=""></td>'
-                                        +'</tr>');
-            {{--  $("#productToView").load();  --}}
-        }});
-
-    });
-
-
-</script>
 
 </body>
 <!-- END: Body-->

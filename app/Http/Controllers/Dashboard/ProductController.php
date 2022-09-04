@@ -385,4 +385,8 @@ class ProductController extends Controller
                 return redirect()->back();
         }
 
+        public function new (){
+
+            return view('dashboard.products.new');
+        }
 }
