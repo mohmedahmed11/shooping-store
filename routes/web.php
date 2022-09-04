@@ -13,7 +13,13 @@ use App\Http\Controllers\Dashboard\NewProductController;
 use App\Http\Controllers\Dashboard\LatestProductsController;
 
 Route::get('/', function () {
-    return view('/home');
+
+    if (Auth::check()) {
+        return redirect('/home');
+
+    } else {
+        return view('/auth.login');
+    }
 });
 
 #################################product################################
@@ -117,8 +123,6 @@ Route::group(['prefix' => 'order', 'namespace' => 'Backend', 'middleware' => 'au
 });
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Auth::routes();
 
 Route::get('/home', [ProductController::class, 'show'])->name('home');
@@ -152,3 +156,8 @@ Route::get('delete/{id}', [LatestProductsController::class , 'destroy'])->name('
 
 
 #################### End New_Products_on_Application ######################
+
+Route::get('/logout', function(){
+    Auth::logout();
+    return redirect('/');
+});

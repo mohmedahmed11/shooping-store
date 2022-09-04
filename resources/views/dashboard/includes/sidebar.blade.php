@@ -23,8 +23,6 @@
             <li class=" nav-item"><a href="{{route('category')}}"><i class="feather icon-menu"></i><span class="menu-title" data-i18n="Dashboard">الاقسام</span><span class="badge badge badge-warning badge-pill float-right mr-2">{{ App\Models\Category::count() }}</span></a>
 
             </li>
-
-
             <li class=" nav-item"><a href="table-ag-grid.html">
                 <i class="feather icon-grid"></i>
                 <span class="menu-title" data-i18n="ag-grid">القائمة الرئيسية</span>
@@ -38,8 +36,6 @@
 
                 </ul>
             </li>
-
-
             <li class=" nav-item"><a href="#"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">المنتجات</span></a>
                 <ul class="menu-content">
                     <li><a href="{{route('products')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">عرض المنتجات</span></a>

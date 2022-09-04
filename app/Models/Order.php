@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\OrderItem;
 use App\Models\User;
 
 class Order extends Model
 {
     use HasFactory;
+
     protected $table = 'orders';
 
     protected $fillable = ['id','user_id','regon_id','address','total','delivery_cost','delivery_period',
@@ -58,16 +60,6 @@ class Order extends Model
     protected $casts = [
         'created_at' => 'datetime:Y-m-d',
     ];
-
-
-
-
-
-
-
-
-
-
 
 
 }

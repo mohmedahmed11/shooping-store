@@ -4,7 +4,6 @@
 
         <section id="page-account-settings" id="data-list-view" class="data-list-view-header">
 
-
             <div class="content-header row">
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
@@ -21,6 +20,7 @@
 
             <div class="app-content content">
                 {{-- <div class="content-area-wrapper"> --}}
+
                     <div class="sidebar-left">
                         <div class="sidebar">
 
@@ -45,15 +45,15 @@
 
 
                                             <div class="col-6">
-                                                <div class="card">
+                                                <div class="card" style="width: 18rem;">
                                                     <div class="card-header">
                                                        <h4>صورة  </h4>  {{-- <h4 class="card-title">Image <i class="fa fa-image" aria-hidden="true"></i>add Image</h4> --}}
                                                     </div>
-                                                    <div class="col-md-6 col-6">
+                                                    <div class="col-md-12 col-12">
 
                                                         <fieldset class="form-group">
-                                                            <div class="card" style="width: 18rem;">
-                                                                <img  id='output' class="img-thumbnail" src="{{url('/storage/img/no_image.jpg')}}" style="height:150px; width:150px;">
+                                                            <div class="" >
+                                                                <img  id='output' class="img-thumbnail" src="{{url('/img/no_image.jpg')}}" style="height:200px; width:200px;">
                                                                 <div class="card-body">
                                                                  <fieldset class="form-group">
                                                                         <span for="basicInputFile">Image</span>
@@ -91,7 +91,6 @@
                         </div>
                     </div>
 
-                {{-- </div> --}}
             </div>
 
 

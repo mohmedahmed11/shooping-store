@@ -15,36 +15,36 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/vendors-rtl.min.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/charts/apexcharts.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/extensions/tether-theme-arrows.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/extensions/tether.min.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/extensions/shepherd-theme-default.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/file-uploaders/dropzone.min.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/vendors-rtl.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/charts/apexcharts.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/tether-theme-arrows.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/tether.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/shepherd-theme-default.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/file-uploaders/dropzone.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/tables/datatable/datatables.min.css') }}">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="/app-assets/css-rtl/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/css-rtl/bootstrap-extended.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/css-rtl/colors.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/css-rtl/components.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/css-rtl/themes/dark-layout.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/css-rtl/themes/semi-dark-layout.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/css-rtl/pages/data-list-view.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/bootstrap-extended.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/colors.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/components.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/themes/dark-layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/themes/semi-dark-layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/pages/data-list-view.css') }}">
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="/app-assets/css-rtl/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/css-rtl/core/colors/palette-gradient.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/css-rtl/pages/dashboard-analytics.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/css-rtl/pages/card-analytics.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/css-rtl/plugins/tour/tour.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/core/menu/menu-types/vertical-menu.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/core/colors/palette-gradient.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/pages/dashboard-analytics.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/pages/card-analytics.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/plugins/tour/tour.css') }}">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="/app-assets/css-rtl/custom-rtl.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/style-rtl.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/custom-rtl.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style-rtl.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('ssets/css/style.css') }}">
     <!-- END: Custom CSS-->
     <link href="https://fonts.googleapis.com/css?family=Cairo:400,700" rel="stylesheet">
     <style>
@@ -54,7 +54,7 @@
     </style>
 
  <!-- toast -->
- <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+ {{-- <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css"> --}}
 </head>
 <!-- END: Head-->
 
@@ -64,7 +64,7 @@
 
     <!-- BEGIN: Header-->
     @include('dashboard.includes.header')
-     
+
     <!-- END: Header-->
 
 
@@ -99,27 +99,27 @@ Stack(
     @include('dashboard.includes.footer')
 
      <!-- BEGIN: Vendor JS-->
-     <script src="/app-assets/vendors/js/vendors.min.js"></script>
+     <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
      <!-- BEGIN Vendor JS-->
 
      <!-- BEGIN: Page Vendor JS-->
-     <script src="/app-assets/vendors/js/extensions/dropzone.min.js"></script>
-     <script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
-     <script src="/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
-     <script src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
-     <script src="/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
-     {{--  <script src="/app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script>
-     <script src="/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>  --}}
+     <script src="{{ asset('app-assets/vendors/js/extensions/dropzone.min.js') }}"></script>
+     <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
+     <script src="{{ asset('sapp-assets/vendors/js/tables/datatable/datatables.buttons.min.js') }}"></script>
+     <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
+     <script src="{{ asset('app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js') }}"></script>
+     {{--  <script src="{{ asset('app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js') }}x"></script>
+     <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js') }}"></script>  --}}
      <!-- END: Page Vendor JS-->
 
      <!-- BEGIN: Theme JS-->
-     <script src="/app-assets/js/core/app-menu.js"></script>
-     <script src="/app-assets/js/core/app.js"></script>
-     <script src="/app-assets/js/scripts/components.js"></script>
+     <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+     <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+     <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
      <!-- END: Theme JS-->
 
      <!-- BEGIN: Page JS-->
-     <script src="/app-assets/js/scripts/ui/data-list-view.js"></script>
+     <script src="{{ asset('app-assets/js/scripts/ui/data-list-view.js') }}"></script>
 
      <!-- PRINT: THIS JS-->
      <script src="{{ asset('assets/js/printThis.js') }}"></script>
@@ -127,25 +127,26 @@ Stack(
 {{--
     <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 
-   <script src="/app-assets/vendors/js/vendors.min.js"></script>
-   <script src="/app-assets/vendors/js/extensions/dropzone.min.js"></script>
-   <script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
-   <script src="/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
-   <script src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
-   <script src="/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
-   <script src="/app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script>
-    <script src="/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
+    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/extensions/dropzone.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.buttons.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/dataTables.select.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js') }}"></script>
+
 
    <!-- END: Page Vendor JS-->
 
    <!-- BEGIN: Theme JS-->
-   <script src="/app-assets/js/core/app-menu.js"></script>
-   <script src="/app-assets/js/core/app.js"></script>
-   <script src="/app-assets/js/scripts/components.js"></script>
+   <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+   <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+   <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
    <!-- END: Theme JS--> --}}
 
    <!-- BEGIN: Page JS-->
-   {{--  <script src="/app-assets/js/scripts/ui/data-list-view.js"></script>  --}}
+   {{--  <script src="{{ asset('app-assets/js/scripts/ui/data-list-view.js') }}"></script>  --}}
 
    <!-- print this -->
    <script>
@@ -168,19 +169,19 @@ Stack(
   <!-- image preview -->
   <script>
     // image preview
-$(".image").change(function () {
+    $(".image").change(function () {
 
-if (this.files && this.files[0]) {
-    var reader = new FileReader();
+    if (this.files && this.files[0]) {
+        var reader = new FileReader();
 
-    reader.onload = function (e) {
-        $('.image-preview').attr('src', e.target.result);
+        reader.onload = function (e) {
+            $('.image-preview').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(this.files[0]);
     }
-
-    reader.readAsDataURL(this.files[0]);
-}
-});
-</script>
+    });
+    </script>
 
   <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
   {!! Toastr::message() !!}
@@ -278,19 +279,14 @@ if (this.files && this.files[0]) {
         var id = $(this).attr("val");
         var APP_URL = {!! json_encode(url('/').'/') !!};
         $.ajax({
-            url: APP_URL+"order/status",
-            method: 'post',
+            url: APP_URL+"order/status/"+id+"/"+status,
+            method: 'GET',
             dataType: 'application/json',
-            data: {
-                status,
-                id
-            },
             success: function(data){
+                location.reload(true);
                 console.log(data);
             }
         });
-        console.log(status);
-        console.log(order_id);
     });
 
 </script>

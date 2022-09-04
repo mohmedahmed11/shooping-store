@@ -132,7 +132,7 @@
 
                                 <fieldset class="form-group">
                                     <div class="card" style="width: 18rem;">
-                                        <img  id='output' class="img-thumbnail" src="{{url('/storage/img/no_image.jpg')}}" style="height:150px; width:150px;">
+                                        <img  id='output' class="img-thumbnail" src="{{url('/img/no_image.jpg')}}" style="height:150px; width:150px;">
                                         <div class="card-body">
                                          <fieldset class="form-group">
                                                 <span for="basicInputFile">Image</span>
@@ -140,6 +140,7 @@
                                             <input type="file" accept='image/*' name="image" onchange='openFile(event)'><br>
                                          </div>
                                      </fieldset>
+                                     
                                         </div>
                                       </div>
                                 </fieldset>

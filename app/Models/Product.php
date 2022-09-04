@@ -57,4 +57,5 @@ class Product extends Model
     public function last(){
         return $this -> hasMany(LatestProducts::class,'product_id','id');
     }
+
 }

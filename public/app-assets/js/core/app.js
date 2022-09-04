@@ -944,7 +944,6 @@
   Waves.attach(".btn", ["waves-light"]);
 })(window, document, jQuery);
 
-
 // image Upload in Update 
 
 var openFile = function(file) {

@@ -16,6 +16,20 @@ class UserController extends Controller
             return ["status" => true, "data" => $user];
         } else {
            return ["status" => false, "data" => null, "message" => "no user fund"];
+
+        }
+    }
+
+
+    function update(Request $req) {
+        $user = User::find($req->id);
+        $user->name = $req->name;
+        $user->password = $req->password;
+        $result = $user->save();
+        if ($result) {
+            return ["status" => true, "data" => $user];
+        } else {
+            return ["status" => false, "data" => null];
         }
     }
 

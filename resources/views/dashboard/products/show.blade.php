@@ -23,6 +23,7 @@
     <div class="table-responsive">
         <table class="table data-thumb-view">
             <thead>
+
                 <tr  class="filters">
                     <th></th>
                     <th>الرقم</th>
@@ -37,14 +38,16 @@
                 </tr>
             </thead>
             <tbody>
+
                 @foreach($products as $index=>$product)
+                
                 <tr role="row" >
                     <td>
                     </td>
                     <td class="product-name">{{ $index + 1 }}</td>
                     <td class="product-img">
                         <a href="{{url('product/details/'.$product->id)}}" data-toggle="tooltip" data-placement="top" title="تفاصيل..">
-                        <img src="{{url('storage/'.$product->image)}}" class="img-thumbnail" style="height:100px; width:100px;">
+                        <img src="{{url('storage/'.$product->image)}}" class="img-thumbnail" style="height:100px; width:150px;">
                     </a>
                     </td>
                     <td class="product-name">{{$product->name}}</td>
@@ -71,6 +74,7 @@
                             </a>
                         <a href="{{url('product/delete/'.$product->id)}}" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="حذف">
 
+
                             <span class="action-delete"><i class="fa fa-trash"></i>
                             </span>
                         </a>
@@ -81,6 +85,7 @@
                         <a href="{{url('product/images/'.$product->id)}}" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="صور العرض">
                             <span class="action-edit"><i class="fa fa-image"></i>
                             </span>
+
                             </a>
                     </td>
                 </tr>
@@ -88,6 +93,7 @@
             </tbody>
         </table>
     </div>
+
 </section>
 @endsection
 <head>
