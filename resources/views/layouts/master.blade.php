@@ -287,7 +287,7 @@ if (this.files && this.files[0]) {
             data: {
                 status,
                 id
-            }, 
+            },
             success: function(data){
                 console.log(data);
             }

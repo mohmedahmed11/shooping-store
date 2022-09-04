@@ -36,12 +36,12 @@
                         {{-- Begin Form --}}
                         <form action="{{ route('category.update', $categories->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" name="id" value="{{ $categories -> id }}">
                             <div class="form-body">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-label-group">
                                             <div class="form-group">
-
                                                 <label for="first-name-icon">الاسم</label>
                                                 <div class="position-relative has-icon-left">
                                                     <input type="text" class="form-control" value="{{ $categories->name }}" name="name">
@@ -49,6 +49,9 @@
                                                         <i class="feather icon-list"></i>
                                                     </div>
                                                 </div>
+                                                @error("name")
+                                                <small class="form-text text-danger">{{$message}}</small>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -58,11 +61,14 @@
                                             <div class="form-group">
                                                 <label for="first-name-icon">صورة</label>
                                                 <div class="position-relative has-icon-left">
-                                                    <input type="file" name="image" class="form-control image">
+                                                    <input type="file" name="image" class="form-control image" value="{{ $categories->image }}">
                                                     <div class="form-control-position">
                                                         <i class="feather icon-image"></i>
                                                     </div>
                                                 </div>
+                                                @error("image")
+                                                <small class="form-text text-danger">{{$message}}</small>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>

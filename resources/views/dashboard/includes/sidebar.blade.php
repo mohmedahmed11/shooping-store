@@ -13,7 +13,7 @@
 
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 
-            <li class=" nav-item"><a href="{{url('/')}}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Main Dash</span><span class="badge badge badge-warning badge-pill float-right mr-2">2</span></a>
+            <li class=" nav-item"><a href="{{url('/dashboard')}}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">الرئيسية</span></a>
 
             </li>
 

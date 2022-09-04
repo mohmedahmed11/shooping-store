@@ -145,7 +145,7 @@ class ProductController extends Controller
             $pro[$key] = $pro;
         }
         $categories = Category::all();
-        return view('dashboard.products.show',compact('products','categories','pro'));
+        return view('dashboard.products.show',compact('products','categories'));
     }
     function create() {
         $categories = Category::all();

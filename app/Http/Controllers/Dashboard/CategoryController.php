@@ -8,7 +8,7 @@ use App\Models\Category;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Brian2694\Toastr\Facades\Toastr;
-
+use App\Http\Requests\CategoryRequest;
 
 
 class CategoryController extends Controller
@@ -39,15 +39,9 @@ public function create()
     return view('dashboard.category.create');
 }
 
-public function store(Request $request)
+public function store(CategoryRequest $request)
 {
     // dd($request->all());
-
-        $request->validate([
-            'name' => 'required',
-            'image' => 'image|required',
-        ]);
-
         $request_data = $request->except(['image']);
 
         if ($request->image) {
@@ -65,9 +59,8 @@ public function store(Request $request)
         $maincategory = Category::create($request_data);
 
         Toastr::success('تم الاضافه بنجاح', 'success');
-
-
         return redirect()->route('category');
+
 }//end of store
 
 public function edit(Request $request, $id)
@@ -77,14 +70,8 @@ public function edit(Request $request, $id)
     return view('dashboard.category.edit', compact('categories'));
 }
 
-public function update(Request $request, $id)
+public function update(CategoryRequest $request, $id)
 {
-    // return $request ;
-    $request->validate([
-        'name' => 'required',
-        'image' => 'image|required',
-    ]);
-
     $request_data = $request->except(['image','_token']);
 
     if ($request->image)

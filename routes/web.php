@@ -9,8 +9,8 @@ use App\Http\Controllers\Settings\RegonsController;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Settings\BannerController;
 
-Route::get('/', function () {
-    return view('layouts.master');
+Route::get('/dashboard', function () {
+    return view('dashboard');
 });
 #################################product################################
 
@@ -36,7 +36,7 @@ Route::prefix('product')->group(function () {
 
     Route::post('/productoption', [ProductController::class, 'productoption'])->name('product.productoption');
     Route::get('/option/delete/{id}', [ProductController::class, 'deleteOptionProduct']);
-    
+
     //
 
 });
