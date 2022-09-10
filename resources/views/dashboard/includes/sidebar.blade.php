@@ -62,6 +62,7 @@
                     <li><a href="{{ route('banner') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">إعلانات</span></a>
                     <li><a href="{{ route('banner.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافه إعلان</span></a>
                     <li><a href="{{ route('settings') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">إعدادات التطبيق</span></a>
+                    <li><a href="{{ route('notification') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">الاشعارات</span></a>
                     </li>
                 </ul>
             </li>

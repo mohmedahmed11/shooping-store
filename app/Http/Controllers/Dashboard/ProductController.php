@@ -102,7 +102,7 @@ class ProductController extends Controller
     function prepareProductData($product) {
 
         $images = DB::table('product_images')
-        
+
         ->where('product_id', $product->id)
         ->get();
 
@@ -402,4 +402,6 @@ class ProductController extends Controller
 
             return view('dashboard.products.new');
         }
+
+
 }

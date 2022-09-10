@@ -11,6 +11,7 @@ use App\Http\Controllers\Settings\BannerController;
 use App\Http\Controllers\Dashboard\BestSellerController;
 use App\Http\Controllers\Dashboard\NewProductController;
 use App\Http\Controllers\Dashboard\LatestProductsController;
+use App\Http\Controllers\Dashboard\NotificationController;
 
 Route::get('/', function () {
 
@@ -48,7 +49,7 @@ Route::get('/', function () {
     Route::post('/productoption', [ProductController::class, 'productoption'])->name('product.productoption');
     Route::get('/option/delete/{id}', [ProductController::class, 'deleteOptionProduct']);
 
-    Route::get('/new', [ProductController::class, 'new'])->name('new');
+
     //
 
 });
@@ -160,4 +161,23 @@ Route::get('delete/{id}', [LatestProductsController::class , 'destroy'])->name('
 Route::get('/logout', function(){
     Auth::logout();
     return redirect('/');
+});
+
+
+Route::group(['prefix' => 'homeApp', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
+{
+Route::get('/', [BestSellerController::class, 'show'])->name('homeApps');
+Route::post('/create', [BestSellerController::class, 'create'])->name('create');
+Route::get('delete/{id}', [BestSellerController::class , 'destroy'])->name('homeApp.delete');
+});
+
+// Route::get('/notification', [ProductController::class, 'notification'])->name('product.notification');
+// Notification
+Route::group(['prefix' => 'notification', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
+{
+Route::get('/', [NotificationController::class, 'show'])->name('notification');
+Route::post('/create', [NotificationController::class, 'create'])->name('notification.create');
+Route::get('delete/{id}', [NotificationController::class , 'destroy'])->name('notification.delete');
+Route::get('/send/{id}', [NotificationController::class, 'sendNotificationby'])->name('notification.send');
+Route::post('/save-token', [HomeController::class, 'saveToken'])->name('save-token');
 });
