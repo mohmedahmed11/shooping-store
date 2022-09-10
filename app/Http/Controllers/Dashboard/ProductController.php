@@ -27,7 +27,6 @@ class ProductController extends Controller
 
         if ($product){
             $product = $this->prepareProductData($product);
-
             return ["status" => true, "data" => $product];
         }else {
             return ["status" => false, "data" => NULL];
@@ -49,7 +48,7 @@ class ProductController extends Controller
         }
     }
 
-    function bestSeller() {
+    public function bestSeller() {
         $products = DB::table('best_seller_products')
         ->join('products', 'products.id', '=', 'best_seller_products.product_id')
         ->select('products.*')
@@ -66,7 +65,7 @@ class ProductController extends Controller
         }
     }
 
-    function latest() {
+    public function latest() {
         $products = DB::table('latest_products')
         ->join('products', 'products.id', '=', 'latest_products.product_id')
         ->select('products.*')
@@ -101,7 +100,9 @@ class ProductController extends Controller
     }
 
     function prepareProductData($product) {
+
         $images = DB::table('product_images')
+        
         ->where('product_id', $product->id)
         ->get();
 
@@ -129,6 +130,14 @@ class ProductController extends Controller
         ->where('product_id', $product->id)
         ->get()->first();
         $product->offer = $offer;
+
+        $newProduct = DB::table('new_products')
+        ->where('product_id', $product->id)
+        ->get()->first();
+        if ($newProduct) {
+            $product-> is_new = 1;
+        }
+
         return $product;
     }
     // new methods
@@ -151,6 +160,7 @@ class ProductController extends Controller
         $categories = Category::all();
         return view('dashboard.products.create',compact('categories'));
     }
+
     public function save(Request $request){
         $validateData=$request->validate([
             'quantity'=>'required:products',
@@ -159,6 +169,7 @@ class ProductController extends Controller
          ]);
 
         $data=new Product;
+
         $imageName = ''.time().'.'.$request->image->extension();
         $request->image->move(public_path('storage/img/'), $imageName);
         $imagePath = 'img/'.$imageName;
@@ -195,6 +206,7 @@ class ProductController extends Controller
         $data->quantity = $request->input('quantity');
         $data->details = $request->input('details');
         if($request->hasFile('image')){
+
 
             $imageName = ''.time().'.'.$request->image->extension();
             $request->image->move(public_path('storage/img/'), $imageName);
@@ -254,6 +266,7 @@ class ProductController extends Controller
         return "Wellcome";
     }
 
+
     public function images(Request $request, $id)
     {
 
@@ -275,7 +288,7 @@ class ProductController extends Controller
               ->resize(300, null, function ($constraint) {
                   $constraint->aspectRatio();
               })
-              ->save(public_path('img/' . $request->image->hashName()));
+              ->save(public_path('storage/img/' . $request->image->hashName()));
 
           $request_data['image'] = $request->image->hashName();
       }//end of if
@@ -283,9 +296,9 @@ class ProductController extends Controller
       $request_data['image'] = 'img/'.$request_data['image'];
       $image = ProductImage::create($request_data);
       if ($image) {
-          Toastr::success('تم الاضافه بنجاح', 'success');
+        //   Toastr::success('تم الاضافه بنجاح', 'success');
       } else {
-          Toastr::success('لم يتم اضافه الصوره', 'error');
+        //   Toastr::success('لم يتم اضافه الصوره', 'error');
       }
       return redirect()->back();
     }
@@ -300,31 +313,31 @@ class ProductController extends Controller
 
     public function details($id)
     {
-            $product= Product::find($id);
-            if ( $product) {
-                $category = Category::find($product->category_id);
-                $product->category = $category->name;
-            }
+        $product= Product::find($id);
+        if ( $product) {
+            $category = Category::find($product->category_id);
+            $product->category = $category->name;
+        }
+            $similerProducts=Product::with(['simlier'=>function($q){
+        }])->find($id);
 
-             $similerProducts=Product::with(['simlier'=>function($q){
-            }])->find($id);
+        foreach ($similerProducts->simlier as $key => $similer) {
+            # code...
+            $similerProducts->simlier[$key]->product = Product::find($similer->similar_product_id);
+        }
+        $product->proparities =  $this->productProparities($id);
+        $products = Product::with(['images'])->find($id);
+        $images = $product->images;
+        $sim= Product::all();
+        $alloption= Product::all();
+        $options=Product::with(['option'=>function($q){
+        }])->find($id);
+        foreach ($options->option as $key => $optiion) {
+            # code...
+            $options->option[$key]->product = Product::find($optiion->product_id);
+        }
+        return view('dashboard.products.details',compact('sim','product','products','images','similerProducts','alloption','options'));
 
-            foreach ($similerProducts->simlier as $key => $similer) {
-                # code...
-                $similerProducts->simlier[$key]->product = Product::find($similer->similar_product_id);
-            }
-            $product->proparities =  $this->productProparities($id);
-            $products = Product::with(['images'])->find($id);
-            $images = $product->images;
-            $sim= Product::all();
-            $alloption= Product::all();
-            $options=Product::with(['option'=>function($q){
-            }])->find($id);
-            foreach ($options->option as $key => $optiion) {
-                # code...
-                $options->option[$key]->product = Product::find($optiion->product_id);
-            }
-            return view('dashboard.products.details',compact('sim','product','products','images','similerProducts','alloption','options'));
     }
     function productSimiler($id) {
             return DB::table('similar_products')
@@ -376,13 +389,17 @@ class ProductController extends Controller
 
     }
     public function deleteOptionProduct($id)
-        {
+    {
 
-        $data = ProductOption::find($id);
-        $data->delete();
-        Storage::delete(public_path('storage/option/'));
-        Toastr::success('تم حذف المنتج..!', 'fail');
-                return redirect()->back();
+    $data = ProductOption::find($id);
+    $data->delete();
+    Storage::delete(public_path('storage/option/'));
+    Toastr::success('تم حذف المنتج..!', 'fail');
+            return redirect()->back();
+    }
+
+        public function new (){
+
+            return view('dashboard.products.new');
         }
-
 }

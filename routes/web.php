@@ -8,13 +8,26 @@ use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Settings\RegonsController;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Settings\BannerController;
+use App\Http\Controllers\Dashboard\BestSellerController;
+use App\Http\Controllers\Dashboard\NewProductController;
+use App\Http\Controllers\Dashboard\LatestProductsController;
+use App\Http\Controllers\Dashboard\AdminsController;
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+
+Route::get('/admin', function () {
+
+    if (Auth::check()) {
+        return view('dashboard');
+
+    } else {
+        return view('/auth.login');
+    }
 });
+
 #################################product################################
 
-Route::prefix('product')->group(function () {
+    Route::group(['prefix' => 'product', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
+    {
     Route::get('/', [ProductController::class, 'show'])->name('products');
     Route::get('/create', [ProductController::class, 'create'])->name('product.create');
     Route::post('/save', [ProductController::class, 'save'])->name('product.save');
@@ -37,13 +50,15 @@ Route::prefix('product')->group(function () {
     Route::post('/productoption', [ProductController::class, 'productoption'])->name('product.productoption');
     Route::get('/option/delete/{id}', [ProductController::class, 'deleteOptionProduct']);
 
+    Route::get('/new', [ProductController::class, 'new'])->name('new');
+
     //
 
 });
 //
 ##################################################
 
-Route::prefix('properties')->group(function () {
+Route::group(['prefix' => 'properties', 'namespace' => 'Backend', 'middleware' => 'auth' ], function(){
     Route::get('/rad/{id}', [PropertiesController::class, 'edit']);
     Route::put('/pro/{id}', [PropertiesController::class, 'update']);
     Route::get('/showProp', [PropertiesController::class, 'show'])->name('properties.showProp');
@@ -56,7 +71,7 @@ Route::prefix('properties')->group(function () {
 //
 #########################   category  #########################
 
-Route::group(['prefix' => 'category'], function(){
+Route::group(['prefix' => 'category', 'namespace' => 'Backend', 'middleware' => 'auth' ], function(){
     Route::get('/', [CategoryController::class , 'show'])->name('category');
     Route::post('store', [CategoryController::class , 'store'])->name('category.store');
     Route::get('edit/{id}', [CategoryController::class , 'edit'])->name('category.edit');
@@ -67,7 +82,7 @@ Route::group(['prefix' => 'category'], function(){
 
 #########################   regons  #########################
 
-Route::group(['prefix' => 'regon'], function(){
+Route::group(['prefix' => 'regon', 'namespace' => 'Backend', 'middleware' => 'auth' ], function(){
     Route::get('/', [RegonsController::class , 'show'])->name('regon');
     Route::post('store', [RegonsController::class , 'store'])->name('regon.store');
     Route::get('edit/{id}', [RegonsController::class , 'edit'])->name('regon.edit');
@@ -78,14 +93,14 @@ Route::group(['prefix' => 'regon'], function(){
 
 #########################   regons  #########################
 
-Route::group(['prefix' => 'settings'], function(){
+Route::group(['prefix' => 'settings', 'namespace' => 'Backend', 'middleware' => 'auth' ], function(){
     Route::get('/', [SettingsController::class , 'show'])->name('settings');
     Route::post('update', [SettingsController::class , 'update'])->name('settings.update');
 });
 
 #########################   banner  #########################
 
-Route::group(['prefix' => 'banner'], function(){
+Route::group(['prefix' => 'banner', 'namespace' => 'Backend', 'middleware' => 'auth' ], function(){
     Route::get('/', [BannerController::class , 'show'])->name('banner');
     Route::get('/create', [BannerController::class , 'create'])->name('banner.create');
     Route::post('store', [BannerController::class , 'store'])->name('banner.store');
@@ -96,15 +111,65 @@ Route::group(['prefix' => 'banner'], function(){
     Route::get('find_product/{id}', [BannerController::class , 'find_product'])->name('banner.find_product');
 
 });
-#########################   order  #########################
 
-Route::group(['prefix' => 'order'], function(){
+#########################   order  #########################
+Route::group(['prefix' => 'order', 'namespace' => 'Backend', 'middleware' => 'auth' ], function(){
     Route::get('/', [OrderController::class , 'show'])->name('order');
     Route::get('/create', [OrderController::class , 'create'])->name('order.create');
     Route::post('store', [OrderController::class , 'store'])->name('order.store');
     Route::post('status', [OrderController::class , 'status'])->name('order.status');
     Route::get('find_order/{id}', [OrderController::class , 'find_order'])->name('order.find_order');
-
-
-
 });
+
+Auth::routes();
+
+Auth::routes();
+
+Route::get('/home', [ProductController::class, 'show'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/logout', function(){
+    Auth::logout();
+    return redirect('/');
+});
+#################### Start Best Seller Products ######################
+Route::group(['prefix' => 'homeApp', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
+{
+Route::get('/', [BestSellerController::class, 'show'])->name('homeApps');
+Route::post('/create', [BestSellerController::class, 'create'])->name('create');
+Route::get('delete/{id}', [BestSellerController::class , 'destroy'])->name('homeApp.delete');
+});
+#################### End Best Seller Products ######################
+
+
+#################### Start Last_Products ####################
+
+Route::group(['prefix' => 'latestproducts', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
+{
+Route::get('/', [LatestProductsController::class, 'show'])->name('latestproducts');
+Route::post('/create', [LatestProductsController::class, 'createlatest'])->name('createlatest');
+Route::get('delete/{id}', [LatestProductsController::class , 'destroy'])->name('latestproducts.delete');
+});
+
+
+#################### End New_Products_on_Application ######################
+
+Route::get('/logout', function(){
+    Auth::logout();
+    return redirect('/');
+});
+
+#########################   admins  #########################
+Route::group(['prefix' => 'admins', 'namespace' => 'Backend', 'middleware' => 'auth' ], function(){
+    Route::get('/', [AdminsController::class , 'show'])->name('admins');
+    Route::get('/create', [AdminsController::class , 'create'])->name('admins.create');
+    Route::post('store', [AdminsController::class , 'store'])->name('admins.store');
+    Route::get('edit/{id}', [AdminsController::class , 'edit'])->name('admins.edit');
+    Route::post('update/{id}', [AdminsController::class , 'update'])->name('admins.update');
+    Route::get('delete/{id}', [AdminsController::class , 'destroy'])->name('admins.delete');
+});
+
+

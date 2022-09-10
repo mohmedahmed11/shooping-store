@@ -20,7 +20,7 @@ class Category extends Model
 
     public function getImageAttribute($val)
     {
-        return ($val !== null) ? asset('' . $val) : "";
+        return ($val !== null) ? asset('storage/' . $val) : "";
 
     }
 

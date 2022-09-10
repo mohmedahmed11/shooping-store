@@ -35,7 +35,11 @@
                             <td><img src="{{ $category->image_path }}" style="width: 80px;" class="img-thumbnail" alt=""></td>
                             <td>
                                 <a href="{{ route('category.edit', $category->id) }}" class="btn btn-outline-info"><i class="fa fa-edit"></i>تعديل</a>
-                                <a href="{{ route('category.delete', $category->id) }}" id="delete" class="btn btn-outline-danger"><i class="fa fa-trash"></i>حذف</a>
+                                @if (auth()->user()->hasPermission('users_delete'))
+                                    <a href="{{ route('category.delete', $category->id) }}" id="delete" class="btn btn-outline-danger"><i class="fa fa-trash"></i>حذف</a>
+                                @else
+                                    <a href="#" id="delete" class="btn btn-outline-danger disabled"><i class="fa fa-trash"></i>حذف</a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

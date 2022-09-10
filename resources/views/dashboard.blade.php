@@ -11,7 +11,8 @@
                             <i class="feather icon-users text-primary font-medium-5"></i>
                         </div>
                     </div>
-                    <h2 class="text-bold-700 mt-1">{{ App\Models\User::count() }}</h2>
+                    {{--  <h2 class="text-bold-700 mt-1">{{ App\Models\User::count() }}</h2>  --}}
+                    <h2 class="text-bold-700 mt-1">3</h2>
                     <p class="mb-0">المستخدمين</p>
                 </div>
                 <div class="card-content" style="position: relative;">
