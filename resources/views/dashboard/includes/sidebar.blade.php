@@ -29,10 +29,12 @@
                 <span class="badge badge badge-primary badge-pill float-right mr-2">New</span>
               </a>
                 <ul class="menu-content">
-                    <li><a href="{{route('homeApps')}}"><i class="feather icon-trending-up"></i><span class="menu-item" data-i18n="Shop"> الأكثر مببيعاً</span></a></li>
-                    <li><a href="{{route('latestproducts')}}"><i class="feather icon-heart"></i><span class="menu-item" data-i18n="Details"> أحدث العروض</span></a></li>
 
-                </ul>
+                    <li><a href="{{route('homeApps')}}"><i class="feather icon-trending-up"></i><span class="menu-item" data-i18n="Shop"> الأكثر مببيعاً</span></a>
+                    </li>
+                    <li><a href="{{route('latestproducts')}}"><i class="feather icon-heart"></i><span class="menu-item" data-i18n="Details"> أحدث العروض</span></a>
+                    </li>
+                               </ul>
             </li>
             <li class=" nav-item"><a href="#"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">المنتجات</span></a>
                 <ul class="menu-content">
