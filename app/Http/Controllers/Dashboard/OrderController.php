@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Order;
 use App\Models\OrderItem;use App\Models\User;
 use App\Models\Regon;
 use App\Models\Product;
+use App\Models\Customer;
+use App\Models\Setting;
 use Brian2694\Toastr\Facades\Toastr;
 use PDF;
 
@@ -28,7 +31,7 @@ class OrderController extends Controller
         $order->order_from = $req->order_from;
         $order->status = 0;
         $result = $order->save();
-        
+
         if($result) {
             $items = array();
             foreach ($req->items as $key => $item) {
@@ -66,7 +69,7 @@ class OrderController extends Controller
         if (Order::find($id)){
 
             $order = $this->order_data($id);
-      
+
             if($order) {
                 return ["status" => true, "data" => $order, "message" => NULL];
             }else {
@@ -99,7 +102,7 @@ class OrderController extends Controller
     function prepareProductData($product) {
 
         $images = DB::table('product_images')
-        
+
         ->where('product_id', $product->id)
         ->get();
 
@@ -164,30 +167,70 @@ class OrderController extends Controller
     {
         $users = User::all();
         $regons = Regon::selection()->get();
-        return view('dashboard.order.create',compact('users','regons'));
+        $products = Product::selection()->get();
+        $settings = Setting::selection()->get();
+        $order_items = session('order_items');
+        $categories = Category::with('products')->get();
+
+        // return $settings;
+        // session()->pull('order_items');
+        // return view('dashboard.order.create',compact('users','regons','products','order_items','settings'));
+        return view('dashboard.order.store',compact('users','regons','products','order_items','settings','categories'));
+
     }
 
     public function store(Request $request)
     {
         // return $request;
         $request->validate([
-            'user_id'=>'required',
+            'name'=>'required',
+            'phone'=>'required',
             'regon_id'=>'required',
             'address'=>'required',
-            'total'=>'required',
-            'delivery_cost'=>'required',
             'delivery_period'=>'required',
-            'items_count'=>'required',
-            'status'=>'required',
-            'order_from'=>'required',
             'note'=>'required',
         ]);
+        $items = session('order_items');
+        $request_data = $request->except(['_token','phone','name','count']);
+        $customer = Customer::where('phone',$request->phone)->get();
+        // return  $customer;
+        if(!$customer->isEmpty()) {
+            $cust = Customer::where('phone',$request->phone)->get()->first();
+            $request_data['user_id'] = $cust->id;
+        }else {
+            $customer = new Customer;
+            $customer->name = $request->name;
+            $customer->phone = $request->phone;
+            $customer->save();
+            $request_data['user_id'] = $customer->id;
+        }
 
-        $request_data = $request->except(['_token']);
+        $request_data['items_count'] =  count($items);
+        $request_data['order_from'] = 'dashboard';
+
+
+        $request_data['delivery_cost'] = $request->delivery_cost;
+        $request_data['total'] = 1324;
+
+        // return $request_data;
+
         $order = Order::create($request_data);
-        Toastr::success('تم الاضافه بنجاح', 'success');
-
-        return redirect()->route('order');
+        if ($order) {
+            foreach ($items as $key => $item) {
+                # code...
+                $order_item = new OrderItem;
+                $order_item->order_id = $order->id;
+                $order_item->product_id = $item->id;
+                $order_item->count = $item->count;
+                $order_item->save();
+            }
+            session()->pull('order_items');
+            Toastr::success('تم الاضافه بنجاح', 'success');
+            return redirect()->route('order');
+        }else {
+            Toastr::error('فشل في إنشاء الطلب', 'error');
+            return redirect()->route('order');
+        }
     }
 
     function find_order($id) {
@@ -209,8 +252,22 @@ class OrderController extends Controller
         return  redirect()->route('order');
     }
 
+    function setToSession($id,$count) {
 
+        $items = session('order_items');
+        $product = Product::select('id','name','price','image')->find($id);
+        $product->count = $count;
+        $items[] = $product;
+        session(['order_items' => $items]);
+        return $items;//redirect()->back()->with('order_items',$items);
+    }
 
+    function deleteItemFromSession($index) {
+        $items = session('order_items');
+        unset($items[$index]);
+        session(['order_items' => $items]);
+        return redirect()->back()->with('order_items',$items);
+    }
 
 
 

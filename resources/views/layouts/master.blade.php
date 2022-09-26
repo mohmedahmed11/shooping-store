@@ -289,6 +289,35 @@ Stack(
         });
     });
 
+    $("#addToSession").click(function () {
+
+        var val = $('#selectOrderProduct').val();
+        if (val == null) {
+            return
+        }
+        var count = $('#product_count').val();
+        {{--  var base_url = '{!! url().'/' !!}';  --}}
+        var APP_URL = {!! json_encode(url('/').'/') !!}
+        console.log(APP_URL);
+        $.ajax({
+        url: APP_URL+"order/add_item_to_session/"+val+"/"+count,
+        method: 'GET',
+        success: function(data){
+             console.log(data);
+             location.reload(true);
+             {{--  $("#productToView tbody").text("");
+             $("#productToView").append('<tr role="row" class="odd">'
+                                        +'<td>'+data.id+'</td>'
+                                        +'<td>'+data.name+'</td>'
+                                        +'<td><img src="'+APP_URL+data.image+'" style="width: 80px;" class="img-thumbnail" alt=""></td>'
+
+                                        +'</tr>');  --}}
+            {{--  $("#productToView").load();  --}}
+        }});
+
+    });
+
+
 </script>
 
 </body>

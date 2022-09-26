@@ -13,14 +13,14 @@ class AdminsController extends Controller
 {
     public function show()
     {
-        $admins = User::selection()->get();
+        $admins = User::whereRoleIs('admin')->selection()->get();
         return view('dashboard.admins.index', compact('admins'));
     }
     // public function create()
     // {
     //     return view('dashboard.admins.create');
     // }
-    public function store(Request $request)
+    public function store(AdminRequest $request)
     {
         // dd($request->all());
         $request_data = $request->except(['password','_token','permissions']);
@@ -40,7 +40,7 @@ class AdminsController extends Controller
         $admin = User::selection()->find($id);
         return view('dashboard.admins.edit', compact('admin'));
     }
-    public function update(Request $request, $id)
+    public function update(AdminRequest $request, $id)
     {
         // dd($request->all());
         $request_data = $request->except(['password','_token','permissions']);

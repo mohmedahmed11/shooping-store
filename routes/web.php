@@ -27,8 +27,8 @@ Route::get('/admin', function () {
 
 #################################product################################
 
-    Route::group(['prefix' => 'product', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
-    {
+Route::group(['prefix' => 'product', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
+{
     Route::get('/', [ProductController::class, 'show'])->name('products');
     Route::get('/create', [ProductController::class, 'create'])->name('product.create');
     Route::post('/save', [ProductController::class, 'save'])->name('product.save');
@@ -122,6 +122,9 @@ Route::group(['prefix' => 'order', 'namespace' => 'Backend', 'middleware' => 'au
     Route::post('store', [OrderController::class , 'store'])->name('order.store');
     Route::post('status', [OrderController::class , 'status'])->name('order.status');
     Route::get('find_order/{id}', [OrderController::class , 'find_order'])->name('order.find_order');
+    Route::get('add_item_to_session/{id}/{count}', [OrderController::class , 'setToSession'])->name('order.add_item_to_session');
+    Route::get('delete_item_from_session/{index}', [OrderController::class , 'deleteItemFromSession'])->name('order.delete_item_from_session');
+
 });
 
 Auth::routes();
@@ -133,9 +136,9 @@ Route::get('/logout', function(){
 #################### Start Best Seller Products ######################
 Route::group(['prefix' => 'homeApp', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
 {
-Route::get('/', [BestSellerController::class, 'show'])->name('homeApps');
-Route::post('/create', [BestSellerController::class, 'create'])->name('create');
-Route::get('delete/{id}', [BestSellerController::class , 'destroy'])->name('homeApp.delete');
+    Route::get('/', [BestSellerController::class, 'show'])->name('homeApps');
+    Route::post('/create', [BestSellerController::class, 'create'])->name('create');
+    Route::get('delete/{id}', [BestSellerController::class , 'destroy'])->name('homeApp.delete');
 });
 #################### End Best Seller Products ######################
 
@@ -144,9 +147,9 @@ Route::get('delete/{id}', [BestSellerController::class , 'destroy'])->name('home
 
 Route::group(['prefix' => 'latestproducts', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
 {
-Route::get('/', [LatestProductsController::class, 'show'])->name('latestproducts');
-Route::post('/create', [LatestProductsController::class, 'createlatest'])->name('createlatest');
-Route::get('delete/{id}', [LatestProductsController::class , 'destroy'])->name('latestproducts.delete');
+    Route::get('/', [LatestProductsController::class, 'show'])->name('latestproducts');
+    Route::post('/create', [LatestProductsController::class, 'createlatest'])->name('createlatest');
+    Route::get('delete/{id}', [LatestProductsController::class , 'destroy'])->name('latestproducts.delete');
 });
 
 
@@ -168,9 +171,9 @@ Route::group(['prefix' => 'admins', 'namespace' => 'Backend', 'middleware' => 'a
 // Notification
 Route::group(['prefix' => 'notification', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
 {
-Route::get('/', [NotificationController::class, 'show'])->name('notification');
-Route::post('/create', [NotificationController::class, 'create'])->name('notification.create');
-Route::get('delete/{id}', [NotificationController::class , 'destroy'])->name('notification.delete');
-Route::get('/send/{id}', [NotificationController::class, 'sendNotificationby'])->name('notification.send');
-Route::post('/save-token', [HomeController::class, 'saveToken'])->name('save-token');
+    Route::get('/', [NotificationController::class, 'show'])->name('notification');
+    Route::post('/create', [NotificationController::class, 'create'])->name('notification.create');
+    Route::get('delete/{id}', [NotificationController::class , 'destroy'])->name('notification.delete');
+    Route::get('/send/{id}', [NotificationController::class, 'sendNotificationby'])->name('notification.send');
+    Route::post('/save-token', [HomeController::class, 'saveToken'])->name('save-token');
 });
