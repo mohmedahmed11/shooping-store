@@ -22,7 +22,6 @@ class User extends Authenticatable
         'id',
         'name',
         'email',
-        'password',
     ];
 
     public function scopeSelection($query)
@@ -37,7 +36,8 @@ class User extends Authenticatable
      */
 
     protected $hidden = [
-        // 'password',
+        'password',
+        'device_token',
         'remember_token',
     ];
 

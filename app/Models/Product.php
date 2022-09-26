@@ -35,27 +35,39 @@ class Product extends Model
     // relations of products
     public function category()
     {
-        $this->belongsTo('App\Models\Category', 'category_id' , 'id');
+        return $this->belongsTo('App\Models\Category', 'category_id' , 'id');
     }//end of category
 
     public function images()
     {
         return $this -> hasMany(ProductImage::class,'product_id','id');
     }
-    public function simlier(){
+    public function simliers(){
         return $this->hasMany(SimilerProduct::class,'product_id','id');
     }
 
-    public function option()
+    public function options()
     {
         return $this -> hasMany(ProductOption::class,'product_id','id');
     }
 
-    public function bestSeller(){
-        return $this -> hasMany(BestSellerProducts::class,'product_id','id');
+    // public function bestSeller(){
+    //     return $this -> hasMany(BestSellerProducts::class,'product_id','id');
+    // }
+    // public function last(){
+    //     return $this -> hasMany(LatestProducts::class,'product_id','id');
+    // }
+    // public function items()
+    // {
+    //     return  $this->hasMany(OrderItem::class, 'product_id' , 'id');
+    // }
+
+
+    public function productitem()
+    {
+       return  $this->belongsTo(Product::class, 'product_id' , 'id');
     }
-    public function last(){
-        return $this -> hasMany(LatestProducts::class,'product_id','id');
-    }
+
+
 
 }

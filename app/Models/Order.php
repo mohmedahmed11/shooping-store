@@ -31,10 +31,12 @@ class Order extends Model
     {
         return $this ->belongsTo(Regon::class,'regon_id','id');
     }//end of regon
-
-    public function items() {
-        return $this ->hasMany(OrderItem::class,'order_id','id');
+    public function items()
+    {
+        return $this ->hasMany(OrderItem::class,'order_id','id')->with('product','product.images','product.simliers','product.options','product.category');
     }
+
+    // 	 Descending 1	count
     protected $appends = [
         'image_path',
     ];

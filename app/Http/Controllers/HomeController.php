@@ -26,4 +26,9 @@ class HomeController extends Controller
         return view('/home');
         // dashboard.products.show
     }
+    public function testapi()
+    {
+        // return view('/home';
+        // dashboard.products.show
+    }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\RegonController;
 use App\Http\Controllers\Dashboard\SettingController;
+use App\Http\Controllers\Api\OrderApisController;
 
 
 /*
@@ -43,3 +44,13 @@ Route::post('login', [UserController::class, 'login']);
 Route::post('update_user', [UserController::class, 'update']);
 
 Route::post('cancel_order', [OrderController::class, 'cancel_order']);
+
+Route::group(['prefix' => 'config' ], function()
+{
+    Route::get('order/{id}', [OrderApisController::class, 'getOrder']);
+    Route::get('orders', [OrderApisController::class, 'getOrders']);
+    Route::post('order/add', [OrderApisController::class, 'createOrder']);
+    Route::put('order/update/{id}', [OrderApisController::class, 'updateOrder']);
+    Route::put('order/status/{id}/{status}', [OrderApisController::class, 'updateStatus']);
+    Route::delete('order/delete/{id}', [OrderApisController::class, 'destroy']);
+});

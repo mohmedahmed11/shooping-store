@@ -28,7 +28,7 @@ class OrderController extends Controller
         $order->order_from = $req->order_from;
         $order->status = 0;
         $result = $order->save();
-        
+
         if($result) {
             $items = array();
             foreach ($req->items as $key => $item) {
@@ -66,7 +66,7 @@ class OrderController extends Controller
         if (Order::find($id)){
 
             $order = $this->order_data($id);
-      
+
             if($order) {
                 return ["status" => true, "data" => $order, "message" => NULL];
             }else {
@@ -99,7 +99,7 @@ class OrderController extends Controller
     function prepareProductData($product) {
 
         $images = DB::table('product_images')
-        
+
         ->where('product_id', $product->id)
         ->get();
 
@@ -208,10 +208,6 @@ class OrderController extends Controller
         // Toastr::success(' تم تغيير الحالة بنجاح ', 'success');
         return  redirect()->route('order');
     }
-
-
-
-
 
 
 
