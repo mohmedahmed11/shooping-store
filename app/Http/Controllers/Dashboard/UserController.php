@@ -24,7 +24,7 @@ class UserController extends Controller
     function update(Request $req) {
         $user = User::find($req->id);
         $user->name = $req->name;
-        $user->password = $req->password;
+        $user->phone = $req->phone;
         $result = $user->save();
         if ($result) {
             return ["status" => true, "data" => $user];
@@ -37,7 +37,7 @@ class UserController extends Controller
         $user = User::where('phone','=',$req->phone)->first();
 
         if ($user) {
-            $users = User::where('phone',$req->phone)->where('password', $req->password)->first();
+            $users = User::where('phone',$req->phone)->first();
             if ($users) {
                 return ["status" => true, "data" => $users];
             } else {
@@ -47,13 +47,13 @@ class UserController extends Controller
 
             $validator = Validator::make($req->all(), [
                 "phone"  => "required|size:9",
-                "password"    => "required|min:6",
+                "name"    => "required|min:3",
             ]);
             if (!$validator->fails()) {
                 $user = new User;
-                // $user->name = $req->name;
+                $user->name = $req->name;
                 $user->phone = $req->phone;
-                $user->password = $req->password;
+                $user->password = '';
                 $user->save();
                 if ($user) {
                     return ["status" => true, "data" => $user];
@@ -67,6 +67,18 @@ class UserController extends Controller
         }
 
         
+    }
+
+
+    function delete_account($id) {
+        $user = User::find($id);
+        $user->phone = $user->phone.'_deleted';
+        $result = $user->save();
+        if ($result) {
+            return ["status" => true, "data" => $user];
+        } else {
+            return ["status" => false, "data" => null];
+        }
     }
 
  

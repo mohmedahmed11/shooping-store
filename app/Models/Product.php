@@ -8,6 +8,7 @@ use App\Models\ProductImage;
 use App\Models\Banner;
 use App\Models\SimilerProduct;
 use App\Models\ProductOption;
+use App\Models\Category;
 
 class Product extends Model
 {
@@ -34,7 +35,7 @@ class Product extends Model
     // relations of products
     public function category()
     {
-        $this->belongsTo('App\Models\Category', 'category_id' , 'id');
+        return $this->belongsTo(Category::Class, 'category_id' , 'id');
     }//end of category
 
     public function images()

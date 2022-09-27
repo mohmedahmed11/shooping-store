@@ -43,3 +43,6 @@ Route::post('login', [UserController::class, 'login']);
 Route::post('update_user', [UserController::class, 'update']);
 
 Route::post('cancel_order', [OrderController::class, 'cancel_order']);
+
+Route::get('delete_user/{id}', [UserController::class, 'delete_account']);
+

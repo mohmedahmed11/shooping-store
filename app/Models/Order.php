@@ -33,7 +33,7 @@ class Order extends Model
     }//end of regon
 
     public function items() {
-        return $this ->hasMany(OrderItem::class,'order_id','id');
+        return $this ->hasMany(OrderItem::class,'order_id','id')->with('product.category','product.images','product.option','product.simlier');
     }
     protected $appends = [
         'image_path',

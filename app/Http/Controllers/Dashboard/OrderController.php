@@ -51,10 +51,10 @@ class OrderController extends Controller
 
     function history($id) {
         if (Order::where('user_id', $id)->get()){
-            $orders = Order::where('user_id', $id)->orderBy('created_at', 'desc')->get();
-            foreach ($orders as $key => $value) {
-                $orders[$key] = $this->order_data($value->id);
-            }
+            $orders = Order::where('user_id', $id)->with('items','items.product')->orderBy('created_at', 'desc')->get();
+            // foreach ($orders as $key => $value) {
+            //     $orders[$key] = $this->order_data($value->id);
+            // }
             return $orders;
 
         }else {

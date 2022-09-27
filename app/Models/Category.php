@@ -25,7 +25,7 @@ class Category extends Model
     }
 
 // relations of categories
-    public function product()
+    public function products()
     {
         return $this -> hasMany('App\Models\Product','category_id','id');
     }
