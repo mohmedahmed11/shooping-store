@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\User;
+use App\Models\Customer;
 
-class UserController extends Controller
+class CustomerController extends Controller
 {
     //
     function index($id) {
-        $user = User::find($id);
+        $user = Customer::find($id);
         if ($user) {
             return ["status" => true, "data" => $user];
         } else {
@@ -22,7 +22,7 @@ class UserController extends Controller
 
 
     function update(Request $req) {
-        $user = User::find($req->id);
+        $user = Customer::find($req->id);
         $user->name = $req->name;
         $user->phone = $req->phone;
         $result = $user->save();
@@ -34,10 +34,10 @@ class UserController extends Controller
     }
 
     function login(Request $req) {
-        $user = User::where('phone','=',$req->phone)->first();
+        $user = Customer::where('phone','=',$req->phone)->first();
 
         if ($user) {
-            $users = User::where('phone',$req->phone)->first();
+            $users = Customer::where('phone',$req->phone)->first();
             if ($users) {
                 return ["status" => true, "data" => $users];
             } else {
@@ -50,7 +50,7 @@ class UserController extends Controller
                 "name"    => "required|min:3",
             ]);
             if (!$validator->fails()) {
-                $user = new User;
+                $user = new Customer;
                 $user->name = $req->name;
                 $user->phone = $req->phone;
                 $user->password = '';
@@ -71,7 +71,7 @@ class UserController extends Controller
 
 
     function delete_account($id) {
-        $user = User::find($id);
+        $user = Customer::find($id);
         $user->phone = $user->phone.'_deleted';
         $result = $user->save();
         if ($result) {

@@ -15,6 +15,8 @@ use App\Http\Controllers\Dashboard\LatestProductsController;
 use App\Http\Controllers\Dashboard\AdminsController;
 
 use App\Http\Controllers\Dashboard\NotificationController;
+use App\Http\Controllers\Api\OrderApiesController;
+use App\Http\Controllers\HomeController;
 
 Route::get('/admin', function () {
 
@@ -124,6 +126,7 @@ Route::group(['prefix' => 'order', 'namespace' => 'Backend', 'middleware' => 'au
     Route::get('find_order/{id}', [OrderController::class , 'find_order'])->name('order.find_order');
     Route::get('add_item_to_session/{id}/{count}', [OrderController::class , 'setToSession'])->name('order.add_item_to_session');
     Route::get('delete_item_from_session/{index}', [OrderController::class , 'deleteItemFromSession'])->name('order.delete_item_from_session');
+    Route::get('orders', [OrderController::class, 'getOrder']);
 
 });
 
@@ -176,4 +179,11 @@ Route::group(['prefix' => 'notification', 'namespace' => 'Backend', 'middleware'
     Route::get('delete/{id}', [NotificationController::class , 'destroy'])->name('notification.delete');
     Route::get('/send/{id}', [NotificationController::class, 'sendNotificationby'])->name('notification.send');
     Route::post('/save-token', [HomeController::class, 'saveToken'])->name('save-token');
+
 });
+
+
+// Route::group(['prefix' => 'homeApp', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
+// {
+// Route::get('/', [OrderApiesController::class, 'show'])->name('homeApps');
+// });

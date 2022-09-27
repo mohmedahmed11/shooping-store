@@ -12,6 +12,7 @@ use App\Models\Regon;
 use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Setting;
+use App\Models\Properties;
 use Brian2694\Toastr\Facades\Toastr;
 use PDF;
 
@@ -54,10 +55,10 @@ class OrderController extends Controller
 
     function history($id) {
         if (Order::where('user_id', $id)->get()){
-            $orders = Order::where('user_id', $id)->with('items','items.product')->orderBy('created_at', 'desc')->get();
-            // foreach ($orders as $key => $value) {
-            //     $orders[$key] = $this->order_data($value->id);
-            // }
+            $orders = Order::where('user_id', $id)->with('items')->orderBy('created_at', 'desc')->get();
+            foreach ($orders as $key => $value) {
+                $orders[$key] = $this->order_data($value->id);
+            }
             return $orders;
 
         }else {
@@ -82,16 +83,21 @@ class OrderController extends Controller
 
     function order_data($id) {
         $order = Order::with('items')->find($id);
-
-        $order->regon = Regon::find($order->regon_id)->name;
+        $regon = Regon::find($order->regon_id);
+        $order['regon'] = $regon['name'];
 
         foreach ($order->items as $key => $value) {
             $product = Product::find($value->product_id);
-
-            $value->product = $this->prepareProductData($product);
+            // $value->product = $this->prepareProductData($product);
             $value->name = $product->name;
             $value->image = $product->image;
             $value->price = $product->price;
+
+            foreach ($value->product->properties as $propertyKey => $propertyValue) {
+                $property = Properties::find($propertyValue->property_id);
+                $value->product->properties[$propertyKey]->name = $property->name;
+                $value->product->properties[$propertyKey]->type = $property->type;
+            }
 
             $order->items[$key] = $value;
         }
@@ -165,7 +171,7 @@ class OrderController extends Controller
 
     public function create()
     {
-        $users = User::all();
+        $users = Customer::all();
         $regons = Regon::selection()->get();
         $products = Product::selection()->get();
         $settings = Setting::selection()->get();
@@ -268,10 +274,6 @@ class OrderController extends Controller
         session(['order_items' => $items]);
         return redirect()->back()->with('order_items',$items);
     }
-
-
-
-
 
 
 

@@ -10,6 +10,7 @@ use App\Models\SimilerProduct;
 use App\Models\ProductOption;
 use App\Models\Category;
 use App\Models\LatestProducts;
+use App\Models\ProductProperty;
 
 class Product extends Model
 {
@@ -43,20 +44,34 @@ class Product extends Model
     {
         return $this -> hasMany(ProductImage::class,'product_id','id');
     }
-    public function simlier(){
+    public function simliers(){
         return $this->hasMany(SimilerProduct::class,'product_id','id');
     }
 
-    public function option()
+    public function options()
     {
         return $this -> hasMany(ProductOption::class,'product_id','id');
     }
 
-    public function bestSeller(){
-        return $this -> hasMany(BestSellerProducts::class,'product_id','id');
+    public function properties(){
+        return $this -> hasMany(ProductProperty::class,'product_id','id');
     }
-    public function last(){
-        return $this -> hasMany(LatestProducts::class,'product_id','id');
+
+
+    // public function last(){
+    //     return $this -> hasMany(LatestProducts::class,'product_id','id');
+    // }
+    // public function items()
+    // {
+    //     return  $this->hasMany(OrderItem::class, 'product_id' , 'id');
+    // }
+
+
+    public function productitem()
+    {
+       return  $this->belongsTo(Product::class, 'product_id' , 'id');
     }
+
+
 
 }

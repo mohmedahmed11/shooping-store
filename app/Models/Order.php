@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\OrderItem;
 use App\Models\Customer;
+use App\Models\Regon;
 
 class Order extends Model
 {
@@ -36,9 +37,15 @@ class Order extends Model
         return $this ->belongsTo(Regon::class,'regon_id','id');
     }//end of regon
 
-    public function items() {
-        return $this ->hasMany(OrderItem::class,'order_id','id')->with('product.category','product.images','product.option','product.simlier');
+    public function items()
+    {
+        return $this ->hasMany(OrderItem::class,'order_id','id')->with('product','product.images','product.simliers','product.options','product.category','product.properties' );
     }
+
+    // 	 Descending 1	count
+    protected $appends = [
+        'image_path',
+    ];
 
     public function getImagePathAttribute()
     {

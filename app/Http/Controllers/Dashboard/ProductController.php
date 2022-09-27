@@ -310,30 +310,29 @@ class ProductController extends Controller
 
     public function details($id)
     {
-        $product= Product::find($id);
-        if ( $product) {
-            $category = Category::find($product->category_id);
-            $product->category = $category->name;
-        }
-            $similerProducts=Product::with(['simlier'=>function($q){
-        }])->find($id);
+        $product= Product::with('options','images', 'simliers', 'properties')->find($id);
+        // if ( $product) {
+        //     $category = Category::find($product->category_id);
+        //     $product->category = $category->name;
+        // }
+        // $similerProducts=Product::with(['simliers'=>function($q){
+        // }])->find($id);
 
-        foreach ($similerProducts->simlier as $key => $similer) {
+        foreach ($product->simliers as $key => $similer) {
             # code...
-            $similerProducts->simlier[$key]->product = Product::find($similer->similar_product_id);
+            $product->simliers[$key]->product = Product::find($similer->similar_product_id);
         }
-        $product->proparities =  $this->productProparities($id);
-        $products = Product::with(['images'])->find($id);
-        $images = $product->images;
-        $sim= Product::all();
-        $alloption= Product::all();
-        $options=Product::with(['option'=>function($q){
-        }])->find($id);
-        foreach ($options->option as $key => $optiion) {
-            # code...
-            $options->option[$key]->product = Product::find($optiion->product_id);
-        }
-        return view('dashboard.products.details',compact('sim','product','products','images','similerProducts','alloption','options'));
+        // $product->proparities =  $this->productProparities($id);
+        // $products = Product::with(['images'])->find($id);
+        // $images = $product->images;
+        $products= Product::all();
+        // $options=$product->options;//Product::with('options')->find($id);//{
+        // }])->find($id);
+        // foreach ($options as $key => $optiion) {
+        //     # code...
+        //     $options[$key]->product = Product::find($option->product_id);
+        // }
+        return view('dashboard.products.details',compact('product','products'));
 
     }
     function productSimiler($id) {

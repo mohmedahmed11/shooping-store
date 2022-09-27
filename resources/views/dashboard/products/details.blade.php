@@ -18,7 +18,7 @@
 
 
 
-            <div class="app-content content">
+            <div class="">
                 {{-- <div class="content-area-wrapper"> --}}
 
                     <div class="sidebar-left">
@@ -116,7 +116,7 @@
                               <strong>{{$product->name}}</strong>
                             </h4>
                             <h4 style="margin-top: 5%" >
-                                القسم : {{$product->category}}
+                                القسم : {{$product->category->name}}
                             </h4>
                             <h4 style="margin-top: 5%">
                                الحالة:
@@ -148,21 +148,23 @@
                             </h4>
                         </div>
                     </div>
+                    @isset($product->images)
                     <hr>
                     <h2>صور المنتج</h2>
                     <div class="row match-height">
-                        @isset($images)
-                        @foreach($images as $index=>$image)
+                        
+                        @foreach($product->images as $index=>$image)
                              <div class="col-xl-4">
                                     <div class="card-body">
                                         <img class="card-img img-fluid mb-1" src="{{ $image->image_path }}" alt="Card image cap">
                                     </div>
                         </div>
                         @endforeach
-                        @endisset
+                        
                     </div>
-                        <h2>خيارات المنتج</h2>
-
+                    @endisset
+                    @isset($product->options)
+                    <h2>خيارات المنتج</h2>
                     <hr>
                     <div class="sidebar-content email-app-sidebar d-flex">
 
@@ -175,47 +177,50 @@
                     </div>
 
                     <div class="row match-height">
-                        @isset($images)
-                        @foreach($options->option as  $option)
+                        
+                        @foreach($product->options as  $option)
                              <div class="col-md-2">
                                     <div class="card-body">
-                                        <img class="card-img img-fluid mb-1" class="img-thumbnail image-preview"  style="width: 80px; height: 80px;" src="{{url('storage/'.$option->image)}}" alt="Card image cap">
+                                        <img class="card-img img-fluid mb-1" class="img-thumbnail image-preview"  style="width: 80px; height: 80px;" src="{{url('storage/'.$option->image)}}" alt="Card image cap"> 
                                         <p class="card-text"><strong>{{$option->name}}</strong></p>
                                         <a href="{{ url('product/option/delete', $option->id) }}" id="delete" class="btn btn-outline-danger"><i class="fa fa-trash"></i>حذف</a>
                                     </div>
                         </div>
 
                         @endforeach
-                        @endisset
+                       
                     </div>
+                    @endisset
                     <hr>
+                    <h3>
+                                التفاصيل : </h3>
                     <div class="col-12">
                         <div class="form-group">
                             <div class="col-12" >
-                                <h3>
-                                التفاصيل :
+                                
                                 <p class="">
                                     <br>
                                     {{ $product->details}}
                                 </p>
-                                </h3>
+                                
                             </div>
                         </div>
                     </div>
                     <hr>
+                    <h3> خصائص المنتج </h3>
 
                     <div class="col-12">
                         <div class="form-group">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>القيمة</th>
-                                        <th>الوصف</th>
+                                        <th class="product-category">القيمة</th>
+                                        <th class="product-category">الوصف</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($product->proparities as $property)
-                                    <tr>
+                                    @foreach($product->properties as $property)
+                                    <tr role="row">
                                         <td class="product-category">{{$property->name}}</td>
                                         <td class="product-category">{{$property->property_value}}</td>
                                     </tr>
@@ -239,8 +244,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @isset($similerProducts->simlier)
-                                @foreach($similerProducts->simlier as $similer)
+                                @foreach($product->simliers as $similer)
                                     <tr role="row" class="odd">
                                         <td></td>
                                         <td>{{ $similer->product->id }}</td>
@@ -250,7 +254,6 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            @endisset
                         </tbody>
                     </table>
                 </div>
@@ -275,9 +278,9 @@
                                 <div class="col-sm-12 data-field-col">
                                     <label for="data-name">Name</label>
                                     <select class="form-control"  name="similar_product_id" id="select" required="">
-                                        @foreach($sim as $SimilerProduct)
-                                        <option value="{{$SimilerProduct->id}}" >
-                                            {{$SimilerProduct->name}}</option>
+                                        @foreach($products as $product)
+                                        <option value="{{$product->id}}" >
+                                            {{$product->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -315,9 +318,9 @@
                                 <div class="col-sm-12 data-field-col">
                                     <label for="data-name">Name</label>
                                     <select class="form-control"  name="similar_product_id" id="select" required="">
-                                        @foreach($sim as $SimilerProduct)
-                                        <option value="{{$SimilerProduct->id}}" >
-                                            {{$SimilerProduct->name}}</option>
+                                        @foreach($products as $product)
+                                        <option value="{{$product->id}}" >
+                                            {{$product->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

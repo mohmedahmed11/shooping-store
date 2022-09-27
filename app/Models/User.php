@@ -24,7 +24,6 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
     ];
 
     public function scopeSelection($query)
@@ -39,7 +38,8 @@ class User extends Authenticatable
      */
 
     protected $hidden = [
-        // 'password',
+        'password',
+        'device_token',
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',

@@ -18,11 +18,6 @@ class Category extends Model
         return $query -> select( 'id','name','image');
     }
 
-    public function getImageAttribute($val)
-    {
-        return ($val !== null) ? asset('storage/' . $val) : "";
-
-    }
 
 // relations of categories
     public function products()

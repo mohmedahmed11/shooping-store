@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admins;
-use App\Models\User;
+use App\Models\Customer;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
@@ -32,28 +32,28 @@ class NotificationController extends Controller
         $data->body=$request->body;
         $data->save();
         if($data){
-            $this->sendNotificationby($data->id);
+            self::sendNotificationby($data->id);
             return back()->with('status','Notification Inserted Successfully..');
             }
     }
 
-    public function sendNotificationby($id){
+    static function sendNotificationby($id){
 
         $notify=Notification::find($id);
         $firebaseTokens =  [];
-    
-        $users=User::where('is_deleted', 0)->get();
+
+        $users=Customer::where('is_deleted', 0)->get();
 
         foreach($users as $user){
             $firebaseTokens[]  =  $user->device_token;
         }
 
-        $this->sendGroupNotification($firebaseTokens, $notify);
+        self::sendGroupNotification($firebaseTokens, $notify);
         if($firebaseTokens){
             return redirect('notification')->with('status','Notification Sended Successfully..');
         }
     }
-    public function sendGroupNotification(array $firebaseTokens, $notification)
+    static function sendGroupNotification(array $firebaseTokens, $notification)
     {
 
         $SERVER_API_KEY = 'AAAA5PyOoKI:APA91bHyIKHxktnAYW_a8C0-q5pYcm8l34NiFN2mv2PkwDc-QgyGr912leKksyfgWMVqB6WgvG88Ft9mK7b467n7In1VnYPs8yEjVU-K3Sxth76RGIF7glIZtz_1fGYNm-icL8Q4Yk51';
@@ -61,8 +61,8 @@ class NotificationController extends Controller
         $data = [
             "registration_ids" =>$firebaseTokens,
             "notification" => [
-                "title" => $notification->title,
-                "body" => $notification->body,
+                "title" => $notification['title'],
+                "body" => $notification['body'],
             ]
         ];
 
