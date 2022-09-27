@@ -9,6 +9,7 @@ use App\Models\Banner;
 use App\Models\SimilerProduct;
 use App\Models\ProductOption;
 use App\Models\Category;
+use App\Models\LatestProducts;
 
 class Product extends Model
 {
@@ -49,6 +50,13 @@ class Product extends Model
     public function option()
     {
         return $this -> hasMany(ProductOption::class,'product_id','id');
+    }
+
+    public function bestSeller(){
+        return $this -> hasMany(BestSellerProducts::class,'product_id','id');
+    }
+    public function last(){
+        return $this -> hasMany(LatestProducts::class,'product_id','id');
     }
 
 }

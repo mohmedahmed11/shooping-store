@@ -8,19 +8,27 @@ use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Settings\RegonsController;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Settings\BannerController;
+use App\Http\Controllers\Dashboard\BestSellerController;
+use App\Http\Controllers\Dashboard\NewProductController;
+use App\Http\Controllers\Dashboard\LatestProductsController;
 
-Route::get('/', function () {
+use App\Http\Controllers\Dashboard\AdminsController;
+
+use App\Http\Controllers\Dashboard\NotificationController;
+
+Route::get('/admin', function () {
+
     if (Auth::check()) {
-        return redirect('/home');
-      
+        return view('/dashboard');
     } else {
         return view('/auth.login');
     }
 });
+
 #################################product################################
 
-    Route::group(['prefix' => 'product', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
-    {
+Route::group(['prefix' => 'product', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
+{
     Route::get('/', [ProductController::class, 'show'])->name('products');
     Route::get('/create', [ProductController::class, 'create'])->name('product.create');
     Route::post('/save', [ProductController::class, 'save'])->name('product.save');
@@ -44,6 +52,7 @@ Route::get('/', function () {
     Route::get('/option/delete/{id}', [ProductController::class, 'deleteOptionProduct']);
 
     Route::get('/new', [ProductController::class, 'new'])->name('new');
+
     //
 
 });
@@ -104,6 +113,7 @@ Route::group(['prefix' => 'banner', 'namespace' => 'Backend', 'middleware' => 'a
 
 });
 
+
 #########################   order  #########################
 
 Route::group(['prefix' => 'order', 'namespace' => 'Backend', 'middleware' => 'auth' ], function(){
@@ -112,19 +122,58 @@ Route::group(['prefix' => 'order', 'namespace' => 'Backend', 'middleware' => 'au
     Route::post('store', [OrderController::class , 'store'])->name('order.store');
     Route::post('status', [OrderController::class , 'status'])->name('order.status');
     Route::get('find_order/{id}', [OrderController::class , 'find_order'])->name('order.find_order');
-
-
+    Route::get('add_item_to_session/{id}/{count}', [OrderController::class , 'setToSession'])->name('order.add_item_to_session');
+    Route::get('delete_item_from_session/{index}', [OrderController::class , 'deleteItemFromSession'])->name('order.delete_item_from_session');
 
 });
-Auth::routes();
-
-Auth::routes();
-
-Route::get('/home', [ProductController::class, 'show'])->name('home');
 
 Auth::routes();
 
 Route::get('/logout', function(){
     Auth::logout();
-    return redirect('/');
+    return redirect('/admin');
+});
+#################### Start Best Seller Products ######################
+Route::group(['prefix' => 'homeApp', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
+{
+    Route::get('/', [BestSellerController::class, 'show'])->name('homeApps');
+    Route::post('/create', [BestSellerController::class, 'create'])->name('create');
+    Route::get('delete/{id}', [BestSellerController::class , 'destroy'])->name('homeApp.delete');
+});
+#################### End Best Seller Products ######################
+
+
+#################### Start Last_Products ####################
+
+Route::group(['prefix' => 'latestproducts', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
+{
+    Route::get('/', [LatestProductsController::class, 'show'])->name('latestproducts');
+    Route::post('/create', [LatestProductsController::class, 'createlatest'])->name('createlatest');
+    Route::get('delete/{id}', [LatestProductsController::class , 'destroy'])->name('latestproducts.delete');
+});
+
+
+#################### End New_Products_on_Application ######################
+
+
+#########################   admins  #########################
+Route::group(['prefix' => 'admins', 'namespace' => 'Backend', 'middleware' => 'auth' ], function(){
+    Route::get('/', [AdminsController::class , 'show'])->name('admins');
+    Route::get('/create', [AdminsController::class , 'create'])->name('admins.create');
+    Route::post('store', [AdminsController::class , 'store'])->name('admins.store');
+    Route::get('edit/{id}', [AdminsController::class , 'edit'])->name('admins.edit');
+    Route::post('update/{id}', [AdminsController::class , 'update'])->name('admins.update');
+    Route::get('delete/{id}', [AdminsController::class , 'destroy'])->name('admins.delete');
+});
+
+
+// Route::get('/notification', [ProductController::class, 'notification'])->name('product.notification');
+// Notification
+Route::group(['prefix' => 'notification', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
+{
+    Route::get('/', [NotificationController::class, 'show'])->name('notification');
+    Route::post('/create', [NotificationController::class, 'create'])->name('notification.create');
+    Route::get('delete/{id}', [NotificationController::class , 'destroy'])->name('notification.delete');
+    Route::get('/send/{id}', [NotificationController::class, 'sendNotificationby'])->name('notification.send');
+    Route::post('/save-token', [HomeController::class, 'saveToken'])->name('save-token');
 });

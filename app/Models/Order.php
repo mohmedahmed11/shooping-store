@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\OrderItem;
-use App\Models\User;
+use App\Models\Customer;
 
 class Order extends Model
 {
@@ -23,9 +23,13 @@ class Order extends Model
     }
 
 // relations of orders
+    // public function user()
+    // {
+    //     return $this ->belongsTo(User::class,'user_id','id');
+    // }//end of user
     public function user()
     {
-        return $this ->belongsTo(User::class,'user_id','id');
+        return $this ->belongsTo(Customer::class,'user_id','id');
     }//end of user
     public function regon()
     {
@@ -35,9 +39,6 @@ class Order extends Model
     public function items() {
         return $this ->hasMany(OrderItem::class,'order_id','id')->with('product.category','product.images','product.option','product.simlier');
     }
-    protected $appends = [
-        'image_path',
-    ];
 
     public function getImagePathAttribute()
     {

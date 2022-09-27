@@ -13,7 +13,7 @@
 
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 
-            <li class=" nav-item"><a href="{{url('/')}}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Main Dash</span><span class="badge badge badge-warning badge-pill float-right mr-2">2</span></a>
+            <li class=" nav-item"><a href="{{url('/admin')}}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">الرئيسية</span></a>
 
             </li>
 
@@ -23,36 +23,44 @@
             <li class=" nav-item"><a href="{{route('category')}}"><i class="feather icon-menu"></i><span class="menu-title" data-i18n="Dashboard">الاقسام</span><span class="badge badge badge-warning badge-pill float-right mr-2">{{ App\Models\Category::count() }}</span></a>
 
             </li>
+            <li class=" nav-item"><a href="table-ag-grid.html">
+                <i class="feather icon-grid"></i>
+                <span class="menu-title" data-i18n="ag-grid">القائمة الرئيسية</span>
+                <span class="badge badge badge-primary badge-pill float-right mr-2">New</span>
+              </a>
+                <ul class="menu-content">
+
+                    <li><a href="{{route('homeApps')}}"><i class="feather icon-trending-up"></i><span class="menu-item" data-i18n="Shop"> الأكثر مببيعاً</span></a>
+                    </li>
+                    <li><a href="{{route('latestproducts')}}"><i class="feather icon-heart"></i><span class="menu-item" data-i18n="Details"> أحدث العروض</span></a>
+                    </li>
+                               </ul>
+            </li>
             <li class=" nav-item"><a href="#"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">المنتجات</span></a>
                 <ul class="menu-content">
-                    <li><a href="{{route('products')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">عرض المنتجات</span></a>
-                    </li>
-                    <li><a href="{{route('product.create')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافة منتج</span></a>
-                    </li>
+                    <li><a href="{{route('products')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">عرض المنتجات</span></a></li>
+                    <li><a href="{{route('product.create')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافة منتج</span></a></li>
 
                 </ul>
             </li>
 
-
             <li class=" nav-item"><a href="#"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">الطلبات</span></a>
                 <ul class="menu-content">
-                    <li><a href="{{route('order')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">عرض الطلبات </span></a>
-                    </li>
-                    <li><a href="{{ route('order.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافه طلب</span></a>
+                    <li><a href="{{route('order')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">عرض الطلبات </span></a></li>
+                    <li><a href="{{ route('order.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافه طلب</span></a></li>
                 </ul>
             </li>
 
             <li class=" nav-item"><a href="#"><i class="feather icon-settings"></i><span class="menu-title" data-i18n="Ecommerce">الاعدادات</span></a>
                 <ul class="menu-content">
-                    <li><a href="{{route('regon')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">مناطق التوصيل</span></a>
-                    </li>
-                    <li><a href="{{ route('banner') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">إعلانات</span></a>
-                    <li><a href="{{ route('banner.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافه إعلان</span></a>
-                    <li><a href="{{ route('settings') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">إعدادات التطبيق</span></a>
-                    </li>
-                </ul>
-            </li>
-
+                    <li><a href="{{route('regon')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">مناطق التوصيل</span></a></li>
+                    <li><a href="{{ route('banner') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">إعلانات</span></a></li>
+                    <li><a href="{{ route('banner.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافه إعلان</span></a></li>
+                    <li><a href="{{ route('settings') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">إعدادات التطبيق</span></a></li>
+                    <li><a href="{{ route('notification') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">الاشعارات</span></a></li>
+                    @if (auth()->user()->hasPermission('users_read'))
+                        <li><a href="{{route('admins')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">المشرفين</span></a></li>
+                    @endif
                 </ul>
             </li>
 

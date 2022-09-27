@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <section id="data-list-view" class="data-list-view-header">
 <body  class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static"
        data-menu="vertical-menu-modern" data-col="2-columns">
@@ -36,7 +35,11 @@
                             <td><img src="{{ $category->image_path }}" style="width: 80px;" class="img-thumbnail" alt=""></td>
                             <td>
                                 <a href="{{ route('category.edit', $category->id) }}" class="btn btn-outline-info"><i class="fa fa-edit"></i>تعديل</a>
-                                <a href="{{ route('category.delete', $category->id) }}" id="delete" class="btn btn-outline-danger"><i class="fa fa-trash"></i>حذف</a>
+                                @if (auth()->user()->hasPermission('users_delete'))
+                                    <a href="{{ route('category.delete', $category->id) }}" id="delete" class="btn btn-outline-danger"><i class="fa fa-trash"></i>حذف</a>
+                                @else
+                                    <a href="#" id="delete" class="btn btn-outline-danger disabled"><i class="fa fa-trash"></i>حذف</a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -46,7 +49,7 @@
     </div>
     <!-- DataTable ends -->
 
-    </div>      
+    </div>
 </div>
 </div>
 </div>
@@ -54,13 +57,13 @@
 <div class="col-4">
 <div class="card">
 <div class="card-header">
-    
+
         <h4 class="text-uppercase">اضافه قسم </h4>
-    
+
 </div>
 <div class="card-content">
     <div class="card-body">
-        
+
 
             {{-- Begin Form --}}
 
@@ -71,7 +74,6 @@
                         <div class="col-md-12">
                             <div class="form-label-group">
                                 <div class="form-group">
-
                                     <label for="first-name-icon">الاسم</label>
                                     <div class="position-relative has-icon-left">
                                         <input type="text" class="form-control" value="{{ old('name') }}" name="name" placeholder="مثال : قسم مستحضرات التجميل">
@@ -79,6 +81,9 @@
                                             <i class="feather icon-list"></i>
                                         </div>
                                     </div>
+                                    @error("name")
+                                    <small class="form-text text-danger">{{$message}}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -88,11 +93,15 @@
                                 <div class="form-group">
                                     <label for="first-name-icon">صورة</label>
                                     <div class="position-relative has-icon-left">
-                                        <input type="file" name="image" class="form-control image">
+                                        <input type="file" name="image" class="form-control image" value="{{ old('image') }}">
                                         <div class="form-control-position">
                                             <i class="feather icon-image"></i>
                                         </div>
                                     </div>
+                                    @error("image")
+                                    <small class="form-text text-danger">{{$message}}</small>
+                                    @enderror
+
                                 </div>
                             </div>
                         </div>
@@ -112,10 +121,10 @@
                 </div>
             </form>
             {{-- End Form --}}
-        
+
     </div>
 </div>
-</div>      
+</div>
 {{-- </div> --}}
 
 </div>
@@ -128,3 +137,6 @@
             </div>
     <!-- END: Content-->
 @endsection
+
+
+

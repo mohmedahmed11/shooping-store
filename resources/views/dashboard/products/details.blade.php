@@ -3,8 +3,24 @@
 
 
         <section id="page-account-settings" id="data-list-view" class="data-list-view-header">
-            <div class=" ">
-                
+
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0">  <strong>التفاصيل  :</strong></h2>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="app-content content">
+                {{-- <div class="content-area-wrapper"> --}}
+
                     <div class="sidebar-left">
                         <div class="sidebar">
 
@@ -79,12 +95,12 @@
 
 
             <div class="card">
-                <div class="card-title" style="margin-top: 1%">
+                {{-- <div class="card-title" style="margin-top: 1%">
                     <h2 style="margin-right: 2%">
                         تفاصيل المنتج
 
                     </h2>
-                </div>
+                </div> --}}
 
                 <div class="card-body">
 
@@ -97,7 +113,7 @@
                         </div>
                         <div class="col-md-5 col-6">
                             <h4  style="margin-top: 5%">
-                                {{$product->name}}
+                              <strong>{{$product->name}}</strong>
                             </h4>
                             <h4 style="margin-top: 5%" >
                                 القسم : {{$product->category}}
@@ -163,8 +179,8 @@
                         @foreach($options->option as  $option)
                              <div class="col-md-2">
                                     <div class="card-body">
-                                        <img class="card-img img-fluid mb-1" class="img-thumbnail image-preview" src="{{url('storage/'.$option->image)}}" alt="Card image cap">
-                                        <p class="card-text">{{$option->name}}</p>
+                                        <img class="card-img img-fluid mb-1" class="img-thumbnail image-preview"  style="width: 80px; height: 80px;" src="{{url('storage/'.$option->image)}}" alt="Card image cap">
+                                        <p class="card-text"><strong>{{$option->name}}</strong></p>
                                         <a href="{{ url('product/option/delete', $option->id) }}" id="delete" class="btn btn-outline-danger"><i class="fa fa-trash"></i>حذف</a>
                                     </div>
                         </div>
@@ -229,7 +245,7 @@
                                         <td></td>
                                         <td>{{ $similer->product->id }}</td>
                                         <td>{{ $similer->product->name }}</td>
-                                        <td><img src="{{ url('storage/'.$similer->product->image) }}" style="width: 80px;" class="img-thumbnail" alt=""></td>
+                                        <td><img src="{{ url('storage/'.$similer->product->image) }}"  style="width: 80px; height: 80px;" class="img-thumbnail" alt=""></td>
                                         <td><a href="{{ url('product/similer/delete', $similer->id) }}" id="delete" class="btn btn-outline-danger"><i class="fa fa-trash"></i>حذف</a>
                                         </td>
                                     </tr>
@@ -274,7 +290,7 @@
                             <button class="btn btn-primary">save</button>
                         </div>
                         <div class="cancel-data-btn">
-                            <button class="btn btn-outline-danger">Cancel</button>
+                            <button type="reset" value="reset" class="btn btn-outline-danger">Cancel</button>
                         </div>
                     </div>
                 </form>
@@ -314,7 +330,7 @@
                             <button class="btn btn-primary">save</button>
                         </div>
                         <div class="cancel-data-btn">
-                            <button class="btn btn-outline-danger">Cancel</button>
+                            <button type="reset" value="reset" class="btn btn-outline-danger">Cancel</button>
                         </div>
                     </div>
                 </form>

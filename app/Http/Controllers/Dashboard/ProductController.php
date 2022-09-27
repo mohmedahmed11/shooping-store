@@ -102,7 +102,7 @@ class ProductController extends Controller
     function prepareProductData($product) {
 
         $images = DB::table('product_images')
-        
+
         ->where('product_id', $product->id)
         ->get();
 
@@ -154,7 +154,7 @@ class ProductController extends Controller
             $pro[$key] = $pro;
         }
         $categories = Category::all();
-        return view('dashboard.products.show',compact('products','categories','pro'));
+        return view('dashboard.products.show',compact('products','categories'));
     }
     function create() {
         $categories = Category::all();
@@ -394,5 +394,10 @@ class ProductController extends Controller
     Toastr::success('تم حذف المنتج..!', 'fail');
             return redirect()->back();
     }
+
+        public function new (){
+
+            return view('dashboard.products.new');
+        }
 
 }
