@@ -18,7 +18,7 @@ use App\Http\Controllers\Dashboard\NotificationController;
 use App\Http\Controllers\Api\OrderApiesController;
 use App\Http\Controllers\HomeController;
 
-Route::get('/admin', function () {
+Route::get('/dashboard', function () {
 
     if (Auth::check()) {
         return view('/dashboard');
@@ -122,7 +122,7 @@ Route::group(['prefix' => 'order', 'namespace' => 'Backend', 'middleware' => 'au
     Route::get('/', [OrderController::class , 'show'])->name('order');
     Route::get('/create', [OrderController::class , 'create'])->name('order.create');
     Route::post('store', [OrderController::class , 'store'])->name('order.store');
-    Route::post('status', [OrderController::class , 'status'])->name('order.status');
+    Route::get('status/{id}/{status}', [OrderController::class , 'status'])->name('order.status');
     Route::get('find_order/{id}', [OrderController::class , 'find_order'])->name('order.find_order');
     Route::get('add_item_to_session/{id}/{count}', [OrderController::class , 'setToSession'])->name('order.add_item_to_session');
     Route::get('delete_item_from_session/{index}', [OrderController::class , 'deleteItemFromSession'])->name('order.delete_item_from_session');
@@ -134,7 +134,7 @@ Auth::routes();
 
 Route::get('/logout', function(){
     Auth::logout();
-    return redirect('/admin');
+    return redirect('/dashboard');
 });
 #################### Start Best Seller Products ######################
 Route::group(['prefix' => 'homeApp', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()

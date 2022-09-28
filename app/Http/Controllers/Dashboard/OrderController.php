@@ -47,6 +47,12 @@ class OrderController extends Controller
 
             }
             $order->items = $items;
+
+            $user=Customer::find($order->user_id);
+            $firebaseTokens[] = $user->device_token;
+            $notify = ["title"=>"الطلبات: رقم الطلب #$order->id" ,"body"=>"تم إنشاء طلبك سيتم التواصل معك لتأكيد"];
+            NotificationController::sendGroupNotification($firebaseTokens, $notify);
+           
             return ["status" => true, "data" => $order, "message" => NULL];
         }else {
             return ["status" => false, "data" => NULL, "message" => "فشل في إنشاء الطلب"];
@@ -254,8 +260,28 @@ class OrderController extends Controller
         $order = Order::find($id);
         $status =  $status ;
         $order -> update(['status'=>$status ]);
+        
+        $user=Customer::find($order->user_id);
+        $firebaseTokens[] = $user->device_token;
+        if($status==1) {
+            $notify = ["title"=>"الطلبات : رقم الطلب $id #" ,"body"=>"تم قبول طلبك"];
+            NotificationController::sendGroupNotification($firebaseTokens, $notify);
+        }
+        elseif($status==2) {
+            $notify = ["title"=>"الطلبات : رقم الطلب $id #" ,"body"=>"قيد التوصيل"];
+            NotificationController::sendGroupNotification($firebaseTokens, $notify);
+        }
+        elseif($status==3) {
+            $notify = ["title"=>"الطلبات : رقم الطلب $id #" ,"body"=>"تم التسليم بنجاح"];
+            NotificationController::sendGroupNotification($firebaseTokens, $notify);
+        }
+        elseif($status==4) {
+            $notify = ["title"=>"الطلبات : رقم الطلب $id #" ,"body"=>"تم إلغاء الطلب"];
+            NotificationController::sendGroupNotification($firebaseTokens, $notify);
+        }
+
         // Toastr::success(' تم تغيير الحالة بنجاح ', 'success');
-        return  redirect()->route('order');
+        return redirect()->back();// redirect()->route('order');
     }
 
     function setToSession($id,$count) {

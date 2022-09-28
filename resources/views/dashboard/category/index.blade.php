@@ -32,7 +32,7 @@
                         <tr role="row" class="odd">
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $category->name }}</td>
-                            <td><img src="{{ $category->image_path }}" style="width: 80px;" class="img-thumbnail" alt=""></td>
+                            <td><img src="{{ 'storage/'.$category->image_path }}" style="width: 80px;" class="img-thumbnail" alt=""></td>
                             <td>
                                 <a href="{{ route('category.edit', $category->id) }}" class="btn btn-outline-info"><i class="fa fa-edit"></i>تعديل</a>
                                 @if (auth()->user()->hasPermission('users_delete'))

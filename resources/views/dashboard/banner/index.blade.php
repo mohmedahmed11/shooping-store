@@ -18,7 +18,7 @@
                     @foreach($banners as $index=>$banner)
                         <tr role="row" class="odd">
                             <td>{{ $index + 1 }}</td>
-                            <td><img src="{{ $banner->image_path }}" style="width: 200px;" class="img-thumbnail" alt=""></td>
+                            <td><img src="{{ 'storage/'.$banner->image_path }}" style="width: 200px;" class="img-thumbnail" alt=""></td>
                             <td>{{ $banner->has_product == 1 ? $banner->product_name : 'لايوجد منتج' }}</td>
                             <td>
                                 <a href="{{ route('banner.edit', $banner->id) }}" class="btn btn-outline-info"><i class="fa fa-edit"></i>تعديل</a>

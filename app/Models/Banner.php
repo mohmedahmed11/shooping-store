@@ -19,10 +19,10 @@ class Banner extends Model
         return $query -> select('id','is_collection_discount','image','has_product','product_id','status');
     }
 
-    public function getImageAttribute($val)
-    {
-        return ($val !== null) ? asset('' . $val) : "";
-    }
+    // public function getImageAttribute($val)
+    // {
+    //     return ($val !== null) ? asset('' . $val) : "";
+    // }
 
     public function getStatus()
     {

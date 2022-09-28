@@ -278,13 +278,19 @@ Stack(
         var status = $(this).val();
         var id = $(this).attr("val");
         var APP_URL = {!! json_encode(url('/').'/') !!};
+        console.log(APP_URL);
         $.ajax({
             url: APP_URL+"order/status/"+id+"/"+status,
             method: 'GET',
             dataType: 'application/json',
             success: function(data){
-                location.reload(true);
                 console.log(data);
+                location.reload(true);
+                
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(thrownError);
+                location.reload(true);
             }
         });
     });
