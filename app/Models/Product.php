@@ -38,11 +38,18 @@ class Product extends Model
         $this->belongsTo('App\Models\Category', 'category_id' , 'id');
     }//end of category
 
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_items');
+    }//end of orders
+
     public function images()
     {
         return $this -> hasMany(ProductImage::class,'product_id','id');
     }
-    public function simlier(){
+
+    public function simlier()
+    {
         return $this->hasMany(SimilerProduct::class,'product_id','id');
     }
 

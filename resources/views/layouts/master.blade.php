@@ -54,7 +54,8 @@
     </style>
 
  <!-- toast -->
- {{-- <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css"> --}}
+ <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
 </head>
 <!-- END: Head-->
 
@@ -183,13 +184,13 @@ Stack(
     });
     </script>
 
-  <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-  {!! Toastr::message() !!}
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
 
-   {{--  chekbox show  --}}
-   <script>
-    function Enableddl(checked)
-     {
+    {{--  chekbox show  --}}
+    <script>
+        function Enableddl(checked)
+        {
         var ddl=document.getElementById('selectProduct');
         ddl.disabled=check.checked ? false : true;
         if (!ddl.disabled)
@@ -317,8 +318,11 @@ Stack(
 
     });
 
-
 </script>
+{{--  custom  --}}
+<script src="{{ asset('app-assets/js/custom/order.js') }}"></script>
+{{--  number  --}}
+<script src="{{ asset('app-assets/js/custom/jquery.number.min.js') }}"></script>
 
 </body>
 <!-- END: Body-->

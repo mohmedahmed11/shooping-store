@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\OrderItem;
 use App\Models\Customer;
+use App\Models\Product;
 
 class Order extends Model
 {
@@ -23,14 +24,16 @@ class Order extends Model
     }
 
 // relations of orders
-    // public function user()
-    // {
-    //     return $this ->belongsTo(User::class,'user_id','id');
-    // }//end of user
     public function user()
     {
         return $this ->belongsTo(Customer::class,'user_id','id');
     }//end of user
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class,'order_items');
+    }//end of products
+
     public function regon()
     {
         return $this ->belongsTo(Regon::class,'regon_id','id');

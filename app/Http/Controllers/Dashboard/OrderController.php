@@ -7,7 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Order;
-use App\Models\OrderItem;use App\Models\User;
+use App\Models\OrderItem;
 use App\Models\Regon;
 use App\Models\Product;
 use App\Models\Customer;
@@ -163,75 +163,48 @@ class OrderController extends Controller
         return view('dashboard.order.index',compact('orders'));
     }
 
-    public function create()
+    public function create($id)
     {
-        $users = User::all();
-        $regons = Regon::selection()->get();
-        $products = Product::selection()->get();
         $settings = Setting::selection()->get();
-        $order_items = session('order_items');
-        $categories = Category::with('products')->get();
-
-        // return $settings;
-        // session()->pull('order_items');
-        // return view('dashboard.order.create',compact('users','regons','products','order_items','settings'));
-        return view('dashboard.order.store',compact('users','regons','products','order_items','settings','categories'));
+        $regons = Regon::selection()->get();
+        $customer = Customer::find($id);
+        $categories = Category::with('product')->get();
+        // return $customer;
+        return view('dashboard.order.create', compact('customer','categories','regons','settings'));
 
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        // return $request;
-        $request->validate([
-            'name'=>'required',
-            'phone'=>'required',
-            'regon_id'=>'required',
-            'address'=>'required',
-            'delivery_period'=>'required',
-            'note'=>'required',
+        // dd($request->all());
+        // $request->validate([
+        //     'name'=>'required',
+        //     'phone'=>'required',
+        //     'regon_id'=>'required',
+        //     'address'=>'required',
+        //     'delivery_period'=>'required',
+        //     'products' => 'required|array',
+        // ]);
+
+        $order = Customer::find($id)->orders()->create([
+            'order_from' => 'dashboard',
+            'delivery_cost' => $request->delivery_cost,
+            'total' => $request->total,
+            'regon_id' => $request->regon_id,
+            'address' => $request->address,
+            'delivery_period' => $request->delivery_period,
+            'note' => $request->note,
         ]);
-        $items = session('order_items');
-        $request_data = $request->except(['_token','phone','name','count']);
-        $customer = Customer::where('phone',$request->phone)->get();
-        // return  $customer;
-        if(!$customer->isEmpty()) {
-            $cust = Customer::where('phone',$request->phone)->get()->first();
-            $request_data['user_id'] = $cust->id;
-        }else {
-            $customer = new Customer;
-            $customer->name = $request->name;
-            $customer->phone = $request->phone;
-            $customer->save();
-            $request_data['user_id'] = $customer->id;
-        }
+        $order->products()->attach($request->products);
 
-        $request_data['items_count'] =  count($items);
-        $request_data['order_from'] = 'dashboard';
-
-
-        $request_data['delivery_cost'] = $request->delivery_cost;
-        $request_data['total'] = 1324;
-
-        // return $request_data;
-
-        $order = Order::create($request_data);
         if ($order) {
-            foreach ($items as $key => $item) {
-                # code...
-                $order_item = new OrderItem;
-                $order_item->order_id = $order->id;
-                $order_item->product_id = $item->id;
-                $order_item->count = $item->count;
-                $order_item->save();
-            }
-            session()->pull('order_items');
             Toastr::success('تم الاضافه بنجاح', 'success');
             return redirect()->route('order');
         }else {
             Toastr::error('فشل في إنشاء الطلب', 'error');
             return redirect()->route('order');
-        }
-    }
+        }//end of if
+    }//end of store
 
     function find_order($id) {
         $order = Order::with(['user','regon','items'])->selection()->find($id);

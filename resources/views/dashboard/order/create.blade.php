@@ -1,50 +1,97 @@
 @extends('layouts.master')
 @section('content')
 
+{{-- //////////////////////////////////////////////////////////////////////////////// --}}
 
+        <section>
 
-        <div class="content-header row">
-            <div class="content-header-left col-md-9 col-12 mb-2">
-                <div class="row breadcrumbs-top">
-                    <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">اضافه طلب</h2>
-                        <div class="breadcrumb-wrapper col-12">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">الرئيسية</a>
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                    {!! Toastr::message() !!}
-                </div>
-            </div>
-        </div>
-        <div class="content-body">
+            <div class="row">
 
-        {{-- //////////////////////////////////////////////////////////////////////////////// --}}
-
-<section id="multiple-column-form">
-
-    <form action="{{ route('order.store') }}" method="post" enctype="multipart/form-data">
-        @csrf
-        <div class="form-body">
-
-            <div class="row match-height">
-                <div class="col-6">
-                    <div class="card">
+                <div class="col-md-6">
+                    <div class="card card-primary">
                         <div class="card-header">
-                            <h4 class="card-title">بياتات مقدم الطلب :</h4>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body">
+                            <h3 class="card-title" style="margin-bottom: 10px">الاقسام</h3>
+                        </div><!-- end of card header -->
+
+                        <div class="card-body">
+                            <table  id="" class="table table-hover nowrap scroll-horizontal-vertical dataTable no-footer" >
+
+                                <tbody>
+                                @foreach ($categories as $category)
+                                <tr class="">
+                                 <td><a data-toggle="collapse" href="#{{ str_replace(' ', '-', $category->name) }}">{{ $category->name }}</a>
+                                 <div id="{{ str_replace(' ', '-', $category->name) }}" class="panel-collapse collapse">
+
+                                    <div class="panel-body">
+
+                                        @if ($category->product->count() > 0)
+
+                                            <table id="DataTables_Table_0" class="table data-thumb-view table nowrap scroll-horizontal-vertical dataTable no-footer">
+                                                <thead>
+                                                <tr>
+                                                    <th>الاسم</th>
+                                                    <th>السعر</th>
+                                                    <th>اضافه</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($category->product as $product)
+                                                    <tr>
+                                                        <td>{{ $product->name }}</td>
+                                                        <td>{{ number_format($product->price, 2) }}</td>
+                                                        <td>
+                                                            <a href=""
+                                                               id="product-{{ $product->id }}"
+                                                               data-name="{{ $product->name }}"
+                                                               data-id="{{ $product->id }}"
+                                                               data-price="{{ $product->price }}"
+                                                               class="btn btn-success btn-sm add-product-btn">
+                                                                <i class="fa fa-plus"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                            </table><!-- end of table -->
+
+                                        @else
+                                            <sapn>لا توجد سجلات</sapn>
+                                        @endif
+
+                                    </div><!-- end of panel body -->
+                                </div><!-- end of panel collapse -->
+                            </td>
+                                </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div><!-- end of card body -->
+
+                    </div><!-- end of card -->
+                </div><!-- end of col -->
+
+                <div class="col-md-6">
+
+                    <div class="card card-primary">
+
+                        <div class="card-header">
+
+                            <h3 class="card-title">الطلبات</h3>
+
+                        </div><!-- end of card header -->
+
+                        <div class="card-body">
+
+                            <form action="{{ route('order.store', $customer->id) }}" method="post">
+                                @csrf
+                                {{ method_field('post') }}
 
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-label-group">
                                             <div class="form-group">
-                                                <label for="first-name-icon">الاسم</label>
                                                 <div class="position-relative has-icon-left">
-                                                    <input type="text" class="form-control" value="{{ old('name') }}" name="name">
+                                                    <input type="text" class="form-control" value="{{ $customer->name }}" name="name">
                                                     <div class="form-control-position">
                                                         <i class="fa fa-user"></i>
                                                     </div>
@@ -56,9 +103,8 @@
                                     <div class="col-md-6">
                                         <div class="form-label-group">
                                             <div class="form-group">
-                                                <label for="first-name-icon">رقم الهاتف</label>
                                                 <div class="position-relative has-icon-left">
-                                                    <input type="text" class="form-control" value="{{ old('phone') }}" name="phone">
+                                                    <input type="text" class="form-control" value="{{ $customer->phone }}" name="phone">
                                                     <div class="form-control-position">
                                                         <i class="fa fa-phone"></i>
                                                     </div>
@@ -87,20 +133,6 @@
                                     <div class="col-md-6">
                                         <div class="form-label-group">
                                             <div class="form-group">
-                                                <label for="first-name-icon">العنوان</label>
-                                                <div class="position-relative has-icon-left">
-                                                    <input type="text" class="form-control" value="{{ old('address') }}" name="address">
-                                                    <div class="form-control-position">
-                                                        <i class="fa fa-home"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-label-group">
-                                            <div class="form-group">
                                                 <label for="first-name-icon">فتره التوصيل</label>
                                                 <select name="delivery_period" class="select2 form-control">
                                                     <optgroup label="من فضلك أختر الحاله ">
@@ -112,16 +144,14 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-label-group">
                                             <div class="form-group">
-                                                <label for="first-name-icon">تكلفه التوصيل</label>
+                                                <label for="first-name-icon">العنوان</label>
                                                 <div class="position-relative has-icon-left">
-                                                    @foreach($settings as $setting)
-                                                    <input type="text" class="form-control" value="{{$setting -> delivery_cost}}" name="delivery_cost">
-                                                    @endforeach
+                                                    <input type="text" class="form-control" value="{{ old('address') }}" name="address">
                                                     <div class="form-control-position">
-                                                        <i class="fa fa-pencil-square-o"></i>
+                                                        <i class="fa fa-home"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -133,120 +163,61 @@
                                             <div class="form-group">
                                                 <label for="first-name-icon">ملاحظة</label>
                                                 <div class="position-relative has-icon-left">
-                                                    <textarea class="form-control"  name="note">{{ old('note') }}</textarea>
+                                                    <input type="text" class="form-control" value="{{ old('note') }}" name="note">
+                                                    <div class="form-control-position">
+                                                        <i class="fa fa-comment"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                            
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>المنتج</th>
+                                        <th>الكميه</th>
+                                        <th>السعر</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
 
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary mr-1 mb-1 waves-effect waves-light"><i class="fa fa-plus"></i> إكمال الطلب</button>
-                                        <button type="reset" class="btn btn-outline-warning mr-1 mb-1 waves-effect waves-light">Reset</button>
-                                    </div>
-                                </div>
+                                    <tbody class="order-list">
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-{{--  //////////////////////////////////////////////////////////////  --}}
-                <div class="col-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">بيانات المنتج:</h4>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="form-label-group col-md-5 ">
-                                        <div class="form-group">
-                                            <label for="first-name-icon">المنتج</label>
-                                            <select class="form-control"  name="product_id" id="selectOrderProduct" >
-                                                <option value="" selected disabled>--اختر المنتج--</option>
-                                                @foreach($products as $product)
-                                                    <option value="{{$product->id}}">{{$product->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
+                                    </tbody>
 
-                                    <div class="form-label-group col-md-5 ">
-                                        <div class="form-group">
-                                            <label for="first-name-icon">الكمية</label>
-                                            <input type="number" class="form-control" id="product_count" name="count" value="1">
-                                        </div>
-                                    </div>
+                                </table><!-- end of table -->
+                                <hr>
+                                <strong>المجموع : <span class="total-price">0</span></strong>
+                                <hr>
+                                @foreach($settings as $setting)                         
+                                    <strong>تكلفه التوصيل : {{$delivery_cost = $setting -> delivery_cost}}</strong>
+                                    <input type="hidden" id="deleviryCost" name="delivery_cost" value="{{$delivery_cost}}" >
+                                    <input type="hidden" id="total" name="total" >
+                                @endforeach
+                                <hr>
+                                <strong>المجموع الكلي : <span id="total-cost"> 0 </span></strong>
+                                <hr>
 
-                                    <div class="form-label-group col-md-2 ">
-                                        <div class="form-group">
-                                            <label for="first-name-icon">  </label>
-                                            <button type="button" id="addToSession" class="form-control btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <button type="submit" class="btn btn-primary btn-block disabled" id="add-order-form-btn"><i class="fa fa-plus"></i>اضافه الطلب</button>
 
-                                <div id="" class="col-12">
-                                    <div class="table-responsive">
-                                        <table class="table" id="productToView">
-                                            <thead>
-                                                <tr role="row">
-                                                    <th>الاسم</th>
-                                                    <th>الكمية</th>
-                                                    <th>سعر المنتج</th>
-                                                    <th>المجموع</th>
-                                                    <th>إجراء</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {{--  {{ $items = ; }}  --}}
-                                                @if(session('order_items'))
-                                                    {{ $total = 0 }}
-                                                    @foreach (session('order_items') as $index => $item)
-                                                    <tr>
-                                                        <td>{{ $item->name }}</td>
-                                                        <td>{{ $item->count }}</td>
-                                                        <td>{{ $item->price }}</td>
-                                                        <td>{{ $total += $item->price *  $item->count }}</td>
-                                                        <td>
-                                                            <a href="{{ route('order.delete_item_from_session',$index ) }}" id="delete" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i>حذف</a>
-                                                        </td>
-                                                        {{--  <input type="hidden" name="product_id[]" value="{{ $item->id }}">  --}}
-                                                    </tr>
-                                                    @endforeach
+                            </form>
 
-                                                    <tr>
-                                                        <th>المجموع الكلي</th>
-                                                    </tr>
-                                                    
-                                                    <tr>
-                                                        <td>{{ $total }}</td>
-                                                    </tr>
-                                                    
-                                                @endif
-                                                {{--  {{ $items }}  --}}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- DataTable ends -->
-                                </div>
+                        </div><!-- end of card body -->
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    </div><!-- end of card -->
 
-            </div>
+                </div><!-- end of col -->
 
-        </div>
-    </form>
-    {{-- End Form --}}
+            </div><!-- end of row -->
+
+        </section><!-- end of content -->
+
+    </div><!-- end of content wrapper -->
 </section>
 
 {{-- //////////////////////////////////////////////////////////////////////////////// --}}
 
-        </div>
-
-
-
+</div>
 
 @endsection
