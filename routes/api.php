@@ -41,7 +41,7 @@ Route::get('order/{order_id}', [OrderController::class, 'order_info']);
 
 Route::post('order', [OrderController::class, 'add']);
 Route::post('login', [CustomerController::class, 'login']);
-Route::post('update_user', [CustomerController::class, 'update']);
+Route::post('update_user', [CustomerController::class, 'updateApi']);
 
 Route::post('cancel_order', [OrderController::class, 'cancel_order']);
 

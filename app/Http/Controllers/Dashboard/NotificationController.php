@@ -48,10 +48,10 @@ class NotificationController extends Controller
             $firebaseTokens[]  =  $user->device_token;
         }
 
-        self::sendGroupNotification($firebaseTokens, $notify);
-        if($firebaseTokens){
-            return redirect('notification')->with('status','Notification Sended Successfully..');
-        }
+        return self::sendGroupNotification($firebaseTokens, $notify);
+        // if($firebaseTokens){
+        //     return redirect('notification')->with('status','Notification Sended Successfully..');
+        // }
     }
     static function sendGroupNotification(array $firebaseTokens, $notification)
     {
@@ -59,11 +59,32 @@ class NotificationController extends Controller
         $SERVER_API_KEY = 'AAAA5PyOoKI:APA91bHyIKHxktnAYW_a8C0-q5pYcm8l34NiFN2mv2PkwDc-QgyGr912leKksyfgWMVqB6WgvG88Ft9mK7b467n7In1VnYPs8yEjVU-K3Sxth76RGIF7glIZtz_1fGYNm-icL8Q4Yk51';
 
         $data = [
-            "registration_ids" =>$firebaseTokens,
+            "to" => "/topics/localTest",
             "notification" => [
                 "title" => $notification['title'],
                 "body" => $notification['body'],
-            ]
+            ],
+              'android' => [
+                'notification'=> [
+                  'imageUrl'=> 'https://foo.bar.pizza-monster.png'
+                ]
+            ],
+              'apns'=> [
+                'payload'=> [
+                  'aps'=> [
+                    'mutable-content'=> 1
+                  ]
+                  ],
+                'fcm_options'=> [
+                  'image'=> 'https://foo.bar.pizza-monster.png'
+                ]
+                ],
+              'webpush'=> [
+                'headers'=> [
+                  'image'=> 'https://foo.bar.pizza-monster.png'
+        ]
+            ],
+
         ];
 
         $dataString = json_encode($data);
@@ -87,5 +108,6 @@ class NotificationController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
         $response = curl_exec($ch);
 
+        return $response;
     }
 }

@@ -47,7 +47,7 @@
             <li class=" nav-item"><a href="#"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">الطلبات</span></a>
                 <ul class="menu-content">
                     <li><a href="{{route('order')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">عرض الطلبات </span></a></li>
-                    <li><a href="{{ route('order.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافه طلب</span></a></li>
+                    {{--  <li><a href="{{ route('order.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافه طلب</span></a></li>  --}}
                 </ul>
             </li>
 
@@ -61,6 +61,7 @@
                     @if (auth()->user()->hasPermission('users_read'))
                         <li><a href="{{route('admins')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">المشرفين</span></a></li>
                     @endif
+                    <li><a href="{{route('customers')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">العملاء</span></a></li>
                 </ul>
             </li>
 

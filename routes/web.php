@@ -11,6 +11,7 @@ use App\Http\Controllers\Settings\BannerController;
 use App\Http\Controllers\Dashboard\BestSellerController;
 use App\Http\Controllers\Dashboard\NewProductController;
 use App\Http\Controllers\Dashboard\LatestProductsController;
+use App\Http\Controllers\Dashboard\CustomerController;
 
 use App\Http\Controllers\Dashboard\AdminsController;
 
@@ -120,8 +121,8 @@ Route::group(['prefix' => 'banner', 'namespace' => 'Backend', 'middleware' => 'a
 
 Route::group(['prefix' => 'order', 'namespace' => 'Backend', 'middleware' => 'auth' ], function(){
     Route::get('/', [OrderController::class , 'show'])->name('order');
-    Route::get('/create', [OrderController::class , 'create'])->name('order.create');
-    Route::post('store', [OrderController::class , 'store'])->name('order.store');
+    Route::get('create/{id}', [OrderController::class , 'create'])->name('order.create');
+    Route::post('store/{id}', [OrderController::class , 'store'])->name('order.store');
     Route::get('status/{id}/{status}', [OrderController::class , 'status'])->name('order.status');
     Route::get('find_order/{id}', [OrderController::class , 'find_order'])->name('order.find_order');
     Route::get('add_item_to_session/{id}/{count}', [OrderController::class , 'setToSession'])->name('order.add_item_to_session');
@@ -183,7 +184,20 @@ Route::group(['prefix' => 'notification', 'namespace' => 'Backend', 'middleware'
 });
 
 
+
 // Route::group(['prefix' => 'homeApp', 'namespace' => 'Backend', 'middleware' => 'auth' ], function()
 // {
 // Route::get('/', [OrderApiesController::class, 'show'])->name('homeApps');
 // });
+
+
+#########################   customers  #########################
+Route::group(['prefix' => 'customers', 'middleware' => 'auth'], function(){
+    Route::get('/', [CustomerController::class , 'show'])->name('customers');
+    Route::get('/create', [CustomerController::class , 'create'])->name('customers.create');
+    Route::post('store', [CustomerController::class , 'store'])->name('customers.store');
+    Route::get('edit/{id}', [CustomerController::class , 'edit'])->name('customers.edit');
+    Route::post('update/{id}', [CustomerController::class , 'update'])->name('customers.update');
+    Route::get('delete/{id}', [CustomerController::class , 'destroy'])->name('customers.delete');
+});
+

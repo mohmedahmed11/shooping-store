@@ -40,10 +40,16 @@ class Product extends Model
         return $this->belongsTo(Category::Class, 'category_id' , 'id');
     }//end of category
 
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_items');
+    }//end of orders
+
     public function images()
     {
         return $this -> hasMany(ProductImage::class,'product_id','id');
     }
+    
     public function simliers(){
         return $this->hasMany(SimilerProduct::class,'product_id','id');
     }

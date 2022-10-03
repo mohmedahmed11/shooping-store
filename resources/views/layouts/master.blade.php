@@ -54,7 +54,8 @@
     </style>
 
  <!-- toast -->
- {{-- <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css"> --}}
+ <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
 </head>
 <!-- END: Head-->
 
@@ -97,25 +98,31 @@ Stack(
 )
 
     @include('dashboard.includes.footer')
-
+    <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
      <!-- BEGIN: Vendor JS-->
      <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
      <!-- BEGIN Vendor JS-->
 
+
+
      <!-- BEGIN: Page Vendor JS-->
-     <script src="{{ asset('app-assets/vendors/js/extensions/dropzone.min.js') }}"></script>
-     <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
-     <script src="{{ asset('sapp-assets/vendors/js/tables/datatable/datatables.buttons.min.js') }}"></script>
-     <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
-     <script src="{{ asset('app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js') }}"></script>
-     {{--  <script src="{{ asset('app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js') }}x"></script>
-     <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js') }}"></script>  --}}
+     <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/extensions/dropzone.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.buttons.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/dataTables.select.min.js') }}"></script>
      <!-- END: Page Vendor JS-->
+     {{--  custom  --}}
+    <script src="{{ asset('app-assets/js/custom/order.js') }}"></script>
+    {{--  number  --}}
+    <script src="{{ asset('app-assets/js/custom/jquery.number.min.js') }}"></script>
 
      <!-- BEGIN: Theme JS-->
      <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
-     <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
-     <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
+   <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+   <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
      <!-- END: Theme JS-->
 
      <!-- BEGIN: Page JS-->
@@ -124,29 +131,7 @@ Stack(
      <!-- PRINT: THIS JS-->
      <script src="{{ asset('assets/js/printThis.js') }}"></script>
 
-{{--
-    <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 
-    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/extensions/dropzone.min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.buttons.min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/tables/datatable/dataTables.select.min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js') }}"></script>
-
-
-   <!-- END: Page Vendor JS-->
-
-   <!-- BEGIN: Theme JS-->
-   <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
-   <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
-   <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
-   <!-- END: Theme JS--> --}}
-
-   <!-- BEGIN: Page JS-->
-   {{--  <script src="{{ asset('app-assets/js/scripts/ui/data-list-view.js') }}"></script>  --}}
 
    <!-- print this -->
    <script>
@@ -183,13 +168,13 @@ Stack(
     });
     </script>
 
-  <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-  {!! Toastr::message() !!}
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
 
-   {{--  chekbox show  --}}
-   <script>
-    function Enableddl(checked)
-     {
+    {{--  chekbox show  --}}
+    <script>
+        function Enableddl(checked)
+        {
         var ddl=document.getElementById('selectProduct');
         ddl.disabled=check.checked ? false : true;
         if (!ddl.disabled)
@@ -322,7 +307,6 @@ Stack(
         }});
 
     });
-
 
 </script>
 
