@@ -26,7 +26,7 @@
 
                                         @if ($category->products->count() > 0)
 
-                                            <table id="DataTables_Table_0" class="table data-thumb-view table nowrap scroll-horizontal-vertical dataTable no-footer">
+                                            <table id="DataTables_Table_0" class="table data-thumb-view-no-action  nowrap scroll-horizontal-vertical dataTable no-footer">
                                                 <thead>
                                                 <tr>
                                                     <th>الاسم</th>
