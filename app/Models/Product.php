@@ -9,6 +9,8 @@ use App\Models\Banner;
 use App\Models\SimilerProduct;
 use App\Models\ProductOption;
 use App\Models\LatestProducts;
+use App\Models\Comment;
+use App\Models\Replies;
 
 class Product extends Model
 {
@@ -42,11 +44,11 @@ class Product extends Model
     {
         return $this -> hasMany(ProductImage::class,'product_id','id');
     }
-    public function simliers(){
+    public function simlier(){
         return $this->hasMany(SimilerProduct::class,'product_id','id');
     }
 
-    public function options()
+    public function option()
     {
         return $this -> hasMany(ProductOption::class,'product_id','id');
     }
@@ -68,6 +70,14 @@ class Product extends Model
        return  $this->belongsTo(Product::class, 'product_id' , 'id');
     }
 
+    public function coments()
+    {
+       return  $this->hasMany(Comment::class, 'product_id' , 'id');
+    }
 
+    public function replay()
+    {
+       return  $this->hasMany(Replies::class, 'product_id' , 'id');
+    }
 
 }

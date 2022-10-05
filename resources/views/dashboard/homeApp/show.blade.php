@@ -1,6 +1,10 @@
 @extends('layouts.master')
 @section('content')
-<section id="data-thumb-view" class="data-thumb-view-header" id="data-list-view" class="data-list-view-header">
+
+
+ <section id="data-thumb-view" class="data-thumb-view-header"> 
+
+
 
     <div class="content-header row">
         <div class="content-header-left col-md-9 col-12 mb-2">
@@ -14,13 +18,8 @@
 
     </div>
 
-
-    <div class="action-btns d-none">
-        <div class="btn-dropdown mr-1 mb-1">
-        </div>
-    </div>
 <div class="table-responsive">
-    <table class="table data-list-view">
+    <table class="table data-thumb-view">
         <thead>
             <tr class="filters">
                 <th></th>
@@ -50,7 +49,9 @@
 
 
 <div class="add-new-data-sidebar">
-    <div class="overlay-bg"></div>
+    <div class="overlay-bg">
+
+    </div>
     <div class="add-new-data">
         <div class="div mt-2 px-2 d-flex new-data-title justify-content-between">
             <div>
