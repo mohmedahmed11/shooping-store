@@ -2,13 +2,15 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Api\LikeController;
+use App\Http\Controllers\Api\RateController;
+use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\OrderController;
+use App\Http\Controllers\Dashboard\RegonController;
 use App\Http\Controllers\Dashboard\BannerController;
 use App\Http\Controllers\Dashboard\ProductController;
-use App\Http\Controllers\Dashboard\OrderController;
-use App\Http\Controllers\Dashboard\UserController;
-use App\Http\Controllers\Dashboard\RegonController;
 use App\Http\Controllers\Dashboard\SettingController;
+use App\Http\Controllers\Dashboard\CategoryController;
 
 
 /*
@@ -43,3 +45,15 @@ Route::post('login', [UserController::class, 'login']);
 Route::post('update_user', [UserController::class, 'update']);
 
 Route::post('cancel_order', [OrderController::class, 'cancel_order']);
+
+
+#########################   like route  #########################
+Route::group(['middleware' => 'api'], function(){
+    Route::post('like', [LikeController::class , 'index']);
+});
+
+#########################   rate route  #########################
+Route::group(['middleware' => 'api'], function(){
+    Route::post('get-rate', [RateController::class , 'index']);
+    Route::post('get-rate-product', [RateController::class , 'rateProduct']);
+});

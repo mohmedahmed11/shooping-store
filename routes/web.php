@@ -9,13 +9,14 @@ use App\Http\Controllers\Settings\RegonsController;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Settings\BannerController;
 use App\Http\Controllers\Dashboard\BestSellerController;
-use App\Http\Controllers\Dashboard\NewProductController;
 use App\Http\Controllers\Dashboard\LatestProductsController;
 use App\Http\Controllers\Dashboard\CustomerController;
-
 use App\Http\Controllers\Dashboard\AdminsController;
-
 use App\Http\Controllers\Dashboard\NotificationController;
+use App\Http\Controllers\Dashboard\RevenuesController;
+use App\Http\Controllers\Dashboard\ExpensesController;
+use App\Http\Controllers\Dashboard\CapitalController;
+use App\Http\Controllers\Dashboard\RetrieverController;
 
 Route::get('/admin', function () {
 
@@ -188,3 +189,38 @@ Route::group(['prefix' => 'customers', 'middleware' => 'auth'], function(){
     Route::post('update/{id}', [CustomerController::class , 'update'])->name('customers.update');
     Route::get('delete/{id}', [CustomerController::class , 'destroy'])->name('customers.delete');
 });
+
+#########################   revenues  #########################
+Route::group(['prefix' => 'revenues', 'middleware' => 'auth'], function(){
+    Route::get('/', [RevenuesController::class , 'show'])->name('revenues');
+    Route::get('/create', [RevenuesController::class , 'create'])->name('revenues.create');
+    Route::post('store', [RevenuesController::class , 'store'])->name('revenues.store');
+    Route::get('delete/{id}', [RevenuesController::class , 'destroy'])->name('revenues.delete');
+});
+
+#########################   expenses  #########################
+Route::group(['prefix' => 'expenses', 'middleware' => 'auth'], function(){
+    Route::get('/', [ExpensesController::class , 'show'])->name('expenses');
+    Route::get('/create', [ExpensesController::class , 'create'])->name('expenses.create');
+    Route::post('store', [ExpensesController::class , 'store'])->name('expenses.store');
+    Route::get('delete/{id}', [ExpensesController::class , 'destroy'])->name('expenses.delete');
+});
+
+#########################   capital  #########################
+Route::group(['prefix' => 'capital', 'middleware' => 'auth'], function(){
+    Route::get('/', [CapitalController::class , 'show'])->name('capital');
+    Route::get('/create', [CapitalController::class , 'create'])->name('capital.create');
+    Route::post('store', [CapitalController::class , 'store'])->name('capital.store');
+    Route::get('delete/{id}', [CapitalController::class , 'destroy'])->name('capital.delete');
+});
+
+#########################  retriever  #########################
+Route::group(['prefix' => 'retriever', 'middleware' => 'auth'], function(){
+    Route::get('/', [RetrieverController::class , 'show'])->name('retriever');
+    Route::get('/create', [RetrieverController::class , 'create'])->name('retriever.create');
+    Route::post('store', [RetrieverController::class , 'store'])->name('retriever.store');
+    Route::get('delete/{id}', [RetrieverController::class , 'destroy'])->name('retriever.delete');
+});
+
+
+

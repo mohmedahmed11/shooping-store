@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductImage;
-use App\Models\Banner;
+use App\Models\Like;
 use App\Models\SimilerProduct;
 use App\Models\ProductOption;
 use App\Models\LatestProducts;
@@ -25,6 +25,9 @@ class Product extends Model
 
     protected $appends = [
         'image_path',
+        'rateavg',
+'likes',
+'dislikes'
     ];
 
     public function getImagePathAttribute()
@@ -63,6 +66,36 @@ class Product extends Model
     }
     public function last(){
         return $this -> hasMany(LatestProducts::class,'product_id','id');
+    }
+
+    public function likes()
+    {
+        return $this -> hasMany(Like::class,'product_id','id');
+    }//end of likes
+
+    public function rates()
+    {
+        return $this -> hasMany(Rate::class,'product_id','id');
+    }//end of likes
+
+    public function getRateavgAttribute()
+    {
+        $rates = Rate::where('product_id', $this->id)->get();
+        $total_rate = 0;
+        foreach($rates as $rate){
+            $total_rate = $total_rate + $rate->rate;
+        }
+        $count = count($rates);
+
+        return $count > 0 ? $total_rate / $count : 0;
+    }
+    public function getLikesAttribute()
+    {
+        return count(Like::where(['product_id' => $this->id, 'status' => 1])->get());
+    }
+    public function getDislikesAttribute()
+    {
+        return count(Like::where(['product_id' => $this->id, 'status' => 0])->get());
     }
 
 }
