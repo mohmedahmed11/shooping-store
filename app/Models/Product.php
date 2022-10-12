@@ -56,7 +56,7 @@ class Product extends Model
 
     public function options()
     {
-        return $this -> hasMany(ProductOption::class,'product_id','id');
+        return $this -> hasMany(ProductOption::class,'product_id','id')->orderBy('id', 'desc');
     }
 
     public function properties(){

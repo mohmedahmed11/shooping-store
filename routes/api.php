@@ -58,3 +58,6 @@ Route::group(['prefix' => 'config' ], function()
 });
 
 Route::post('token', [SettingController::class, 'token']);
+
+
+Route::get('test', [ProductController::class, 'test']);

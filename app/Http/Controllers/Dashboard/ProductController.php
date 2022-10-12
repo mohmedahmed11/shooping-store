@@ -399,4 +399,10 @@ class ProductController extends Controller
             return view('dashboard.products.new');
         }
 
+
+
+
+        function test() {
+            return Product::with('options')->orderBy('created_at', )->get();
+        }
 }
