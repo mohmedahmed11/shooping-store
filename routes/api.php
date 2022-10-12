@@ -10,7 +10,8 @@ use App\Http\Controllers\Dashboard\CustomerController;
 use App\Http\Controllers\Dashboard\RegonController;
 use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Api\OrderApisController;
-
+use App\Http\Controllers\api\CommentController;
+use App\Http\Controllers\api\RepliesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,5 +60,22 @@ Route::group(['prefix' => 'config' ], function()
 
 Route::post('token', [SettingController::class, 'token']);
 
-
 Route::get('test', [ProductController::class, 'test']);
+
+Route::group(['prefix' => 'comment' ], function()
+{
+    Route::get('/', [CommentController::class, 'getAllComents']);
+    Route::get('/{product_id}', [CommentController::class, 'getComments']);
+    Route::put('update/{id}', [CommentController::class, 'update']);
+    Route::post('create', [CommentController::class, 'create']);
+    Route::delete('delete/{id}', [CommentController::class, 'destroy']);
+});
+
+Route::group(['prefix' => 'replies' ], function()
+{
+    Route::get('/', [RepliesController::class, 'getAllreplies']);
+    Route::get('/{product_id}', [RepliesController::class, 'getreplies']);
+    Route::put('update/{id}', [RepliesController::class, 'update']);
+    Route::post('create', [RepliesController::class, 'create']);
+    Route::delete('delete/{id}', [RepliesController::class, 'destroy']);
+});

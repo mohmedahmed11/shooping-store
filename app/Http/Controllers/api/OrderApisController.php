@@ -163,6 +163,8 @@ class OrderApisController extends Controller
       $order = Order::find($id);
         // $data->user_id->$status->user_id->$this->sendNotificationby($status->id);
         // eSOwb0_8lEnDu_l73_Unx_:APA91bELmc_Vzp9S1wEu72bLhb4RcEJX1b_EDa8_jUz8wsZjnjTWqPoMsRrNv8WpaoASPvd9wG1juLWr86j3OQ-YM7wQrRreftMlW9aJDmte0Awh5XgYqQFVtMlTMVJS9s89D6b0xLWT
+        // fvh_O69CTDGPUtMtQbMnPH:APA91bEHkkNe01wHs7c-1KSpvbAgNastOmu_XfzrFRbakp_8dir8hT9FXmUO33dZYn8cgtngOQurVsgHxdfcH-1bXTZAf8NaVFiLB0kuAZwM6e26VnZ8lqkU3ZAuPcjELxB8Q9xXtcuA
+        // eSOwb0_8lEnDu_l73_Unx_:APA91bELmc_Vzp9S1wEu72bLhb4RcEJX1b_EDa8_jUz8wsZjnjTWqPoMsRrNv8WpaoASPvd9wG1juLWr86j3OQ-YM7wQrRreftMlW9aJDmte0Awh5XgYqQFVtMlTMVJS9s89D6b0xLWT
         $order->status = $status;
         $order->update();
 
@@ -179,23 +181,39 @@ class OrderApisController extends Controller
             return $this->api_rsponse(true, $order,"جديد", 200);
         }
         elseif($status==1) {
+<<<<<<< HEAD
             $notify = ["title"=>"الطلبات : رقم الطلب $id#" ,"body"=>"تم قبول طلبك"];
+=======
+            $notify = ["title"=>"الطلبات : رقم الطلب $id #" ,"body"=>"تم قبول طلبك"];
+>>>>>>> cdacdd5414eeb98773a731ae16ad444032d23d04
             NotificationController::sendGroupNotification($firebaseTokens, $notify);
             return $this->api_rsponse(true, $order, "مقبول", 200);
         }
         elseif($status==2) {
             // +
+<<<<<<< HEAD
             $notify = ["title"=>"الطلبات : رقم الطلب $id#" ,"body"=>"قيد التوصيل"];
+=======
+            $notify = ["title"=>"الطلبات : رقم الطلب $id #" ,"body"=>"قيد التوصيل"];
+>>>>>>> cdacdd5414eeb98773a731ae16ad444032d23d04
             NotificationController::sendGroupNotification($firebaseTokens, $notify);
             return $this->api_rsponse(true, $order, "طلب رقم $id قيد التوصيل", 200);
         }
         elseif($status==3) {
+<<<<<<< HEAD
             $notify = ["title"=>"الطلبات : رقم الطلب $id#" ,"body"=>"تم التسليم بنجاح"];
+=======
+            $notify = ["title"=>"الطلبات : رقم الطلب $id #" ,"body"=>"تم التسليم بنجاح"];
+>>>>>>> cdacdd5414eeb98773a731ae16ad444032d23d04
             NotificationController::sendGroupNotification($firebaseTokens, $notify);
             return $this->api_rsponse(true, $order, "تم التسليم", 200);
         }
         elseif($status==4) {
+<<<<<<< HEAD
             $notify = ["title"=>"الطلبات : رقم الطلب $id#" ,"body"=>"تم إلغاء الطلب"];
+=======
+            $notify = ["title"=>"الطلبات : رقم الطلب $id #" ,"body"=>"تم إلغاء الطلب"];
+>>>>>>> cdacdd5414eeb98773a731ae16ad444032d23d04
             NotificationController::sendGroupNotification($firebaseTokens, $notify);
             return $this->api_rsponse(true, $order, "تم الإلغاء", 200);
         }

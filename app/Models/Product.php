@@ -11,6 +11,8 @@ use App\Models\ProductOption;
 use App\Models\Category;
 use App\Models\LatestProducts;
 use App\Models\ProductProperty;
+use App\Models\Comment;
+use App\Models\Replies;
 
 class Product extends Model
 {
@@ -51,10 +53,11 @@ class Product extends Model
     }
     
     public function simliers(){
+
         return $this->hasMany(SimilerProduct::class,'product_id','id');
     }
 
-    public function options()
+    public function option()
     {
         return $this -> hasMany(ProductOption::class,'product_id','id')->orderBy('id', 'desc');
     }
@@ -78,6 +81,14 @@ class Product extends Model
        return  $this->belongsTo(Product::class, 'product_id' , 'id');
     }
 
+    public function coments()
+    {
+       return  $this->hasMany(Comment::class, 'product_id' , 'id');
+    }
 
+    public function replay()
+    {
+       return  $this->hasMany(Replies::class, 'product_id' , 'id');
+    }
 
 }

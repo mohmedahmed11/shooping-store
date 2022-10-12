@@ -38,13 +38,13 @@
                                 @if (auth()->user()->hasPermission('users_update'))
                                     <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-outline-info btn-sm"><i class="fa fa-edit"></i>تعديل</a>
                                 @else
-                                    <a href="#" class="btn btn-outline-info disabled"><i class="fa fa-edit"></i>تعديل</a>
+                                    <a href="#" class="btn btn-outline-info disabled btn-sm"><i class="fa fa-edit"></i>تعديل</a>
                                 @endif
 
                                 @if (auth()->user()->hasPermission('users_delete'))
                                     <a href="{{ route('customers.delete', $customer->id) }}" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i>حذف</a>
                                 @else
-                                    <a href="#" class="btn btn-outline-danger disabled"><i class="fa fa-trash"></i>حذف</a>
+                                    <a href="#" class="btn btn-outline-danger disabled btn-sm"><i class="fa fa-trash"></i>حذف</a>
                                 @endif
                                 {{--  <a href="{{ route('admins.edit', $admin->id) }}" class="btn btn-outline-info"><i class="fa fa-edit"></i>تعديل</a>  --}}
                                 {{--  <a href="{{ route('admins.delete', $admin->id) }}" id="delete" class="btn btn-outline-danger"><i class="fa fa-trash"></i>حذف</a>  --}}
