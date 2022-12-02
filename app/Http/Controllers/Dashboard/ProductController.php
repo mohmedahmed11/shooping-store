@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Brian2694\Toastr\Facades\Toastr;
 use Facade\FlareClient\Stacktrace\File;
+use App\Models\Supplier;
+use App\Models\Trademark;
 
 class ProductController extends Controller
 {
@@ -27,6 +29,17 @@ class ProductController extends Controller
 
         if ($product){
             $product = $this->prepareProductData($product);
+            return ["status" => true, "data" => $product];
+        }else {
+            return ["status" => false, "data" => NULL];
+        }
+    }
+
+    function product_by($product_id) {
+        $product = Product::with(['category', 'images', 'simliers','simliers.product','simliers.product.category', 'options', 'properties', 'properties.property'])->find($product_id);
+
+        if ($product){
+            // $product = $this->prepareProductData($product);
             return ["status" => true, "data" => $product];
         }else {
             return ["status" => false, "data" => NULL];
@@ -158,7 +171,9 @@ class ProductController extends Controller
     }
     function create() {
         $categories = Category::all();
-        return view('dashboard.products.create',compact('categories'));
+        $trademarks = Trademark::all();
+        $suppliers = Supplier::all();
+        return view('dashboard.products.create',compact('categories','trademarks','suppliers'));
     }
 
     public function save(Request $request){
@@ -176,6 +191,8 @@ class ProductController extends Controller
         $data->image=$imagePath;
         $data->name=$request->name;
         $data->category_id=$request->category_id;
+        $data->trademark_id=$request->trademark_id;
+        $data->supplier_id= $request->status ? $request->supplier_id : NULL;
         $data->code=$request->code;
         $data->quantity=$request->quantity;
         $data->status=1;
@@ -193,8 +210,10 @@ class ProductController extends Controller
     public function update($id)
     {
         $data = Product::find($id);
+        $trademarks = Trademark::all();
+        $suppliers = Supplier::all();
         $categories = Category::all();
-        return view('dashboard.products.update', compact('data', 'categories'));
+        return view('dashboard.products.update', compact('data', 'categories','trademarks','suppliers'));
     }
     // for save updateProduct
     public function edit(Request $request,$id)
@@ -352,7 +371,7 @@ class ProductController extends Controller
     public function Crate_Silmiler(Request $request){
 
         $data = new SimilerProduct();
-        $data->status = $request->status;
+        $data->status = 1;
         $data->similar_product_id = $request->similar_product_id;
         $data->product_id = $request->product_id;
          $data->save();

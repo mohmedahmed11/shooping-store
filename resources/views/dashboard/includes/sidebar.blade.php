@@ -40,6 +40,8 @@
                 <ul class="menu-content">
                     <li><a href="{{route('products')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">عرض المنتجات</span></a></li>
                     <li><a href="{{route('product.create')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">اضافة منتج</span></a></li>
+                    <li><a href="{{ route('suppliers') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">الموردين</span></a></li>
+                    <li><a href="{{ route('trademarks') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">العلامات التجاريه</span></a></li>
 
                 </ul>
             </li>
@@ -62,6 +64,15 @@
                         <li><a href="{{route('admins')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">المشرفين</span></a></li>
                     @endif
                     <li><a href="{{route('customers')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">العملاء</span></a></li>
+                </ul>
+            </li>
+
+            <li class=" nav-item"><a href="#"><i class="feather icon-database"></i><span class="menu-title" data-i18n="Ecommerce">الخزينة</span></a>
+                <ul class="menu-content">
+                    <li><a href="{{route('revenues')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop"> الايرادات </span></a></li>
+                    <li><a href="{{ route('expenses') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">المصروفات</span></a></li>
+                    <li><a href="{{ route('retriever') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">المسترجع</span></a></li>
+                    <li><a href="{{ route('capital') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">سجل الدفيات</span></a></li>
                 </ul>
             </li>
 

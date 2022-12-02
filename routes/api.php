@@ -2,13 +2,16 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Dashboard\CategoryController;
-use App\Http\Controllers\Dashboard\BannerController;
-use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Api\LikeController;
+use App\Http\Controllers\Api\RateController;
+use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\CustomerController;
 use App\Http\Controllers\Dashboard\RegonController;
+use App\Http\Controllers\Dashboard\BannerController;
+use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\SettingController;
+use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Api\OrderApisController;
 use App\Http\Controllers\api\CommentController;
 use App\Http\Controllers\api\RepliesController;
@@ -28,6 +31,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('product/{id}', [ProductController::class, 'product_by']);
 Route::get('setting', [SettingController::class, 'index']);
 Route::get('user/{id}', [CustomerController::class, 'index']);
 Route::get('regons', [RegonController::class, 'index']);
@@ -74,8 +78,20 @@ Route::group(['prefix' => 'comment' ], function()
 Route::group(['prefix' => 'replies' ], function()
 {
     Route::get('/', [RepliesController::class, 'getAllreplies']);
-    Route::get('/{product_id}', [RepliesController::class, 'getreplies']);
+    Route::get('/{comment_id}', [RepliesController::class, 'getreplies']);
     Route::put('update/{id}', [RepliesController::class, 'update']);
     Route::post('create', [RepliesController::class, 'create']);
     Route::delete('delete/{id}', [RepliesController::class, 'destroy']);
+});
+
+
+#########################   like route  #########################
+Route::group(['middleware' => 'api'], function(){
+    Route::post('like', [LikeController::class , 'index']);
+});
+
+#########################   rate route  #########################
+Route::group(['middleware' => 'api'], function(){
+    Route::post('get-rate', [RateController::class , 'index']);
+    Route::post('get-rate-product', [RateController::class , 'rateProduct']);
 });

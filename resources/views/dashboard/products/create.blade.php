@@ -80,16 +80,97 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-4">
+                                                <span for="location1">العلامة التجارية</span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-control"  name="trademark_id" id="select" required="">
+                                                    @foreach($trademarks as $trademark)
+                                                    <option value="{{$trademark->id}}" >
+                                                        {{$trademark->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h4 class="card-title">التفاصيل</h4>
+                                        <div class="form-group row">
+                                            <div class="col-md-4">
+                                                <span for="location1">مورد المنتج</span>
                                             </div>
-                                            <div class="card-content">
+                                            <div class="col-md-2" style="margin: auto;">
+                                                <span> <input type="checkbox" onclick="Enableddl(this)" id="check" name="status"/> يوجد مورد </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select class="form-control"  name="supplier_id" id="selectProduct" disabled='disabled'>
+                                                    <option value="" selected disabled>-- اختر المورد --</option>
+                                                    @foreach($suppliers as $supplier)
+                                                    <option value="{{$supplier->id}}">
+                                                        {{$supplier->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+<!-- 
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <div class="form-label-group">
+                                                <div class="form-group">
+                                                    <div class="vs-checkbox-con vs-checkbox-primary">
+                                                        <input type="checkbox" onclick="Enableddl(this)" id="check" name="status"/>
+                                                        <span class="vs-checkbox">
+                                                            <span class="vs-checkbox--check">
+                                                                <i class="vs-icon feather icon-check"></i>
+                                                            </span>
+                                                        </span>
+                                                        <span class="">يوجد مورد</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="controls">
+                                                <select class="form-control"  name="supplier_id" id="selectProduct" disabled='disabled'>
+                                                    <option value="" selected disabled>-- اختر المورد --</option>
+                                                    @foreach($suppliers as $supplier)
+                                                    <option value="{{$supplier->id}}">
+                                                        {{$supplier->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-4">
+                                                <label id="checkout-number-error">التفاصيل </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <fieldset class="form-label-group mb-0">
+                                                    <textarea data-length="200" required name="details" class="form-control char-textarea active" id="textarea-counter" rows="3" placeholder="التفاصيل" style="color: rgb(78, 81, 84);"></textarea>
+                                                    <label for="textarea-counter">التفاصيل</label>
+                                                </fieldset>
+                                                <small class="counter-value float-right" style="background-color: rgb(115, 103, 240);"><span class="char-count">0</span> / 100 </small>
+                                                        
+                                            </div>
+                                        </div>
+                                    </div>
+<!-- 
+                                    <div class="col-12">
+                                    <div class="form-group row">
+                                            <div class="col-md-4">
+
+                                                <span for="location1">التفاصيل</span>
+                                            </div>
+                                            <div class="col-md-8">
                                                 <div class="card-body">
                                                     <p class="mb-2">
-                                                     <div class="row">
                                                         <div class="col-12">
                                                             <fieldset class="form-label-group mb-0">
                                                                 <textarea data-length="200" required name="details" class="form-control char-textarea active" id="textarea-counter" rows="3" placeholder="Counter" style="color: rgb(78, 81, 84);"></textarea>
@@ -98,17 +179,17 @@
                                                             <small class="counter-value float-right" style="background-color: rgb(115, 103, 240);"><span class="char-count">0</span> / 100 </small>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
                                         <div class="add-data-btn">
                                             <input type="hidden" name="Save" value="Save">
-                                            <button class="btn mr-4 btn-primary">save</button>
+                                            <button class="btn mr-4 btn-primary">إضافة المنتج</button>
                                         </div>
                                         <div class="cancel-data-btn">
-                                            <button type="reset" name="reset" class="btn btn-outline-danger">Cancel</button>
+                                            <button type="reset" name="reset" class="btn btn-outline-danger">إلغاء</button>
                                         </div>
                                     </div>
                                 </div>

@@ -23,8 +23,6 @@ class CategoryController extends Controller
         //all();
     }
 
-
-
 ////////////////////////////////////////////////
 
 public function show()
@@ -56,7 +54,7 @@ public function store(CategoryRequest $request)
 
         }//end of if
 
-        $maincategory = Category::create($request_data);
+        Category::create($request_data);
 
         Toastr::success('تم الاضافه بنجاح', 'success');
         return redirect()->route('category');

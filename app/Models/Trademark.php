@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Order;
 use App\Models\Like;
 
-class Customer extends Model
+class Trademark extends Model
 {
     use HasFactory;
-    // public $timestamps = false;
+    public $timestamps = false;
 
-    protected $table = 'customers';
-    protected $fillable = ['id','name','phone'];
+    protected $table = 'trademarks';
+    protected $fillable = ['id','name','image'];
 
     public function scopeSelection($query)
     {

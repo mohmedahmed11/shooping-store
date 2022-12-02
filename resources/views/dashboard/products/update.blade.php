@@ -58,6 +58,48 @@
 
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-6 col-12">
+                                                        <div class="form-label-group">
+                                                            <span>العلامة التجارية</span>
+                                                            <select class="form-control"  name="trademark_id" id="select" required="">
+                                                                @foreach($trademarks as $trademark)
+                                                                <option value="{{$trademark->id}}" {{$trademark->id == $data->trademark_id  ? 'selected' : ''}}>
+                                                                    {{$trademark->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-12">
+                                                        <!-- <div class="col-md-4">
+                                                            <div class="form-label-group">
+                                                                <div class="form-group">
+                                                                    <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                        <input type="checkbox" onclick="Enableddl(this)" id="check" name="status"/>
+                                                                        <span class="vs-checkbox">
+                                                                            <span class="vs-checkbox--check">
+                                                                                <i class="vs-icon feather icon-check"></i>
+                                                                            </span>
+                                                                        </span>
+                                                                        <span class=""></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
+
+                                                        <div class="form-label-group">
+                                                            <span> <input type="checkbox" onclick="Enableddl(this)" id="check" name="status"/> يوجد مورد </span>
+                                                            <select class="form-control"  name="supplier_id" id="selectProduct" disabled='disabled'>
+                                                                    <option value="" selected disabled>-- اختر المورد --</option>
+                                                                    @foreach($suppliers as $supplier)
+                                                                    <option value="{{$supplier->id}}" {{$supplier->id == $data->supplier  ? 'selected' : ''}}>
+                                                                        {{$supplier->name}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                        </div>
+
+                                                    </div>
                                                     <div class="col-md-6 col-12">
                                                         <div class="form-label-group">
                                                                 <div class="form-group">
@@ -70,10 +112,10 @@
                                                     <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
                                                         <div class="add-data-btn">
                                                             <input type="hidden" name="Save" value="Save">
-                                                            <button class="btn mr-4 btn-primary">save</button>
+                                                            <button class="btn mr-4 btn-primary"> حفظ تعديل</button>
                                                         </div>
                                                         <div class="cancel-data-btn">
-                                                            <button type="reset" name="reset" class="btn btn-outline-danger">Cancel</button>
+                                                            <button type="reset" name="reset" class="btn btn-outline-danger">إلغاء</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -82,26 +124,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row match-height">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                       <h4>صورة المنتج </h4>  {{-- <h4 class="card-title">Image <i class="fa fa-image" aria-hidden="true"></i>add Image</h4> --}}
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>صورة المنتج </h4> 
+                                </div>
+                                <div class="card" style="margin: 5%">
+                                    <img  id='output' style="height:150px; width:150px;" class="img-thumbnail" src="{{url('storage/'.$data->image)}}">
+                                    <div class="card-body">
+                                        <fieldset class="form-group">
+                                            <div class="custom-file">
+                                            <input type="file" accept='image/*' name="image" onchange='openFile(event)'>
+                                            {{-- <br> --}}
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                    <div class="card" style="margin-right: 74px;" style="margin-top: 2%">
-                                        <img  id='output' style="height:150px; width:150px;" class="img-thumbnail" src="{{url('storage/'.$data->image)}}">
-                                        <div class="card-body">
-                                         <fieldset class="form-group">
-                                            <span for="basicInputFile">Image</span>
-                                             <div class="custom-file">
-                                             <input type="file" accept='image/*' name="image" onchange='openFile(event)'>
-                                             {{-- <br> --}}
-                                             </div>
-                                         </fieldset>
-                                        </div>
-                                      </div>
                                 </div>
                             </div>
+                            
                         </div>
                     </form>
                     </div>

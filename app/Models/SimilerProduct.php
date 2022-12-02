@@ -12,4 +12,9 @@ class SimilerProduct extends Model
     protected $fillable=['product_id','similar_product_id','status'];
     public $timestamps=false;
 
+    public function product()
+    {
+        return $this -> belongsTo('App\Models\Product','similar_product_id','id');
+    }
+
 }
