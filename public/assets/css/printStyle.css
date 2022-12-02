@@ -1,0 +1,69 @@
+.modal-body {
+    position: relative;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1rem;
+  }
+
+  body, h1, h2, h3, h4, h5, h6, .navigation {
+    font-family: 'Cairo', sans-serif !important;
+  }
+
+  html body {
+    direction: rtl;
+  }
+
+
+  body {
+    font-size: 3rem;
+    font-weight: 400;
+    line-height: 1.45;
+    color: #626262;
+    text-align: right;
+  }
+
+  .row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-left: -14px;
+    margin-right: -14px;
+  }
+
+  *, ::before, ::after {
+    box-sizing: border-box;
+  }
+
+  .col-md-6 {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 50%;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .col-md-6 ,.col-md-12{
+    position: relative;
+    width: 100%;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  b, strong {
+  font-weight: bold;
+}
+
+label, span, th, td {
+    color: #464646;
+    font-size: 2.25rem;
+  }
+
+  .table th {
+    font-size: 2.25rem;
+  }
