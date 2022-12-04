@@ -40,74 +40,71 @@ class NotificationController extends Controller
     static function sendNotificationby($id){
 
         $notify=Notification::find($id);
-        $firebaseTokens =  [];
-
-        $users=Customer::where('is_deleted', 0)->get();
-
-        foreach($users as $user){
-            $firebaseTokens[]  =  $user->device_token;
-        }
-
-        return self::sendGroupNotification($firebaseTokens, $notify);
+        return self::sendNotificationTo("to", "/topics/general", $notify );
         // if($firebaseTokens){
         //     return redirect('notification')->with('status','Notification Sended Successfully..');
         // }
     }
+
     static function sendGroupNotification(array $firebaseTokens, $notification)
     {
+      sendNotificationTo("registration_ids", $firebaseTokens, $notification );
+        
+    }
 
-        $SERVER_API_KEY = 'AAAA5PyOoKI:APA91bHyIKHxktnAYW_a8C0-q5pYcm8l34NiFN2mv2PkwDc-QgyGr912leKksyfgWMVqB6WgvG88Ft9mK7b467n7In1VnYPs8yEjVU-K3Sxth76RGIF7glIZtz_1fGYNm-icL8Q4Yk51';
+    static function sendNotificationTo($to, $firebaseSender, $notification) {
+      $SERVER_API_KEY = 'AAAA5PyOoKI:APA91bHyIKHxktnAYW_a8C0-q5pYcm8l34NiFN2mv2PkwDc-QgyGr912leKksyfgWMVqB6WgvG88Ft9mK7b467n7In1VnYPs8yEjVU-K3Sxth76RGIF7glIZtz_1fGYNm-icL8Q4Yk51';
 
-        $data = [
-            "to" => "/topics/localTest",
-            "notification" => [
-                "title" => $notification['title'],
-                "body" => $notification['body'],
-            ],
-              'android' => [
-                'notification'=> [
-                  'imageUrl'=> 'https://foo.bar.pizza-monster.png'
-                ]
-            ],
-              'apns'=> [
-                'payload'=> [
-                  'aps'=> [
-                    'mutable-content'=> 1
-                  ]
-                  ],
-                'fcm_options'=> [
-                  'image'=> 'https://foo.bar.pizza-monster.png'
+      $data = [
+        $to => $firebaseSender,
+          "notification" => [
+              "title" => $notification['title'],
+              "body" => $notification['body'],
+          ],
+            'android' => [
+              'notification'=> [
+                'imageUrl'=> 'https://foo.bar.pizza-monster.png'
+              ]
+          ],
+            'apns'=> [
+              'payload'=> [
+                'aps'=> [
+                  'mutable-content'=> 1
                 ]
                 ],
-              'webpush'=> [
-                'headers'=> [
-                  'image'=> 'https://foo.bar.pizza-monster.png'
-        ]
-            ],
+              'fcm_options'=> [
+                'image'=> 'https://foo.bar.pizza-monster.png'
+              ]
+              ],
+            'webpush'=> [
+              'headers'=> [
+                'image'=> 'https://foo.bar.pizza-monster.png'
+      ]
+          ],
 
-        ];
+      ];
 
-        $dataString = json_encode($data);
-        $headers = [
-            'Authorization: key=' . $SERVER_API_KEY,
-            'Content-Type: application/json',
-        ];
+      $dataString = json_encode($data);
+      $headers = [
+          'Authorization: key=' . $SERVER_API_KEY,
+          'Content-Type: application/json',
+      ];
 
-        $ch = curl_init();
+      $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+      curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
 
-        curl_setopt($ch, CURLOPT_POST, true);
+      curl_setopt($ch, CURLOPT_POST, true);
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
-        $response = curl_exec($ch);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+      $response = curl_exec($ch);
 
-        return $response;
+      return $response;
     }
 }

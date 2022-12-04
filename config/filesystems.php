@@ -44,7 +44,9 @@ return [
 
         'public_uploads' => [
             'driver' => 'local',
-            'root' => public_path('icons'),
+            // 'root'   => '/storage', 
+            'root'   => public_path() . '/storage', 
+            'visibility' => 'public',
         ],
 
         's3' => [
@@ -72,7 +74,7 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        public_path('storage') => storage_path('/public/storage'),
     ],
 
 ];
