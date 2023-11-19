@@ -22,6 +22,44 @@ use App\Http\Controllers\Dashboard\RetrieverController;
 use App\Http\Controllers\Dashboard\SupplierController;
 use App\Http\Controllers\Dashboard\TrademarkController;
 
+// Clear application cache:
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    return 'Application cache has been cleared';
+});
+
+//Clear route cache:
+Route::get('/route-cache', function() {
+	Artisan::call('route:cache');
+    return 'Routes cache has been cleared';
+});
+
+//Clear config cache:
+Route::get('/config-cache', function() {
+ 	Artisan::call('config:cache');
+ 	return 'Config cache has been cleared';
+}); 
+
+// Clear view cache:
+Route::get('/view-clear', function() {
+    Artisan::call('view:clear');
+    return 'View cache has been cleared';
+});
+
+Route::get('/', function () {
+    return view('/index');
+});
+
+Route::get('/pull', function () {
+  shell_exec('git pull origin master');
+    return view('/index');
+});
+
+
+Route::get('/privacy', function () {
+  return view('/privacy');
+});
+
 Route::get('/dashboard', function () {
 
     if (Auth::check()) {
