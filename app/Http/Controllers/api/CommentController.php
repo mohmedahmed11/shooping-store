@@ -19,7 +19,6 @@ class CommentController extends Controller
     }
     public function getComments($product_id){
 
-
         $coments = Comment::where('product_id', $product_id)->with('user','replaies','replaies.user')->orderBy('created_at', 'desc')->get();
          $total=$coments->count();
         if ($coments) {
@@ -28,7 +27,6 @@ class CommentController extends Controller
             return $this->api_rsponse(false, null, "no Coments", 200);
         }
     }
-
 
     public function create(Request $request){
         $request->validate([
@@ -44,7 +42,6 @@ class CommentController extends Controller
         return response()->json(['message'=>'comment Added Successfull'],200);
     }
 
-
     public function destroy($id){
             $coment=Comment::find($id);
             $coment->delete();
@@ -54,8 +51,6 @@ class CommentController extends Controller
                 return $this->api_rsponse(false, null, "no Coments", 200);
             }
     }
-
-
 
     function api_rsponse($status, $data, $message, $code) {
         return response()->json(['status'=>$status , 'data'=> $data, 'message'=>$message], $code);

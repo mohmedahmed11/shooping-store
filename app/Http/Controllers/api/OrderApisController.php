@@ -17,10 +17,6 @@ class OrderApisController extends Controller
     public function test()
     {
     return response()->json(['message'=>'Api Successfull'],200);
-
-        // $orders = OrderItem::all();
-        // $order = Order::with('regon','user','items')->find($id);
-        // return response()->json(['order'=>$order]);
     }
 
 
